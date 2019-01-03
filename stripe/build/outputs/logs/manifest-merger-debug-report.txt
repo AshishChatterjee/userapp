@@ -1,0 +1,37 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:1-6:12
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:1-6:12
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:1-6:12
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:1-6:12
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:1-6:12
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:1-6:12
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:1-6:12
+	package
+		ADDED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:3:11-39
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+	android:versionName
+		ADDED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:5:11-36
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml:4:11-34
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+uses-sdk
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+		ADDED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+		ADDED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
+		INJECTED from E:\Download\User_App2\User App\stripe\AndroidManifest.xml
