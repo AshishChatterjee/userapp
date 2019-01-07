@@ -99,6 +99,7 @@ import com.taxi.driver.gpsLocation.LocationAddress;
 import com.taxi.driver.utils.CabDetails;
 import com.taxi.driver.utils.Common;
 import com.taxi.driver.utils.Url;
+
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
@@ -110,9 +111,9 @@ import cz.msebera.android.httpclient.params.HttpConnectionParams;
 import cz.msebera.android.httpclient.params.HttpParams;
 import cz.msebera.android.httpclient.util.EntityUtils;
 
-public class HomeActivity extends FragmentActivity implements OnMapReadyCallback,CabDetailAdapter.OnCabDetailClickListener,PickupDropLocationAdapter.OnDraoppickupClickListener {
+public class HomeActivity extends FragmentActivity implements OnMapReadyCallback, CabDetailAdapter.OnCabDetailClickListener, PickupDropLocationAdapter.OnDraoppickupClickListener {
 
-    TextView txt_home,txt_reservation,txt_now;
+    TextView txt_home, txt_reservation, txt_now;
     RelativeLayout layout_slidemenu;
     EditText edt_pickup_location;
     EditText edt_drop_location;
@@ -129,7 +130,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     TextView please_check;
 
     SharedPreferences userPref;
-    Typeface OpenSans_Regular,OpenSans_Bold,Roboto_Regular,Roboto_Medium,Roboto_Bold;
+    Typeface OpenSans_Regular, OpenSans_Bold, Roboto_Regular, Roboto_Medium, Roboto_Bold;
 
     SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
 
@@ -148,7 +149,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     double PickupLongtude;
     double PickupLatitude;
 
-    ArrayList<HashMap<String,String>> locationArray;
+    ArrayList<HashMap<String, String>> locationArray;
     private ArrayList<LatLng> arrayPoints = null;
 
     Dialog NowDialog;
@@ -157,13 +158,13 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     CabDetailAdapter cabDetailAdapter;
 
     TextView txt_car_header;
-    TextView txt_currency,txt_far_breakup,txt_book,txt_cancel;
+    TextView txt_currency, txt_far_breakup, txt_book, txt_cancel;
     TextView txt_car_descriptin;
     TextView txt_first_price;
     TextView txt_first_km;
     TextView txt_sec_pric;
     TextView txt_sec_km;
-    TextView txt_thd_price,txt_locatons;
+    TextView txt_thd_price, txt_locatons;
     RelativeLayout layout_one;
     RelativeLayout layout_two;
     RelativeLayout layout_three;
@@ -194,7 +195,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     String truckType;
     String CabId;
     String AreaId;
-    Float totlePrice;
+    Float totlePrice=100.0f;
     float FirstKm;
     int totalTime;
     String CarName = "";
@@ -222,11 +223,12 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     Common common = new Common();
 
     boolean LocationDistanse = false;
+    int dis = 0;
     Marker PickupMarker;
     Marker DropMarker;
     int CabPositon = 0;
 
-/*Paypall integration variable*/
+    /*Paypall integration variable*/
     private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_NO_NETWORK;
     // note that these credentials will differ between live & sandbox environments.
     private static final String CONFIG_CLIENT_ID = "AYqm_vX5LIbsdhuZBgkVBHAJ9YR6yA2_3N81R9wZGkjBZPMHDu91uo47fwL7779Bxly6li5vQWfrO0fy";
@@ -239,7 +241,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
     String BookingType;
 
-    ArrayList<HashMap<String,String>> FixRateArray;
+    ArrayList<HashMap<String, String>> FixRateArray;
 
     Dialog ProgressDialog;
     RotateLoading cusRotateLoading;
@@ -253,39 +255,39 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         userPref = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
 
-        txt_home = (TextView)findViewById(R.id.txt_home);
-        layout_slidemenu = (RelativeLayout)findViewById(R.id.layout_slidemenu);
-        edt_pickup_location = (EditText)findViewById(R.id.edt_pickup_location);
-        edt_drop_location = (EditText)findViewById(R.id.edt_drop_location);
-        edt_write_comment = (EditText)findViewById(R.id.edt_write_comment);
+        txt_home = (TextView) findViewById(R.id.txt_home);
+        layout_slidemenu = (RelativeLayout) findViewById(R.id.layout_slidemenu);
+        edt_pickup_location = (EditText) findViewById(R.id.edt_pickup_location);
+        edt_drop_location = (EditText) findViewById(R.id.edt_drop_location);
+        edt_write_comment = (EditText) findViewById(R.id.edt_write_comment);
         layout_now = (RelativeLayout) findViewById(R.id.layout_now);
         layout_reservation = (RelativeLayout) findViewById(R.id.layout_reservation);
-        img_pickup_close = (ImageView)findViewById(R.id.img_pickup_close);
-        img_drop_close = (ImageView)findViewById(R.id.img_drop_close);
-        recycle_pickup_location = (RecyclerView)findViewById(R.id.recycle_pickup_location);
-        layout_pickup_drag_location = (RelativeLayout)findViewById(R.id.layout_pickup_drag_location);
-        layout_no_result = (LinearLayout)findViewById(R.id.layout_no_result);
-        txt_not_found = (TextView)findViewById(R.id.txt_not_found);
-        no_location = (TextView)findViewById(R.id.no_location);
-        please_check = (TextView)findViewById(R.id.please_check);
-        txt_locatons = (TextView)findViewById(R.id.txt_locatons);
-        txt_reservation = (TextView)findViewById(R.id.txt_reservation);
-        txt_now = (TextView)findViewById(R.id.txt_now);
+        img_pickup_close = (ImageView) findViewById(R.id.img_pickup_close);
+        img_drop_close = (ImageView) findViewById(R.id.img_drop_close);
+        recycle_pickup_location = (RecyclerView) findViewById(R.id.recycle_pickup_location);
+        layout_pickup_drag_location = (RelativeLayout) findViewById(R.id.layout_pickup_drag_location);
+        layout_no_result = (LinearLayout) findViewById(R.id.layout_no_result);
+        txt_not_found = (TextView) findViewById(R.id.txt_not_found);
+        no_location = (TextView) findViewById(R.id.no_location);
+        please_check = (TextView) findViewById(R.id.please_check);
+        txt_locatons = (TextView) findViewById(R.id.txt_locatons);
+        txt_reservation = (TextView) findViewById(R.id.txt_reservation);
+        txt_now = (TextView) findViewById(R.id.txt_now);
 
         String bookinCancel = getIntent().getStringExtra("cancel_booking");
-        if(bookinCancel != null && bookinCancel.equals("1")){
-            Common.showMkSucess(HomeActivity.this,getResources().getString(R.string.your_booking_cancel),"yes");
+        if (bookinCancel != null && bookinCancel.equals("1")) {
+            Common.showMkSucess(HomeActivity.this, getResources().getString(R.string.your_booking_cancel), "yes");
         }
 
         ProgressDialog = new Dialog(HomeActivity.this, android.R.style.Theme_Translucent_NoTitleBar);
         ProgressDialog.setContentView(R.layout.custom_progress_dialog);
         ProgressDialog.setCancelable(false);
-        cusRotateLoading = (RotateLoading)ProgressDialog.findViewById(R.id.rotateloading_register);
+        cusRotateLoading = (RotateLoading) ProgressDialog.findViewById(R.id.rotateloading_register);
 //        Log.d("device_token","device_token = "+Common.device_token);
 //        Log.d("id_device_token","id_device_token = "+userPref.getString("id_device_token",""));
 
-        if(!userPref.getString("id_device_token","").equals("1"))
-            new Common.CallUnSubscribeTaken(HomeActivity.this,Common.device_token).execute();
+        if (!userPref.getString("id_device_token", "").equals("1"))
+            new Common.CallUnSubscribeTaken(HomeActivity.this, Common.device_token).execute();
 
         arrayPoints = new ArrayList<LatLng>();
 
@@ -324,14 +326,14 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         recycle_pickup_location.setLayoutManager(pickupDragLayoutManager);
 
         /*get Current Location And Set Edittext*/
-        PickupLatitude = getIntent().getDoubleExtra("PickupLatitude",0.0);
-        PickupLongtude = getIntent().getDoubleExtra("PickupLongtude",0.0);
+        PickupLatitude = getIntent().getDoubleExtra("PickupLatitude", 0.0);
+        PickupLongtude = getIntent().getDoubleExtra("PickupLongtude", 0.0);
 
         gpsTracker = new GPSTracker(HomeActivity.this);
 
-        if(PickupLongtude != 0.0 && PickupLatitude != 0.0){
+        if (PickupLongtude != 0.0 && PickupLatitude != 0.0) {
             bothLocationString = "pickeup";
-            if(Common.isNetworkAvailable(HomeActivity.this)) {
+            if (Common.isNetworkAvailable(HomeActivity.this)) {
                 LocationAddress locationAddress = new LocationAddress();
                 locationAddress.getAddressFromLocation(PickupLatitude, PickupLongtude,
                         getApplicationContext(), new GeocoderHandler());
@@ -345,12 +347,12 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         MarkerAdd();
                     }
                 }, 1000);
-            }else{
-                Toast.makeText(HomeActivity.this,"No Network",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
             }
-        }else{
+        } else {
 
-            if(gpsTracker.checkLocationPermission()) {
+            if (gpsTracker.checkLocationPermission()) {
 
                 PickupLatitude = gpsTracker.getLatitude();
                 PickupLongtude = gpsTracker.getLongitude();
@@ -358,7 +360,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 ClickOkButton = true;
 
                 bothLocationString = "pickeup";
-                if(Common.isNetworkAvailable(HomeActivity.this)) {
+                if (Common.isNetworkAvailable(HomeActivity.this)) {
                     LocationAddress locationAddress = new LocationAddress();
                     locationAddress.getAddressFromLocation(PickupLatitude, PickupLongtude,
                             getApplicationContext(), new GeocoderHandler());
@@ -372,11 +374,11 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                             MarkerAdd();
                         }
                     }, 1000);
-                }else{
-                    Toast.makeText(HomeActivity.this,"No Network",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
                 }
 
-            }else{
+            } else {
                 gpsTracker.showSettingsAlert();
             }
         }
@@ -407,7 +409,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         slidingMenu.setMenu(R.layout.left_menu);
 
-        common.SlideMenuDesign(slidingMenu, HomeActivity.this,"home");
+        common.SlideMenuDesign(slidingMenu, HomeActivity.this, "home");
 
         layout_slidemenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -428,15 +430,15 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
             String currentLocalTime = currentTime.format(new Date());
             Date StarDateFrm = null;
-            if(!Common.StartDayTime.equals(""))
+            if (!Common.StartDayTime.equals(""))
                 StarDateFrm = currentTime.parse(Common.StartDayTime);
             Date EndDateFrm = null;
-            if(!Common.StartDayTime.equals(""))
-                EndDateFrm =  currentTime.parse(Common.EndDayTime);
+            if (!Common.StartDayTime.equals(""))
+                EndDateFrm = currentTime.parse(Common.EndDayTime);
 
-            Date CurDateFrm =  currentTime.parse(currentLocalTime);
+            Date CurDateFrm = currentTime.parse(currentLocalTime);
 
-            if(StarDateFrm != null && EndDateFrm != null) {
+            if (StarDateFrm != null && EndDateFrm != null) {
                 if (CurDateFrm.before(StarDateFrm) || CurDateFrm.after(EndDateFrm)) {
                     Log.d("get time", "get time = before");
                     DayNight = "night";
@@ -452,44 +454,44 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         /*Now Image Click popup start*/
         //NowDialog = new Dialog(HomeActivity.this,android.R.style.Theme_Translucent_NoTitleBar);
-        NowDialog = new Dialog(HomeActivity.this,R.style.DialogUpDownAnim);
+        NowDialog = new Dialog(HomeActivity.this, R.style.DialogUpDownAnim);
         NowDialog.setContentView(R.layout.now_dialog_layout);
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             NowDialog.getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        txt_car_header = (TextView)NowDialog.findViewById(R.id.txt_car_header);
+        txt_car_header = (TextView) NowDialog.findViewById(R.id.txt_car_header);
         txt_car_header.setTypeface(Roboto_Medium);
-        txt_currency = (TextView)NowDialog.findViewById(R.id.txt_currency);
+        txt_currency = (TextView) NowDialog.findViewById(R.id.txt_currency);
         txt_currency.setTypeface(Roboto_Regular);
-        txt_far_breakup = (TextView)NowDialog.findViewById(R.id.txt_far_breakup);
+        txt_far_breakup = (TextView) NowDialog.findViewById(R.id.txt_far_breakup);
         txt_far_breakup.setTypeface(Roboto_Bold);
-        txt_book = (TextView)NowDialog.findViewById(R.id.txt_book);
+        txt_book = (TextView) NowDialog.findViewById(R.id.txt_book);
         txt_book.setTypeface(Roboto_Bold);
-        txt_cancel = (TextView)NowDialog.findViewById(R.id.txt_cancel);
+        txt_cancel = (TextView) NowDialog.findViewById(R.id.txt_cancel);
         txt_cancel.setTypeface(Roboto_Bold);
 
-        txt_car_descriptin = (TextView)NowDialog.findViewById(R.id.txt_car_descriptin);
+        txt_car_descriptin = (TextView) NowDialog.findViewById(R.id.txt_car_descriptin);
         txt_car_descriptin.setTypeface(Roboto_Regular);
-        txt_first_price = (TextView)NowDialog.findViewById(R.id.txt_first_price);
+        txt_first_price = (TextView) NowDialog.findViewById(R.id.txt_first_price);
         txt_first_price.setTypeface(Roboto_Regular);
-        txt_first_km = (TextView)NowDialog.findViewById(R.id.txt_first_km);
+        txt_first_km = (TextView) NowDialog.findViewById(R.id.txt_first_km);
         txt_first_km.setTypeface(Roboto_Regular);
-        txt_sec_pric = (TextView)NowDialog.findViewById(R.id.txt_sec_pric);
+        txt_sec_pric = (TextView) NowDialog.findViewById(R.id.txt_sec_pric);
         txt_sec_pric.setTypeface(Roboto_Regular);
-        txt_sec_km = (TextView)NowDialog.findViewById(R.id.txt_sec_km);
+        txt_sec_km = (TextView) NowDialog.findViewById(R.id.txt_sec_km);
         txt_sec_km.setTypeface(Roboto_Regular);
-        txt_thd_price = (TextView)NowDialog.findViewById(R.id.txt_thd_price);
+        txt_thd_price = (TextView) NowDialog.findViewById(R.id.txt_thd_price);
         txt_thd_price.setTypeface(Roboto_Regular);
-        layout_one = (RelativeLayout)NowDialog.findViewById(R.id.layout_one);
-        layout_two = (RelativeLayout)NowDialog.findViewById(R.id.layout_two);
-        layout_three = (RelativeLayout)NowDialog.findViewById(R.id.layout_three);
-        txt_total_price = (TextView)NowDialog.findViewById(R.id.txt_total_price);
-        txt_cash = (TextView)NowDialog.findViewById(R.id.txt_cash);
-        spinner_person = (Spinner)NowDialog.findViewById(R.id.spinner_person);
-        txt_first_currency = (TextView)NowDialog.findViewById(R.id.txt_first_currency);
-        txt_secound_currency = (TextView)NowDialog.findViewById(R.id.txt_secound_currency);
-        txt_thd_currency = (TextView)NowDialog.findViewById(R.id.txt_thd_currency);
+        layout_one = (RelativeLayout) NowDialog.findViewById(R.id.layout_one);
+        layout_two = (RelativeLayout) NowDialog.findViewById(R.id.layout_two);
+        layout_three = (RelativeLayout) NowDialog.findViewById(R.id.layout_three);
+        txt_total_price = (TextView) NowDialog.findViewById(R.id.txt_total_price);
+        txt_cash = (TextView) NowDialog.findViewById(R.id.txt_cash);
+        spinner_person = (Spinner) NowDialog.findViewById(R.id.spinner_person);
+        txt_first_currency = (TextView) NowDialog.findViewById(R.id.txt_first_currency);
+        txt_secound_currency = (TextView) NowDialog.findViewById(R.id.txt_secound_currency);
+        txt_thd_currency = (TextView) NowDialog.findViewById(R.id.txt_thd_currency);
         layout_timming = (LinearLayout) NowDialog.findViewById(R.id.layout_timming);
         layout_far_breakup = (RelativeLayout) NowDialog.findViewById(R.id.layout_far_breakup);
 
@@ -505,7 +507,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        TextView txt_specailChr_note = (TextView)NowDialog.findViewById(R.id.txt_specailChr_note);
+        TextView txt_specailChr_note = (TextView) NowDialog.findViewById(R.id.txt_specailChr_note);
         txt_specailChr_note.setTypeface(Roboto_Regular);
 
         txt_total_price.setTypeface(Roboto_Regular);
@@ -518,7 +520,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         txt_thd_currency.setText(Common.Currency);
         txt_thd_currency.setTypeface(Roboto_Bold);
 
-        recycle_cab_detail = (RecyclerView)NowDialog.findViewById(R.id.recycle_cab_detail);
+        recycle_cab_detail = (RecyclerView) NowDialog.findViewById(R.id.recycle_cab_detail);
         RecyclerView.LayoutManager categoryLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recycle_cab_detail.setLayoutManager(categoryLayoutManager);
 
@@ -548,15 +550,15 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("total price", "total price = " + totlePrice);
 
 
-                if(totlePrice != 0f) {
+                if (totlePrice != 0f) {
                     Intent bi = new Intent(HomeActivity.this, TripDetailActivity.class);
                     bi.putExtra("pickup_point", edt_pickup_location.getText().toString().trim());
                     bi.putExtra("drop_point", edt_drop_location.getText().toString().trim());
                     bi.putExtra("distance", distance);
                     bi.putExtra("truckIcon", truckIcon);
                     bi.putExtra("truckType", truckType);
-                    bi.putExtra("CabId",CabId);
-                    bi.putExtra("AreaId",AreaId);
+                    bi.putExtra("CabId", CabId);
+                    bi.putExtra("AreaId", AreaId);
                     bi.putExtra("booking_date", BookingDateTime);
                     bi.putExtra("totlePrice", totlePrice);
                     bi.putExtra("PickupLatitude", PickupLatitude);
@@ -569,11 +571,11 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                     bi.putExtra("PaymentType", PaymentType);
                     bi.putExtra("person", person);
                     bi.putExtra("transaction_id", transaction_id);
-                    bi.putExtra("BookingType",BookingType);
-                    bi.putExtra("AstTime",AstTime);
+                    bi.putExtra("BookingType", BookingType);
+                    bi.putExtra("AstTime", AstTime);
                     startActivity(bi);
-                }else{
-                    Common.showMkError(HomeActivity.this,getResources().getString(R.string.not_valid_total_price));
+                } else {
+                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.not_valid_total_price));
                 }
             }
         });
@@ -594,7 +596,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         JSONArray CabDetailAry = Common.CabDetail;
 
-        for(int ci=0;ci<CabDetailAry.length();ci++){
+        for (int ci = 0; ci < CabDetailAry.length(); ci++) {
 
             CabDetails cabDetails = new CabDetails();
 
@@ -618,14 +620,14 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 cabDetails.setRideTimeRate(cabObj.getString("ride_time_rate"));
                 cabDetails.setNightRideTimeRate(cabObj.getString("night_ride_time_rate"));
                 cabDetails.setSeatCapacity(cabObj.getString("seat_capacity"));
-                if(cabObj.has("fix_price")){
+                if (cabObj.has("fix_price")) {
                     cabDetails.setFixPrice(cabObj.getString("fix_price"));
-                }else{
+                } else {
                     cabDetails.setFixPrice("");
                 }
-                if(cabObj.has("area_id")){
+                if (cabObj.has("area_id")) {
                     cabDetails.setAreaId(cabObj.getString("area_id"));
-                }else{
+                } else {
                     cabDetails.setFixPrice("");
                 }
 
@@ -641,39 +643,38 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
-        if(CabDetailAry != null && CabDetailAry.length() > 0){
-            Log.d("cabDetailArray","cabDetailArray = "+cabDetailArray.size());
-            if(cabDetailArray != null && cabDetailArray.size() > 0){
+        if (CabDetailAry != null && CabDetailAry.length() > 0) {
+            Log.d("cabDetailArray", "cabDetailArray = " + cabDetailArray.size());
+            if (cabDetailArray != null && cabDetailArray.size() > 0) {
 
                 CabDetails cabDetails = cabDetailArray.get(0);
                 txt_car_header.setText(cabDetails.getCartype().toUpperCase());
                 CarName = cabDetails.getCartype().toUpperCase();
                 txt_car_descriptin.setText(cabDetails.getDescription());
 
-                if(DayNight.equals("day")) {
+                if (DayNight.equals("day")) {
                     car_rate = cabDetails.getCarRate();
                     fromintailrate = cabDetails.getFromintailrate();
-                    if(cabDetails.getRideTimeRate() != null) {
+                    if (cabDetails.getRideTimeRate() != null) {
                         ride_time_rate = cabDetails.getRideTimeRate();
                     }
-                }
-                else if(DayNight.equals("night")) {
+                } else if (DayNight.equals("night")) {
                     car_rate = cabDetails.getNightIntailrate();
                     fromintailrate = cabDetails.getNightFromintailrate();
-                    if(cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")) {
+                    if (cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")) {
                         ride_time_rate = cabDetails.getNightRideTimeRate();
                     }
                 }
                 txt_first_price.setText(car_rate);
                 FirstKm = Float.parseFloat(cabDetails.getIntialkm());
-                txt_first_km.setText(getResources().getString(R.string.first)+" "+FirstKm+" "+getResources().getString(R.string.km));
-                txt_sec_pric.setText(fromintailrate+"/"+getResources().getString(R.string.km));
-                txt_sec_km.setText(getResources().getString(R.string.after)+" "+FirstKm+" "+getResources().getString(R.string.km));
+                txt_first_km.setText(getResources().getString(R.string.first) + " " + FirstKm + " " + getResources().getString(R.string.km));
+                txt_sec_pric.setText(fromintailrate + "/" + getResources().getString(R.string.km));
+                txt_sec_km.setText(getResources().getString(R.string.after) + " " + FirstKm + " " + getResources().getString(R.string.km));
 
-                if(cabDetails.getRideTimeRate() != null || cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")){
+                if (cabDetails.getRideTimeRate() != null || cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")) {
                     layout_three.setVisibility(View.VISIBLE);
-                    txt_thd_price.setText(ride_time_rate+"/"+getResources().getString(R.string.min));
-                }else{
+                    txt_thd_price.setText(ride_time_rate + "/" + getResources().getString(R.string.min));
+                } else {
                     layout_three.setVisibility(View.GONE);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                             AbsoluteLayout.LayoutParams.WRAP_CONTENT, AbsoluteLayout.LayoutParams.MATCH_PARENT);
@@ -688,22 +689,22 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 AreaId = cabDetails.getAreaId();
                 transfertype = cabDetails.getTransfertype();
 
-                cabDetailAdapter = new CabDetailAdapter(HomeActivity.this,cabDetailArray);
+                cabDetailAdapter = new CabDetailAdapter(HomeActivity.this, cabDetailArray);
                 recycle_cab_detail.setAdapter(cabDetailAdapter);
                 cabDetailAdapter.setOnCabDetailItemClickListener(HomeActivity.this);
                 cabDetailAdapter.updateItems();
 
                 List<String> list = new ArrayList<String>();
-                for(int si=0;si<Integer.parseInt(cabDetails.getSeatCapacity());si++){
-                    int seat = si+1;
-                    list.add(seat+"");
+                for (int si = 0; si < Integer.parseInt(cabDetails.getSeatCapacity()); si++) {
+                    int seat = si + 1;
+                    list.add(seat + "");
                 }
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(HomeActivity.this,
                         android.R.layout.simple_spinner_item, list);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner_person.setAdapter(dataAdapter);
 
-                Log.d("Fix Price","Fix Price = "+cabDetails.getFixPrice());
+                Log.d("Fix Price", "Fix Price = " + cabDetails.getFixPrice());
 
             }
 
@@ -712,30 +713,31 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         layout_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int d = 0;
                 Log.d("length ", "length = " + edt_pickup_location.getText().toString().length());
                 if (edt_pickup_location.getText().toString().length() == 0) {
                     Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
                     return;
                 } else if (edt_drop_location.getText().toString().length() == 0) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_drop));
+                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
                     return;
-                }else if (!LocationDistanse) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
-                    return;
-                }else if(distance == 0.0){
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
-                    return;
+                } else {
+                    d = getDistance();
+                    if (!LocationDistanse) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
+                        return;
+                    } else if (d == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
+                        return;
+                    } else {
+                        BookingDateTime = bookingFormate.format(Calendar.getInstance().getTime());
+
+                        BookingType = "Now";
+                        layout_reservation.setVisibility(View.GONE);
+                        NowDialog.show();
+                    }
                 }
 
-                BookingDateTime = bookingFormate.format(Calendar.getInstance().getTime());
-
-                BookingType = "Now";
-                layout_reservation.setVisibility(View.GONE);
-
-
-
-
-                NowDialog.show();
 
 //                if(intailrate != null && fromintailrate != null && ride_time_rate != null)
 //                    totlePrice = Common.getTotalPrice(intailrate, FirstKm, distance, fromintailrate, ride_time_rate, totalTime);
@@ -748,14 +750,14 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
 
-    /*Cash Dialog Strat*/
-        CashDialog = new Dialog(HomeActivity.this,R.style.DialogUpDownAnim);
+        /*Cash Dialog Strat*/
+        CashDialog = new Dialog(HomeActivity.this, R.style.DialogUpDownAnim);
         CashDialog.setContentView(R.layout.cash_dialog_layout);
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             CashDialog.getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        RelativeLayout layout__cash_cash = (RelativeLayout)CashDialog.findViewById(R.id.layout__cash_cash);
+        RelativeLayout layout__cash_cash = (RelativeLayout) CashDialog.findViewById(R.id.layout__cash_cash);
         layout__cash_cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -764,7 +766,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 PaymentType = "Cash";
             }
         });
-        RelativeLayout layout_cash_paypal = (RelativeLayout)CashDialog.findViewById(R.id.layout_cash_paypal);
+        RelativeLayout layout_cash_paypal = (RelativeLayout) CashDialog.findViewById(R.id.layout_cash_paypal);
         layout_cash_paypal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -772,16 +774,16 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 onBuyPressed();
             }
         });
-        RelativeLayout layout_cash_credit_card = (RelativeLayout)CashDialog.findViewById(R.id.layout_cash_credit_card);
+        RelativeLayout layout_cash_credit_card = (RelativeLayout) CashDialog.findViewById(R.id.layout_cash_credit_card);
         layout_cash_credit_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PaymentType = "Stripe";
-                Intent si = new Intent(HomeActivity.this,StripeFormActivity.class);
-                startActivityForResult(si,REQUEST_CODE_STRIPE);
+                Intent si = new Intent(HomeActivity.this, StripeFormActivity.class);
+                startActivityForResult(si, REQUEST_CODE_STRIPE);
             }
         });
-        RelativeLayout layout_cash_cancel = (RelativeLayout)CashDialog.findViewById(R.id.layout_cash_cancel);
+        RelativeLayout layout_cash_cancel = (RelativeLayout) CashDialog.findViewById(R.id.layout_cash_cancel);
         layout_cash_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -791,7 +793,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        layout_cash = (RelativeLayout)NowDialog.findViewById(R.id.layout_cash);
+        layout_cash = (RelativeLayout) NowDialog.findViewById(R.id.layout_cash);
         layout_cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -800,7 +802,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-    /*Cash Dialog End*/
+        /*Cash Dialog End*/
 
         /*Now Image Click popup end*/
 
@@ -822,22 +824,22 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         };
 
-        ReservationDialog = new Dialog(HomeActivity.this,R.style.DialogUpDownAnim);
+        ReservationDialog = new Dialog(HomeActivity.this, R.style.DialogUpDownAnim);
         ReservationDialog.setContentView(R.layout.reservation_dialog_layout);
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             ReservationDialog.getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        txt_date = (TextView)ReservationDialog.findViewById(R.id.txt_date);
-        txt_time = (TextView)ReservationDialog.findViewById(R.id.txt_time);
+        txt_date = (TextView) ReservationDialog.findViewById(R.id.txt_date);
+        txt_time = (TextView) ReservationDialog.findViewById(R.id.txt_time);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        RelativeLayout layout_res = (RelativeLayout)ReservationDialog.findViewById(R.id.layout_res);
+        RelativeLayout layout_res = (RelativeLayout) ReservationDialog.findViewById(R.id.layout_res);
         layout_res.getLayoutParams().height = (int) (dm.heightPixels * 0.40);
 
-        RelativeLayout layout_select_date = (RelativeLayout)ReservationDialog.findViewById(R.id.layout_select_date);
+        RelativeLayout layout_select_date = (RelativeLayout) ReservationDialog.findViewById(R.id.layout_select_date);
         layout_select_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -861,7 +863,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
 
-        RelativeLayout layout_select_time = (RelativeLayout)ReservationDialog.findViewById(R.id.layout_select_time);
+        RelativeLayout layout_select_time = (RelativeLayout) ReservationDialog.findViewById(R.id.layout_select_time);
         layout_select_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -881,22 +883,22 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        RelativeLayout layout_done = (RelativeLayout)ReservationDialog.findViewById(R.id.layout_done);
+        RelativeLayout layout_done = (RelativeLayout) ReservationDialog.findViewById(R.id.layout_done);
         layout_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Log.d("txt_date ","txt_date = "+txt_date.getText().toString());
-                if(txt_date.getText().toString().length() == 0){
-                    Common.showMkError(HomeActivity.this,getResources().getString(R.string.please_enter_date));
+                Log.d("txt_date ", "txt_date = " + txt_date.getText().toString());
+                if (txt_date.getText().toString().length() == 0) {
+                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.please_enter_date));
                     return;
-                }else if(txt_time.getText().length() == 0){
-                    Common.showMkError(HomeActivity.this,getResources().getString(R.string.please_enter_time));
+                } else if (txt_time.getText().length() == 0) {
+                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.please_enter_time));
                     return;
                 }
 
                 SimpleDateFormat currentDateFormate = new SimpleDateFormat("dd/MM/yyyy HH:mm aa");
-                String DateTimeString = txt_date.getText()+" "+txt_time.getText();
+                String DateTimeString = txt_date.getText() + " " + txt_time.getText();
                 String SeletedtDate = "";
                 Date SeletDate;
                 try {
@@ -914,13 +916,13 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 Calendar onMonCal = Calendar.getInstance();
                 onMonCal.add(Calendar.MONTH, 1);
                 String curOneMonDate = currentDateFormate.format(onMonCal.getTime());
-                SimpleDateFormat dfDate  = new SimpleDateFormat("dd/MM/yyyy HH:mm aa");
-                Log.d("curOneMonDate","curOneMonDate = "+curOneMonDate+"=="+DateTimeString);
+                SimpleDateFormat dfDate = new SimpleDateFormat("dd/MM/yyyy HH:mm aa");
+                Log.d("curOneMonDate", "curOneMonDate = " + curOneMonDate + "==" + DateTimeString);
                 try {
                     Date CrtDate = dfDate.parse(curOneMonDate);
                     Date SelDate = dfDate.parse(DateTimeString);
-                    if(SelDate.after(CrtDate)){
-                        Log.d("After","curOneMonDate After One");
+                    if (SelDate.after(CrtDate)) {
+                        Log.d("After", "curOneMonDate After One");
                         afterOneMonth = true;
                     }
                 } catch (ParseException e) {
@@ -928,38 +930,38 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
                 try {
-                    SimpleDateFormat selectedDateFormate  = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    SimpleDateFormat selectedDateFormate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     Date parshDate = selectedDateFormate.parse(DateTimeString);
                     BookingDateTime = bookingFormate.format(parshDate);
 
                 } catch (ParseException e) {
                     e.printStackTrace();
-                    Log.d("date Error","DateTimeString Error = "+e.getMessage());
+                    Log.d("date Error", "DateTimeString Error = " + e.getMessage());
                 }
                 //SimpleDateFormat bookingFormate = new SimpleDateFormat("h:mm a, d, MMM yyyy,EEE");
-                Log.d("DateTimeString","DateTimeString one= "+DateTimeString);
-                Log.d("DateTimeString","DateTimeString two= "+currentDate);
-                Log.d("DateTimeString","DateTimeString three= "+dateVal);
-                Log.d("DateTimeString","DateTimeString for= "+BookingDateTime);
-                if(afterOneMonth){
-                    Common.showMkError(HomeActivity.this,getResources().getString(R.string.time_is_large));
+                Log.d("DateTimeString", "DateTimeString one= " + DateTimeString);
+                Log.d("DateTimeString", "DateTimeString two= " + currentDate);
+                Log.d("DateTimeString", "DateTimeString three= " + dateVal);
+                Log.d("DateTimeString", "DateTimeString for= " + BookingDateTime);
+                if (afterOneMonth) {
+                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.time_is_large));
                     return;
-                }else if(!dateVal){
-                    Common.showMkError(HomeActivity.this,getResources().getString(R.string.date_time_not_valid));
+                } else if (!dateVal) {
+                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.date_time_not_valid));
                     return;
                 }
                 try {
 
-                    Date ResCurDateFrm =  currentTime.parse(txt_time.getText().toString());
+                    Date ResCurDateFrm = currentTime.parse(txt_time.getText().toString());
                     Date ResStarDateFrm = null;
-                    if(!Common.StartDayTime.equals(""))
-                            ResStarDateFrm = currentTime.parse(Common.StartDayTime);
+                    if (!Common.StartDayTime.equals(""))
+                        ResStarDateFrm = currentTime.parse(Common.StartDayTime);
 
                     Date ResEndDateFrm = null;
-                    if(!Common.StartDayTime.equals(""))
-                        ResEndDateFrm =  currentTime.parse(Common.EndDayTime);
+                    if (!Common.StartDayTime.equals(""))
+                        ResEndDateFrm = currentTime.parse(Common.EndDayTime);
 
-                    if(ResStarDateFrm != null && ResEndDateFrm != null) {
+                    if (ResStarDateFrm != null && ResEndDateFrm != null) {
                         if (ResCurDateFrm.before(ResStarDateFrm) || ResCurDateFrm.after(ResEndDateFrm)) {
                             Log.d("get time", "get time = before");
                             DayNight = "night";
@@ -970,28 +972,27 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Log.d("DayNight","DayNight = "+DayNight);
+                Log.d("DayNight", "DayNight = " + DayNight);
                 CabDetails ResCabDetails = cabDetailArray.get(CabPositon);
-                if(DayNight.equals("day")) {
+                if (DayNight.equals("day")) {
                     car_rate = ResCabDetails.getCarRate();
                     fromintailrate = ResCabDetails.getFromintailrate();
-                    if(ResCabDetails.getRideTimeRate() != null) {
+                    if (ResCabDetails.getRideTimeRate() != null) {
                         ride_time_rate = ResCabDetails.getRideTimeRate();
                     }
-                }
-                else if(DayNight.equals("night")) {
+                } else if (DayNight.equals("night")) {
                     car_rate = ResCabDetails.getNightIntailrate();
                     fromintailrate = ResCabDetails.getNightFromintailrate();
-                    if(ResCabDetails.getNightRideTimeRate() != null && !ResCabDetails.getNightRideTimeRate().equals("0")) {
+                    if (ResCabDetails.getNightRideTimeRate() != null && !ResCabDetails.getNightRideTimeRate().equals("0")) {
                         ride_time_rate = ResCabDetails.getNightRideTimeRate();
                     }
                 }
-                if(ResCabDetails.getRideTimeRate() != null || ResCabDetails.getNightRideTimeRate() != null && !ResCabDetails.getNightRideTimeRate().equals("0")){
+                if (ResCabDetails.getRideTimeRate() != null || ResCabDetails.getNightRideTimeRate() != null && !ResCabDetails.getNightRideTimeRate().equals("0")) {
                     layout_three.setVisibility(View.VISIBLE);
-                    txt_thd_price.setText(ride_time_rate+"/"+getResources().getString(R.string.min));
+                    txt_thd_price.setText(ride_time_rate + "/" + getResources().getString(R.string.min));
                 }
                 txt_first_price.setText(car_rate);
-                txt_sec_pric.setText(fromintailrate+"/"+getResources().getString(R.string.km));
+                txt_sec_pric.setText(fromintailrate + "/" + getResources().getString(R.string.km));
 
                 layout_reservation.setVisibility(View.GONE);
                 NowDialog.show();
@@ -1011,10 +1012,10 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 } else if (edt_drop_location.getText().toString().length() == 0) {
                     Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_drop));
                     return;
-                }else if(!LocationDistanse){
+                } else if (!LocationDistanse) {
                     Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
                     return;
-                }else if(distance == 0.0){
+                } else if (distance == 0.0) {
                     Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
                     return;
                 }
@@ -1063,13 +1064,11 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 paymentIntent);
     }
 
-    public static boolean CheckDates(String startDate, String currentDate)
-    {
-        SimpleDateFormat dfDate  = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    public static boolean CheckDates(String startDate, String currentDate) {
+        SimpleDateFormat dfDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         boolean b = false;
         try {
-            if(dfDate.parse(startDate).after(dfDate.parse(currentDate)))
-            {
+            if (dfDate.parse(startDate).after(dfDate.parse(currentDate))) {
                 b = true;//If start date is before end date
             }
         } catch (ParseException e) {
@@ -1081,7 +1080,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void LocationAutocompleate(AutoCompleteTextView locationEditext, final String clickText){
+    public void LocationAutocompleate(AutoCompleteTextView locationEditext, final String clickText) {
         locationEditext.setThreshold(1);
 
         //Set adapter to AutoCompleteTextView
@@ -1120,7 +1119,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                             bothLocationString = "pickeup";
                             LocationAddress.getAddressFromLocation(edt_pickup_location.getText().toString(), getApplicationContext(), new GeocoderHandlerLatitude());
                         } else {
-                            Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
                         }
                     }
                 } else if (clickText.equals("drop")) {
@@ -1129,7 +1128,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         bothLocationString = "drop";
                         LocationAddress.getAddressFromLocation(edt_drop_location.getText().toString(), getApplicationContext(), new GeocoderHandlerLatitude());
                     } else {
-                        Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -1163,7 +1162,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         return true;
     }
 
-    public void CaculationDirationIon(){
+    public void CaculationDirationIon() {
         String CaculationLocUrl = "";
 //        try {
 //            DrowLocUrl = "http://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin="+URLEncoder.encode(edt_pickup_location.getText().toString(), "UTF-8")+"&destination="+URLEncoder.encode(edt_drop_location.getText().toString(), "UTF-8");
@@ -1171,11 +1170,11 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 //            e.printStackTrace();
 //        }
 
-        CaculationLocUrl = "http://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin="+PickupLatitude+","+PickupLongtude+"&destination="+DropLatitude+","+DropLongtude;
-        Log.d("CaculationLocUrl","CaculationLocUrl = "+CaculationLocUrl);
+        CaculationLocUrl = "http://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin=" + PickupLatitude + "," + PickupLongtude + "&destination=" + DropLatitude + "," + DropLongtude;
+        Log.d("CaculationLocUrl", "CaculationLocUrl = " + CaculationLocUrl);
         Ion.with(HomeActivity.this)
-            .load(CaculationLocUrl)
-            .setTimeout(10000)
+                .load(CaculationLocUrl)
+                .setTimeout(10000)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -1226,33 +1225,33 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                                         else
                                             mintus = Integer.parseInt(durTextSpi[0]);
                                     }
-                                Log.d("hours","hours = "+hours+"=="+mintus);
+                                    Log.d("hours", "hours = " + hours + "==" + mintus);
                                     totalTime = mintus + hours;
 
                                     googleDuration = duration.getInt("value");
 
 
-                                    if(FixRateArray.size() > 0) {
+                                    if (FixRateArray.size() > 0) {
                                         for (int ci = 0; ci < cabDetailArray.size(); ci++) {
 
                                             CabDetails FixCabDetails = cabDetailArray.get(ci);
 
-                                            for (int fi = 0; fi < FixRateArray.size(); fi++){
-                                                HashMap<String,String> FixHasMap = FixRateArray.get(fi);
+                                            for (int fi = 0; fi < FixRateArray.size(); fi++) {
+                                                HashMap<String, String> FixHasMap = FixRateArray.get(fi);
 
-                                                Log.d("car_type_id","car_type_id = "+FixHasMap.get("car_type_id")+"=="+FixCabDetails.getId());
-                                                if(FixHasMap.get("car_type_id").equals(FixCabDetails.getId())){
+                                                Log.d("car_type_id", "car_type_id = " + FixHasMap.get("car_type_id") + "==" + FixCabDetails.getId());
+                                                if (FixHasMap.get("car_type_id").equals(FixCabDetails.getId())) {
                                                     CabDetails cabDetails = cabDetailArray.get(ci);
                                                     cabDetails.setFixPrice(FixHasMap.get("fix_price").toString());
                                                     cabDetails.setAreaId(FixHasMap.get("area_id").toString());
                                                     break;
                                                 }
 
-                                                Log.d("fi","car_type_id fi = "+fi);
+                                                Log.d("fi", "car_type_id fi = " + fi);
                                             }
-                                            Log.d("ci","car_type_id ci = "+ci);
+                                            Log.d("ci", "car_type_id ci = " + ci);
                                         }
-                                    }else{
+                                    } else {
                                         for (int ci = 0; ci < cabDetailArray.size(); ci++) {
                                             CabDetails AllCabDetails = cabDetailArray.get(ci);
                                             AllCabDetails.setFixPrice("");
@@ -1260,12 +1259,12 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                                         }
                                     }
                                     CabDetails cabDetails = cabDetailArray.get(0);
-                                    if(!cabDetails.getFixPrice().equals("")) {
+                                    if (!cabDetails.getFixPrice().equals("")) {
                                         layout_timming.setVisibility(View.GONE);
                                         layout_far_breakup.setVisibility(View.INVISIBLE);
                                         totlePrice = Float.parseFloat(cabDetails.getFixPrice());
                                         txt_total_price.setText(Math.round(totlePrice) + "");
-                                    }else {
+                                    } else {
                                         Log.d("fromintailrate", "fromintailrate = " + car_rate + "==" + FirstKm + "==" + distance + "==" + fromintailrate + "==" + ride_time_rate + "==" + totalTime);
                                         if (car_rate != null && fromintailrate != null && ride_time_rate != null)
                                             totlePrice = Common.getTotalPrice(car_rate, FirstKm, distance, fromintailrate, ride_time_rate, totalTime);
@@ -1301,14 +1300,15 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         SetNowDialogCabValue();
     }
 
-    public class CaculationDiration extends AsyncTask<String, Integer, String>{
+    public class CaculationDiration extends AsyncTask<String, Integer, String> {
 
-        private String content =  null;
+        private String content = null;
 
         String DrowLocUrl = "";
-        public CaculationDiration(){
+
+        public CaculationDiration() {
             try {
-                DrowLocUrl = "http://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin="+URLEncoder.encode(edt_pickup_location.getText().toString(), "UTF-8")+"&destination="+URLEncoder.encode(edt_drop_location.getText().toString(), "UTF-8");
+                DrowLocUrl = "http://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin=" + URLEncoder.encode(edt_pickup_location.getText().toString(), "UTF-8") + "&destination=" + URLEncoder.encode(edt_drop_location.getText().toString(), "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -1320,13 +1320,12 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         protected String doInBackground(String... params) {
-            try
-            {
+            try {
                 HttpClient client = new DefaultHttpClient();
                 HttpParams HttpParams = client.getParams();
                 HttpConnectionParams.setConnectionTimeout(HttpParams, 60 * 60 * 1000);
                 HttpConnectionParams.setSoTimeout(HttpParams, 60 * 60 * 1000);
-                Log.d("DrowLocUrl","DrowLocUrl = "+DrowLocUrl);
+                Log.d("DrowLocUrl", "DrowLocUrl = " + DrowLocUrl);
                 HttpGet getMethod = new HttpGet(DrowLocUrl);
                 //getMethod.setEntity(entity);
                 client.execute(getMethod, new ResponseHandler<String>() {
@@ -1335,14 +1334,13 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
                         HttpEntity httpEntity = httpResponse.getEntity();
                         content = EntityUtils.toString(httpEntity);
-                        Log.d("Result >>>","DrowLocUrl Result One"+ content);
+                        Log.d("Result >>>", "DrowLocUrl Result One" + content);
 
                         return null;
                     }
                 });
 
-            } catch(Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
                 Log.d("Indiaries", "DrowLocUrl Result error" + e);
                 return e.getMessage();
@@ -1352,12 +1350,11 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         protected void onPostExecute(String result) {
-            boolean isStatus = Common.ShowHttpErrorMessage(HomeActivity.this,result);
-            if(isStatus) {
+            boolean isStatus = Common.ShowHttpErrorMessage(HomeActivity.this, result);
+            if (isStatus) {
                 try {
                     JSONObject resObj = new JSONObject(result);
                     if (resObj.getString("status").toLowerCase().equals("ok")) {
-
 
                         JSONArray routArray = new JSONArray(resObj.getString("routes"));
                         JSONObject routObj = routArray.getJSONObject(0);
@@ -1372,7 +1369,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                             distance = (float) disObj.getInt("value") / 100;
                         else if (disObj.getInt("value") > 10)
                             distance = (float) disObj.getInt("value") / 10;
-                        else if(disObj.getInt("value") == 0)
+                        else if (disObj.getInt("value") == 0)
                             distance = (float) disObj.getInt("value");
                         Log.d("distance", "distance = " + distance);
                         Log.d("dis", "dis = " + distance);
@@ -1423,36 +1420,36 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     public void CarDetailTab(int position) {
         CabPositon = position;
 
-        if(cabDetailArray != null && cabDetailArray.size() > 0){
+        if (cabDetailArray != null && cabDetailArray.size() > 0) {
             CabDetails cabDetails = cabDetailArray.get(position);
 
 
-            if(DayNight.equals("day")) {
+            if (DayNight.equals("day")) {
                 car_rate = cabDetails.getCarRate();
                 fromintailrate = cabDetails.getFromintailrate();
-                Log.d("ride_time_rate","ride_time_rate one day= "+cabDetails.getRideTimeRate());
-                if(cabDetails.getRideTimeRate() != null) {
+                Log.d("ride_time_rate", "ride_time_rate one day= " + cabDetails.getRideTimeRate());
+                if (cabDetails.getRideTimeRate() != null) {
                     ride_time_rate = cabDetails.getRideTimeRate();
                 }
-            }else if(DayNight.equals("night")) {
+            } else if (DayNight.equals("night")) {
                 car_rate = cabDetails.getNightIntailrate();
                 fromintailrate = cabDetails.getNightFromintailrate();
-                Log.d("ride_time_rate","ride_time_rate one night= "+cabDetails.getRideTimeRate());
-                if(cabDetails.getNightRideTimeRate() != null) {
+                Log.d("ride_time_rate", "ride_time_rate one night= " + cabDetails.getRideTimeRate());
+                if (cabDetails.getNightRideTimeRate() != null) {
                     ride_time_rate = cabDetails.getNightRideTimeRate();
                 }
             }
 
-            Log.d("ride_time_rate","ride_time_rate two= "+ride_time_rate);
+            Log.d("ride_time_rate", "ride_time_rate two= " + ride_time_rate);
 
             txt_car_header.setText(cabDetails.getCartype().toUpperCase());
             CarName = cabDetails.getCartype().toUpperCase();
             txt_car_descriptin.setText(cabDetails.getDescription());
-            txt_first_price.setText("$"+car_rate);
+            txt_first_price.setText("$" + car_rate);
             FirstKm = Float.parseFloat(cabDetails.getIntialkm());
-            txt_first_km.setText("First "+FirstKm+" km");
-            txt_sec_pric.setText("$ "+fromintailrate+"/km");
-            txt_sec_km.setText("After "+FirstKm+" km");
+            txt_first_km.setText("First " + FirstKm + " km");
+            txt_sec_pric.setText("$ " + fromintailrate + "/km");
+            txt_sec_km.setText("After " + FirstKm + " km");
 
             truckIcon = cabDetails.getIcon();
             truckType = cabDetails.getCartype();
@@ -1460,7 +1457,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             AreaId = cabDetails.getAreaId();
             transfertype = cabDetails.getTransfertype();
 
-            if(cabDetails.getRideTimeRate() != null || cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")){
+            if (cabDetails.getRideTimeRate() != null || cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")) {
 
                 layout_three.setVisibility(View.GONE);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -1471,8 +1468,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 layout_three.setLayoutParams(params);
 
                 layout_three.setVisibility(View.VISIBLE);
-                txt_thd_price.setText(ride_time_rate+"/min");
-            }else{
+                txt_thd_price.setText(ride_time_rate + "/min");
+            } else {
                 layout_three.setVisibility(View.GONE);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         AbsoluteLayout.LayoutParams.WRAP_CONTENT, AbsoluteLayout.LayoutParams.MATCH_PARENT);
@@ -1481,39 +1478,39 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 layout_two.setLayoutParams(params);
             }
 
-            for(int i=0;i<cabDetailArray.size();i++) {
+            for (int i = 0; i < cabDetailArray.size(); i++) {
                 CabDetails allcabDetails = cabDetailArray.get(i);
-                Log.d("position","position = "+position+"=="+i);
-                if(i == position) {
+                Log.d("position", "position = " + position + "==" + i);
+                if (i == position) {
                     allcabDetails.setIsSelected(true);
-                }else{
+                } else {
                     allcabDetails.setIsSelected(false);
                 }
             }
             cabDetailAdapter.notifyDataSetChanged();
 
             List<String> list = new ArrayList<String>();
-            for(int si=0;si<Integer.parseInt(cabDetails.getSeatCapacity());si++){
-                int seat = si+1;
-                list.add(seat+"");
+            for (int si = 0; si < Integer.parseInt(cabDetails.getSeatCapacity()); si++) {
+                int seat = si + 1;
+                list.add(seat + "");
             }
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_item, list);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner_person.setAdapter(dataAdapter);
 
-            if(!cabDetails.getFixPrice().equals("")) {
+            if (!cabDetails.getFixPrice().equals("")) {
                 layout_timming.setVisibility(View.GONE);
                 layout_far_breakup.setVisibility(View.INVISIBLE);
                 txt_total_price.setText(cabDetails.getFixPrice());
                 totlePrice = Float.parseFloat(cabDetails.getFixPrice());
-            }else {
+            } else {
                 layout_timming.setVisibility(View.VISIBLE);
                 layout_far_breakup.setVisibility(View.VISIBLE);
-                Log.d("fromintailrate","fromintailrate = "+car_rate+"=="+fromintailrate+"=="+ride_time_rate);
-                if(car_rate != null && fromintailrate != null && ride_time_rate != null)
-                    totlePrice = Common.getTotalPrice(car_rate, FirstKm, distance, fromintailrate, ride_time_rate, totalTime);
-                Log.d("totlePrice","totlePrice = "+totlePrice);
+                Log.d("fromintailrate", "fromintailrate = " + car_rate + "==" + fromintailrate + "==" + ride_time_rate);
+                if (car_rate != null && fromintailrate != null && ride_time_rate != null)
+                    totlePrice = Common.getTotalPrice("5", 5, distance, fromintailrate, ride_time_rate, totalTime);
+                Log.d("totlePrice", "totlePrice = " + totlePrice);
                 txt_total_price.setText(Math.round(totlePrice) + "");
             }
 
@@ -1521,42 +1518,41 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void SetNowDialogCabValue(){
+    public void SetNowDialogCabValue() {
 
         JSONArray CabDetailAry = Common.CabDetail;
-        if(CabDetailAry != null && CabDetailAry.length() > 0){
-            Log.d("cabDetailArray","cabDetailArray = "+cabDetailArray.size());
-            if(cabDetailArray != null && cabDetailArray.size() > 0){
+        if (CabDetailAry != null && CabDetailAry.length() > 0) {
+            Log.d("cabDetailArray", "cabDetailArray = " + cabDetailArray.size());
+            if (cabDetailArray != null && cabDetailArray.size() > 0) {
 
                 CabDetails cabDetails = cabDetailArray.get(0);
                 txt_car_header.setText(cabDetails.getCartype().toUpperCase());
                 CarName = cabDetails.getCartype().toUpperCase();
                 txt_car_descriptin.setText(cabDetails.getDescription());
 
-                if(DayNight.equals("day")) {
+                if (DayNight.equals("day")) {
                     car_rate = cabDetails.getCarRate();
                     fromintailrate = cabDetails.getFromintailrate();
-                    if(cabDetails.getRideTimeRate() != null) {
+                    if (cabDetails.getRideTimeRate() != null) {
                         ride_time_rate = cabDetails.getRideTimeRate();
                     }
-                }
-                else if(DayNight.equals("night")) {
+                } else if (DayNight.equals("night")) {
                     car_rate = cabDetails.getNightIntailrate();
                     fromintailrate = cabDetails.getNightFromintailrate();
-                    if(cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")) {
+                    if (cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")) {
                         ride_time_rate = cabDetails.getNightRideTimeRate();
                     }
                 }
                 txt_first_price.setText(car_rate);
                 FirstKm = Float.parseFloat(cabDetails.getIntialkm());
-                txt_first_km.setText(getResources().getString(R.string.first)+" "+FirstKm+" "+getResources().getString(R.string.km));
-                txt_sec_pric.setText(fromintailrate+"/"+getResources().getString(R.string.km));
-                txt_sec_km.setText(getResources().getString(R.string.after)+" "+FirstKm+" "+getResources().getString(R.string.km));
+                txt_first_km.setText(getResources().getString(R.string.first) + " " + FirstKm + " " + getResources().getString(R.string.km));
+                txt_sec_pric.setText(fromintailrate + "/" + getResources().getString(R.string.km));
+                txt_sec_km.setText(getResources().getString(R.string.after) + " " + FirstKm + " " + getResources().getString(R.string.km));
 
-                if(cabDetails.getRideTimeRate() != null || cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")){
+                if (cabDetails.getRideTimeRate() != null || cabDetails.getNightRideTimeRate() != null && !cabDetails.getNightRideTimeRate().equals("0")) {
                     layout_three.setVisibility(View.VISIBLE);
-                    txt_thd_price.setText(ride_time_rate+"/"+getResources().getString(R.string.min));
-                }else{
+                    txt_thd_price.setText(ride_time_rate + "/" + getResources().getString(R.string.min));
+                } else {
                     layout_three.setVisibility(View.GONE);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                             AbsoluteLayout.LayoutParams.WRAP_CONTENT, AbsoluteLayout.LayoutParams.MATCH_PARENT);
@@ -1571,22 +1567,22 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 AreaId = cabDetails.getAreaId();
                 transfertype = cabDetails.getTransfertype();
 
-                cabDetailAdapter = new CabDetailAdapter(HomeActivity.this,cabDetailArray);
+                cabDetailAdapter = new CabDetailAdapter(HomeActivity.this, cabDetailArray);
                 recycle_cab_detail.setAdapter(cabDetailAdapter);
                 cabDetailAdapter.setOnCabDetailItemClickListener(HomeActivity.this);
                 cabDetailAdapter.updateItems();
 
                 List<String> list = new ArrayList<String>();
-                for(int si=0;si<Integer.parseInt(cabDetails.getSeatCapacity());si++){
-                    int seat = si+1;
-                    list.add(seat+"");
+                for (int si = 0; si < Integer.parseInt(cabDetails.getSeatCapacity()); si++) {
+                    int seat = si + 1;
+                    list.add(seat + "");
                 }
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(HomeActivity.this,
                         android.R.layout.simple_spinner_item, list);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner_person.setAdapter(dataAdapter);
 
-                Log.d("Fix Price","Fix Price = "+cabDetails.getFixPrice());
+                Log.d("Fix Price", "Fix Price = " + cabDetails.getFixPrice());
 
             }
 
@@ -1594,16 +1590,16 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void PickupFixRateCall(){
+    public void PickupFixRateCall() {
 
         ProgressDialog.show();
         cusRotateLoading.start();
 
         FixRateArray = new ArrayList<>();
 
-      //  String FixAreaUrl = Url.FixAreaUrl+"?pick_lat="+PickupLatitude+"&pick_long="+PickupLongtude+"&drop_lat="+DropLatitude+"&drop_long="+DropLongtude;
-        String FixAreaUrl = Url.FixAreaUrl+"?pick_lat="+PickupLatitude+"&pick_long="+PickupLongtude+"&drop_lat="+DropLatitude+"&drop_long="+DropLongtude;
-        Log.d("FixAreaUrl","FixAreaUrl ="+FixAreaUrl);
+        //  String FixAreaUrl = Url.FixAreaUrl+"?pick_lat="+PickupLatitude+"&pick_long="+PickupLongtude+"&drop_lat="+DropLatitude+"&drop_long="+DropLongtude;
+        String FixAreaUrl = Url.FixAreaUrl + "?pick_lat=" + PickupLatitude + "&pick_long=" + PickupLongtude + "&drop_lat=" + DropLatitude + "&drop_long=" + DropLongtude;
+        Log.d("FixAreaUrl", "FixAreaUrl =" + FixAreaUrl);
         Ion.with(HomeActivity.this)
                 .load(FixAreaUrl)
                 .setTimeout(6000)
@@ -1617,25 +1613,36 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
                             try {
                                 JSONObject resObj = new JSONObject(result.toString());
-                                Log.d("loadTripsUrl", "loadTripsUrl two= " + resObj);
-                                JSONArray fixAreaArray = new JSONArray(resObj.getString("fixAreaPriceList"));
-                                for(int fi=0;fi<fixAreaArray.length();fi++){
-                                    JSONObject fixAreaObj = fixAreaArray.getJSONObject(fi);
+                                JSONObject status = resObj.getJSONObject("status");
+                                if (status.get("status").equals("success")) {
+                                    // Log.d("loadTripsUrl", "loadTripsUrl two= " + resObj);
+                                    // JSONArray fixAreaArray = new JSONArray(resObj.getString("fixAreaPriceList"));
+                                    JSONArray fixAreaArray = new JSONArray(resObj.getString("cablist"));
+                                    for (int fi = 0; fi < fixAreaArray.length(); fi++) {
+                                        JSONObject fixAreaObj = fixAreaArray.getJSONObject(fi);
 
-                                    Log.d("FixRateArray","FixAreaUrl FixRateArray = "+fixAreaObj);
-                                    if(!fixAreaObj.getString("fix_price").equals("0")) {
-                                        HashMap<String,String> FixHasMap = new HashMap<String, String>();
-                                        FixHasMap.put("fix_price", fixAreaObj.getString("fix_price").toString());
-                                        FixHasMap.put("car_type_id", fixAreaObj.getString("car_type_id").toString());
-                                        FixHasMap.put("car_type_name", fixAreaObj.getString("car_type_name").toString());
-                                        FixHasMap.put("area_title", fixAreaObj.getString("area_title").toString());
-                                        FixHasMap.put("area_id", fixAreaObj.getString("area_id").toString());
-                                        FixRateArray.add(FixHasMap);
+                                        HashMap<String, String> FixHasMap = new HashMap<String, String>();
+                                        // FixHasMap.put("fix_price", fixAreaObj.getString("fix_price").toString());
+                                        FixHasMap.put("cab_id", fixAreaObj.getString("cab_id").toString());
+                                        FixHasMap.put("cartype", fixAreaObj.getString("cartype").toString());
+                                        //  FixHasMap.put("area_title", fixAreaObj.getString("area_title").toString());
+                                        //   FixHasMap.put("area_id", fixAreaObj.getString("area_id").toString());
+
+                                        Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + fixAreaObj);
+                                        /*if (!fixAreaObj.getString("fix_price").equals("0")) {
+                                            HashMap<String, String> FixHasMap = new HashMap<String, String>();
+                                            FixHasMap.put("fix_price", fixAreaObj.getString("fix_price").toString());
+                                            FixHasMap.put("car_type_id", fixAreaObj.getString("car_type_id").toString());
+                                            FixHasMap.put("car_type_name", fixAreaObj.getString("car_type_name").toString());
+                                            FixHasMap.put("area_title", fixAreaObj.getString("area_title").toString());
+                                            FixHasMap.put("area_id", fixAreaObj.getString("area_id").toString());
+                                            FixRateArray.add(FixHasMap);
+                                        }
+*/
                                     }
-
+                                    Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + FixRateArray.size());
+                                 //   CaculationDirationIon();
                                 }
-                                Log.d("FixRateArray","FixAreaUrl FixRateArray = "+FixRateArray.size());
-                                CaculationDirationIon();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -1665,9 +1672,9 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 default:
                     locationAddress = null;
             }
-            if(locationAddress != null) {
+            if (locationAddress != null) {
                 if (locationAddress.equals("Unable connect to Geocoder")) {
-                    Toast.makeText(HomeActivity.this, "No Network conection", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(HomeActivity.this, "No Network conection", Toast.LENGTH_LONG).show();
                 } else {
                     Log.d("locationAddress", "locationAddress = " + locationAddress + "==" + bothLocationString);
                     if (bothLocationString.equals("pickeup") && edt_pickup_location != null)
@@ -1675,7 +1682,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                     else if (bothLocationString.equals("drop") && edt_drop_location != null)
                         edt_drop_location.setText(locationAddress);
                 }
-            }else{
+            } else {
                 NowDialog.cancel();
                 layout_reservation.setVisibility(View.VISIBLE);
                 Toast.makeText(HomeActivity.this, getResources().getString(R.string.location_long), Toast.LENGTH_LONG).show();
@@ -1684,7 +1691,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private class GeocoderHandlerLatitude extends Handler{
+    private class GeocoderHandlerLatitude extends Handler {
         @Override
         public void handleMessage(Message message) {
             String locationAddress;
@@ -1696,8 +1703,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 default:
                     locationAddress = null;
             }
-            Log.d("locationAddress","locationAddress = "+locationAddress);
-            if(locationAddress != null) {
+            Log.d("locationAddress", "locationAddress = " + locationAddress);
+            if (locationAddress != null) {
                 if (locationAddress.equals("Unable connect to Geocoder")) {
                     Toast.makeText(HomeActivity.this, "No Network conection", Toast.LENGTH_LONG).show();
                 } else {
@@ -1707,8 +1714,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         PickupLatitude = Double.parseDouble(LocationSplit[0]);
                         PickupLongtude = Double.parseDouble(LocationSplit[1]);
                         PickupLarLng = new LatLng(Double.parseDouble(LocationSplit[0]), Double.parseDouble(LocationSplit[1]));
-                    }
-                    else if (bothLocationString.equals("drop")) {
+                    } else if (bothLocationString.equals("drop")) {
                         DropLongtude = Double.parseDouble(LocationSplit[1]);
                         DropLatitude = Double.parseDouble(LocationSplit[0]);
 
@@ -1719,18 +1725,19 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                     if (edt_drop_location.getText().length() > 0 && edt_pickup_location.getText().length() > 0) {
                         if (checkReady() && Common.isNetworkAvailable(HomeActivity.this)) {
 
-                            PickupFixRateCall();
+                          //  PickupFixRateCall();
 
                         } else {
                             Common.showInternetInfo(HomeActivity.this, "");
                         }
-                    }else{
+                    } else {
                         MarkerAdd();
                     }
                 }
             }
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -1738,42 +1745,42 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /*Add marker function*/
-    public void MarkerAdd(){
+    public void MarkerAdd() {
 
-        if(checkReady()) {
+        if (checkReady()) {
 
-            if(marker != null)
+            if (marker != null)
                 googleMap.clear();
 
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                if(PickupLarLng != null) {
-                    marker = new MarkerOptions()
-                            .position(PickupLarLng)
-                            .title("Pick Up Location")
+            if (PickupLarLng != null) {
+                marker = new MarkerOptions()
+                        .position(PickupLarLng)
+                        .title("Pick Up Location")
 
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.pickup_location_icon));
-                    PickupMarker =  googleMap.addMarker(marker);
-                    PickupMarker.setDraggable(true);
-                    builder.include(marker.getPosition());
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pickup_location_icon));
+                PickupMarker = googleMap.addMarker(marker);
+                PickupMarker.setDraggable(true);
+                builder.include(marker.getPosition());
 
 
-                }
+            }
 
-                if(DropLarLng != null) {
-                    marker = new MarkerOptions()
-                            .position(DropLarLng)
-                            .title("Drop Location")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.drop_location_icon));
+            if (DropLarLng != null) {
+                marker = new MarkerOptions()
+                        .position(DropLarLng)
+                        .title("Drop Location")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.drop_location_icon));
 
-                    DropMarker = googleMap.addMarker(marker);
-                    DropMarker.setDraggable(true);
-                    builder.include(marker.getPosition());
-                }
+                DropMarker = googleMap.addMarker(marker);
+                DropMarker.setDraggable(true);
+                builder.include(marker.getPosition());
+            }
 
             // .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_icon))
 
-            if(DropLarLng != null || PickupLarLng != null) {
+            if (DropLarLng != null || PickupLarLng != null) {
                 LatLngBounds bounds = builder.build();
 
                 //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
@@ -1785,10 +1792,10 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
                         @Override
                         public void onFinish() {
-                            if(PickupMarker!=null)
-                                BounceAnimationMarker(PickupMarker,PickupLarLng);
-                            if(DropMarker != null)
-                                BounceAnimationMarker(DropMarker,DropLarLng);
+                            if (PickupMarker != null)
+                                BounceAnimationMarker(PickupMarker, PickupLarLng);
+                            if (DropMarker != null)
+                                BounceAnimationMarker(DropMarker, DropLarLng);
                         }
 
                         @Override
@@ -1823,8 +1830,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         public void onFinish() {
                             CameraUpdate zout = CameraUpdateFactory.zoomBy((float) -1.0);
                             googleMap.animateCamera(zout);
-                            BounceAnimationMarker(PickupMarker,PickupLarLng);
-                            BounceAnimationMarker(DropMarker,DropLarLng);
+                            BounceAnimationMarker(PickupMarker, PickupLarLng);
+                            BounceAnimationMarker(DropMarker, DropLarLng);
                         }
 
                         @Override
@@ -1849,12 +1856,12 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public boolean onMarkerClick(final Marker pickMarker) {
 
-                    Log.d("bothLocationString","bothLocationString pickup= "+bothLocationString+"=="+marker.getTitle()+"=="+edt_pickup_location.getText().toString());
-                    if(marker.getTitle().equals("Pick Up Location"))
+                    Log.d("bothLocationString", "bothLocationString pickup= " + bothLocationString + "==" + marker.getTitle() + "==" + edt_pickup_location.getText().toString());
+                    if (marker.getTitle().equals("Pick Up Location"))
                         bothLocationString = "pickeup";
-                    else if(marker.getTitle().equals("Drop Location"))
+                    else if (marker.getTitle().equals("Drop Location"))
                         bothLocationString = "drop";
-                    Log.d("bothLocationString","bothLocationString pickup= "+bothLocationString+"=="+marker.getTitle()+"=="+edt_pickup_location.getText().toString());
+                    Log.d("bothLocationString", "bothLocationString pickup= " + bothLocationString + "==" + marker.getTitle() + "==" + edt_pickup_location.getText().toString());
                     Log.d("bothLocationString", "bothLocationString drop= " + bothLocationString + "==" + marker.getTitle() + "==" + edt_drop_location.getText().toString());
 
                     return false;
@@ -1904,8 +1911,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void BounceAnimationMarker(final Marker animationMarker, final LatLng animationLatLng){
-        if(animationLatLng != null) {
+    public void BounceAnimationMarker(final Marker animationMarker, final LatLng animationLatLng) {
+        if (animationLatLng != null) {
             final Handler handler = new Handler();
             final long start = SystemClock.uptimeMillis();
             Projection proj = googleMap.getProjection();
@@ -1937,7 +1944,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         return result[0] < minDistanceInMeter;
     }
 
-    public void EditorActionListener(final EditText locationEditext, final String clickText){
+    public void EditorActionListener(final EditText locationEditext, final String clickText) {
 
         locationEditext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -1987,7 +1994,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    public void AddTextChangeListener(final EditText locationEditext, final String clickText){
+    public void AddTextChangeListener(final EditText locationEditext, final String clickText) {
         locationEditext.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -2039,7 +2046,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void AddSetOnClickListener(EditText locationEditext, final String ClickValue){
+    public void AddSetOnClickListener(EditText locationEditext, final String ClickValue) {
 
         locationEditext.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -2074,7 +2081,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void getPickupDropAddressIon(String inputSting){
+    public void getPickupDropAddressIon(String inputSting) {
         String locatinUrl = "";
         locationArray = new ArrayList<>();
         try {
@@ -2082,7 +2089,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Log.d("locatinUrl","Login locatinUrl = "+locatinUrl);
+        Log.d("locatinUrl", "Login locatinUrl = " + locatinUrl);
         Ion.with(HomeActivity.this)
                 .load(locatinUrl)
                 .setTimeout(10000)
@@ -2134,16 +2141,16 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                             Common.ShowHttpErrorMessage(HomeActivity.this, error.getMessage());
                         }
                     }
-            });
+                });
     }
 
     @Override
     public void PickupDropClick(int position) {
 
-        if(locationArray != null && locationArray.size() > 0){
-        HashMap<String,String> picDrpHash = locationArray.get(position);
-        Log.d("bothLocationString","bothLocationString = "+bothLocationString);
-            if(!bothLocationString.equals("")) {
+        if (locationArray != null && locationArray.size() > 0) {
+            HashMap<String, String> picDrpHash = locationArray.get(position);
+            Log.d("bothLocationString", "bothLocationString = " + bothLocationString);
+            if (!bothLocationString.equals("")) {
                 if (bothLocationString.equals("pickeup")) {
                     edt_pickup_location.setText(picDrpHash.get("location name"));
                     if (Common.isNetworkAvailable(HomeActivity.this)) {
@@ -2219,16 +2226,16 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("requestCode","requestCode = "+requestCode);
+        Log.d("requestCode", "requestCode = " + requestCode);
         if (requestCode == 3) {
-            if(data != null){
+            if (data != null) {
                 String userUpd = data.getStringExtra("update_user_profile").toString();
-                Log.d("requestCode","requestCode = "+userUpd);
-                if(userUpd.equals("1")){
-                    common.SlideMenuDesign(slidingMenu,HomeActivity.this,"home");
+                Log.d("requestCode", "requestCode = " + userUpd);
+                if (userUpd.equals("1")) {
+                    common.SlideMenuDesign(slidingMenu, HomeActivity.this, "home");
                 }
             }
-        }else if (requestCode == REQUEST_CODE_PAYMENT) {
+        } else if (requestCode == REQUEST_CODE_PAYMENT) {
             if (resultCode == Activity.RESULT_OK) {
                 PaymentConfirmation confirm =
                         data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
@@ -2242,7 +2249,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         JSONObject conObj = new JSONObject(confirm.toJSONObject().toString(4));
                         JSONObject ResObj = new JSONObject(conObj.getString("response"));
                         transaction_id = ResObj.getString("id");
-                        Log.d("stripe_id","stripe_id = "+transaction_id);
+                        Log.d("stripe_id", "stripe_id = " + transaction_id);
                         /**
                          *  TODO: send 'confirm' (and possibly confirm.getPayment() to your server for verification
                          */
@@ -2259,10 +2266,10 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.makeText(getApplicationContext(), "An invalid Payment or PayPalConfiguration" +
                         " was submitted. Please see the docs.", Toast.LENGTH_LONG).show();
             }
-        }else if(requestCode == REQUEST_CODE_STRIPE){
-            if(data != null){
+        } else if (requestCode == REQUEST_CODE_STRIPE) {
+            if (data != null) {
                 transaction_id = data.getStringExtra("stripe_id").toString();
-                Log.d("stripe_id","stripe_id = "+transaction_id);
+                Log.d("stripe_id", "stripe_id = " + transaction_id);
                 CashDialog.cancel();
                 NowDialog.show();
             }
@@ -2273,9 +2280,9 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onBackPressed() {
 
-        if(slidingMenu.isMenuShowing()){
+        if (slidingMenu.isMenuShowing()) {
             slidingMenu.toggle();
-        }else {
+        } else {
             new AlertDialog.Builder(this)
                     .setTitle("Really Exit?")
                     .setMessage("Are you sure you want to exit?")
@@ -2287,6 +2294,48 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }).create().show();
         }
+    }
+
+    public int getDistance() {
+        /*String CaculationLocUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + edt_pickup_location.getText().toString() + "&destinations=" + edt_drop_location.getText().toString() + "&key=AIzaSyAOMoXEjvhoTXlaqIKCGvu5yIjCHuePLek";
+        Log.d("CaculationLocUrl", "CaculationLocUrl = " + CaculationLocUrl);
+        Ion.with(HomeActivity.this)
+                .load(CaculationLocUrl)
+                .setTimeout(10000)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception error, JsonObject result) {
+                        // do stuff with the result or error
+
+                        ProgressDialog.cancel();
+                        cusRotateLoading.stop();
+
+                        Log.d("Login result", "Login result = " + result + "==" + error);
+                        if (error == null) {
+                            try {
+                                JSONObject resObj = new JSONObject(result.toString());
+                                if (resObj.getString("status").toLowerCase().equals("ok")) {
+
+                                    JSONArray rows = new JSONArray(resObj.getString("rows"));
+                                    JSONObject ob = rows.getJSONObject(0);
+                                    JSONArray element = ob.getJSONArray("elements");
+
+                                    JSONObject ob1 = element.getJSONObject(0);
+                                    JSONObject distance = ob.getJSONObject("distance");
+                                    dis = distance.getInt("value") / 1000;
+                                    LocationDistanse = true;
+                                }
+                            } catch (Exception e) {
+
+                                Toast.makeText(HomeActivity.this, "Location you have entered is wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+*/
+        LocationDistanse = true;
+        return 100;
     }
 
 }
