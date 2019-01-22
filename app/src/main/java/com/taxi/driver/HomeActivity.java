@@ -1597,8 +1597,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         FixRateArray = new ArrayList<>();
 
-        //  String FixAreaUrl = Url.FixAreaUrl+"?pick_lat="+PickupLatitude+"&pick_long="+PickupLongtude+"&drop_lat="+DropLatitude+"&drop_long="+DropLongtude;
-        String FixAreaUrl = Url.FixAreaUrl + "?pick_lat=" + PickupLatitude + "&pick_long=" + PickupLongtude + "&drop_lat=" + DropLatitude + "&drop_long=" + DropLongtude;
+          String FixAreaUrl = "http://mediaorange.co/olauber/new_api/fix_rate_list?driverid=11"+"&lat="+ PickupLongtude+"&long=" + DropLatitude;
+      //  String FixAreaUrl = Url.FixAreaUrl + "?pick_lat=" + PickupLatitude + "&pick_long=" + PickupLongtude + "&drop_lat=" + DropLatitude + "&drop_long=" + DropLongtude;
         Log.d("FixAreaUrl", "FixAreaUrl =" + FixAreaUrl);
         Ion.with(HomeActivity.this)
                 .load(FixAreaUrl)
@@ -1612,34 +1612,16 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         if (error == null) {
 
                             try {
-                                JSONObject resObj = new JSONObject(result.toString());
-                                JSONObject status = resObj.getJSONObject("status");
-                                if (status.get("status").equals("success")) {
-                                    // Log.d("loadTripsUrl", "loadTripsUrl two= " + resObj);
-                                    // JSONArray fixAreaArray = new JSONArray(resObj.getString("fixAreaPriceList"));
-                                    JSONArray fixAreaArray = new JSONArray(resObj.getString("cablist"));
+                                JSONArray fixAreaArray = new JSONArray(result.toString());
                                     for (int fi = 0; fi < fixAreaArray.length(); fi++) {
                                         JSONObject fixAreaObj = fixAreaArray.getJSONObject(fi);
-
                                         HashMap<String, String> FixHasMap = new HashMap<String, String>();
-                                        // FixHasMap.put("fix_price", fixAreaObj.getString("fix_price").toString());
                                         FixHasMap.put("cab_id", fixAreaObj.getString("cab_id").toString());
                                         FixHasMap.put("cartype", fixAreaObj.getString("cartype").toString());
-                                        //  FixHasMap.put("area_title", fixAreaObj.getString("area_title").toString());
-                                        //   FixHasMap.put("area_id", fixAreaObj.getString("area_id").toString());
+                                        FixHasMap.put("car_rate", fixAreaObj.getString("car_rate").toString());
+                                       // Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + fixAreaObj);
 
-                                        Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + fixAreaObj);
-                                        /*if (!fixAreaObj.getString("fix_price").equals("0")) {
-                                            HashMap<String, String> FixHasMap = new HashMap<String, String>();
-                                            FixHasMap.put("fix_price", fixAreaObj.getString("fix_price").toString());
-                                            FixHasMap.put("car_type_id", fixAreaObj.getString("car_type_id").toString());
-                                            FixHasMap.put("car_type_name", fixAreaObj.getString("car_type_name").toString());
-                                            FixHasMap.put("area_title", fixAreaObj.getString("area_title").toString());
-                                            FixHasMap.put("area_id", fixAreaObj.getString("area_id").toString());
-                                            FixRateArray.add(FixHasMap);
-                                        }
-*/
-                                    }
+
                                     Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + FixRateArray.size());
                                  //   CaculationDirationIon();
                                 }
@@ -1725,7 +1707,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                     if (edt_drop_location.getText().length() > 0 && edt_pickup_location.getText().length() > 0) {
                         if (checkReady() && Common.isNetworkAvailable(HomeActivity.this)) {
 
-                          //  PickupFixRateCall();
+                            PickupFixRateCall();
 
                         } else {
                             Common.showInternetInfo(HomeActivity.this, "");

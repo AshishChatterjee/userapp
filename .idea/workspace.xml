@@ -40,10 +40,12 @@
       <file leaf-file-name="HomeActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="120" column="29" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="29" />
+            <state relative-caret-position="160">
+              <caret line="263" column="82" selection-start-line="263" selection-start-column="64" selection-end-line="263" selection-end-column="82" />
               <folding>
-                <marker date="1546786624465" expanded="true" signature="77018:78863" ph="{...}" />
+                <element signature="e#75968#79508#0" expanded="true" />
+                <element signature="e#79507#79508#0" expanded="true" />
+                <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -61,7 +63,7 @@
       <file leaf-file-name="TripDetailActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/TripDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
+            <state relative-caret-position="3876">
               <caret line="261" selection-start-line="261" selection-end-line="261" />
             </state>
           </provider>
@@ -70,26 +72,17 @@
       <file leaf-file-name="AllTripActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/AllTripActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="-4233">
               <caret line="46" column="28" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Common.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/Common.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-99">
-              <caret line="918" column="24" selection-start-line="918" selection-start-column="24" selection-end-line="918" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="212" column="39" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="39" />
+            <state relative-caret-position="159">
+              <caret line="236" column="47" selection-start-line="236" selection-start-column="29" selection-end-line="236" selection-end-column="47" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
@@ -100,7 +93,7 @@
       <file leaf-file-name="AutoCompleteAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/gpsLocation/AutoCompleteAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="119">
               <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
             </state>
           </provider>
@@ -131,7 +124,9 @@
       <find>CaculationDirationIon</find>
       <find>Toast</find>
       <find>PickupFixRateCall</find>
+      <find>CaculationDirationIon()</find>
       <find>layout_now</find>
+      <find>layout_reservation</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -5394,40 +5389,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="User App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="User App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="User App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="driver" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="User App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="driver" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="DEBUGGABLE_DEVICE" value="Nexus_4_API_25 [emulator-5554]" />
@@ -5437,6 +5399,7 @@
     <property name="SearchEverywhereHistoryKey" value="all&#9;PSI&#9;JAVA://com.taxi.driver.AllTripActivity&#10;auto&#9;PSI&#9;JAVA://com.taxi.driver.gpsLocation.AutoCompleteAdapter" />
     <property name="android.sdk.path" value="E:/program file/.android" />
     <property name="device.picker.selection" value="Nexus_4_API_25" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Driver app/DriverApp2-master/DriverApp2-master/Driver App" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
@@ -5576,6 +5539,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3293718" />
@@ -5584,28 +5548,28 @@
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50075644" side_tool="true" weight="0.70458406" />
-      <window_info anchor="right" id="Preview" weight="0.32980332" />
+      <window_info active="true" anchor="right" id="Preview" order="4" visible="true" weight="0.32980332" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49924356" weight="0.3293718" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3293718" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="7" visible="true" weight="0.0" />
+      <window_info anchor="bottom" id="Logcat" order="7" weight="0.3293718" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.24962178" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49924356" weight="0.0016977929" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49924356" visible="true" weight="0.0016977929" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.37691003" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.12393888" />
     </layout>
     <layout-to-restore>
@@ -5655,19 +5619,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
-          <line>2119</line>
+          <line>2101</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
-          <line>1646</line>
+          <line>1628</line>
           <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
-          <line>1652</line>
+          <line>1634</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
@@ -5685,7 +5649,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
-          <line>2131</line>
+          <line>2113</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
@@ -5703,12 +5667,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
-          <line>1643</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
           <line>1187</line>
           <properties />
           <option name="timeStamp" value="16" />
@@ -5721,13 +5679,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
-          <line>2310</line>
+          <line>2292</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java</url>
-          <line>2300</line>
+          <line>2282</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
@@ -5756,10 +5714,140 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="120" column="29" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="29" />
+          <folding>
+            <element signature="e#75968#79508#0" expanded="true" />
+            <element signature="e#79507#79508#0" expanded="true" />
+            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/Url.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/TripDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3876">
+          <caret line="261" selection-start-line="261" selection-end-line="261" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/AllTripActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="46" column="28" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3604">
+          <caret line="212" column="39" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="39" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/gpsLocation/AutoCompleteAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/DistanceUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/Common.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15810">
+          <caret line="930" column="9" lean-forward="true" selection-start-line="930" selection-start-column="9" selection-end-line="930" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="120" column="29" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="29" />
+          <folding>
+            <element signature="e#75968#79508#0" expanded="true" />
+            <element signature="e#79507#79508#0" expanded="true" />
+            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/Url.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/TripDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4437">
+          <caret line="261" selection-start-line="261" selection-end-line="261" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/AllTripActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="28" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3604">
+          <caret line="212" column="39" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="39" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/gpsLocation/AutoCompleteAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/DistanceUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/Common.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15606">
+          <caret line="918" column="24" selection-start-line="918" selection-start-column="24" selection-end-line="918" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27455">
           <caret line="1615" selection-start-line="1615" selection-end-line="1615" />
           <folding>
-            <marker date="1546786624465" expanded="true" signature="77018:78863" ph="{...}" />
+            <element signature="e#75968#79508#0" expanded="true" />
+            <element signature="e#79507#79508#0" expanded="true" />
+            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -5776,7 +5864,9 @@
         <state relative-caret-position="27710">
           <caret line="1630" column="38" selection-start-line="1630" selection-start-column="38" selection-end-line="1630" selection-end-column="38" />
           <folding>
-            <marker date="1546786624465" expanded="true" signature="77018:78863" ph="{...}" />
+            <element signature="e#75968#79508#0" expanded="true" />
+            <element signature="e#79507#79508#0" expanded="true" />
+            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -5804,21 +5894,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/gpsLocation/AutoCompleteAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="119">
           <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/AllTripActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="46" column="28" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/TripDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
+        <state relative-caret-position="3876">
           <caret line="261" selection-start-line="261" selection-end-line="261" />
         </state>
       </provider>
@@ -5844,31 +5927,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/Common.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="930" column="9" selection-start-line="930" selection-start-column="9" selection-end-line="930" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/AllTripActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4233">
+          <caret line="46" column="28" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="120" column="29" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="29" />
+        <state relative-caret-position="160">
+          <caret line="263" column="82" selection-start-line="263" selection-start-column="64" selection-end-line="263" selection-end-column="82" />
           <folding>
-            <marker date="1546786624465" expanded="true" signature="77018:78863" ph="{...}" />
+            <element signature="e#75968#79508#0" expanded="true" />
+            <element signature="e#79507#79508#0" expanded="true" />
+            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="212" column="39" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="39" />
+        <state relative-caret-position="159">
+          <caret line="236" column="47" selection-start-line="236" selection-start-column="29" selection-end-line="236" selection-end-column="47" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/utils/Common.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-99">
-          <caret line="918" column="24" selection-start-line="918" selection-start-column="24" selection-end-line="918" selection-end-column="24" />
-        </state>
       </provider>
     </entry>
   </component>
