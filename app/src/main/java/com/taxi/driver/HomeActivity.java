@@ -1597,7 +1597,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         FixRateArray = new ArrayList<>();
 
-          String FixAreaUrl = "http://mediaorange.co/olauber/new_api/fix_rate_list?driverid=11"+"&lat="+ PickupLongtude+"&long=" + DropLatitude;
+          String FixAreaUrl = "http://mediaorange.co/olauber/new_api/fix_rate_list?lat="+ PickupLongtude+"&long=" + DropLatitude;
       //  String FixAreaUrl = Url.FixAreaUrl + "?pick_lat=" + PickupLatitude + "&pick_long=" + PickupLongtude + "&drop_lat=" + DropLatitude + "&drop_long=" + DropLongtude;
         Log.d("FixAreaUrl", "FixAreaUrl =" + FixAreaUrl);
         Ion.with(HomeActivity.this)

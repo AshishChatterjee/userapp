@@ -37,15 +37,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HomeActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomeActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="263" column="82" selection-start-line="263" selection-start-column="64" selection-end-line="263" selection-end-column="82" />
+            <state relative-caret-position="330">
+              <caret line="1599" column="83" selection-start-line="1599" selection-start-column="83" selection-end-line="1599" selection-end-column="83" />
               <folding>
                 <element signature="e#75968#79508#0" expanded="true" />
                 <element signature="e#79507#79508#0" expanded="true" />
-                <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
+                <marker date="1548220728584" expanded="true" signature="76519:77163" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -78,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="236" column="47" selection-start-line="236" selection-start-column="29" selection-end-line="236" selection-end-column="47" />
+            <state relative-caret-position="1481">
+              <caret line="130" column="40" selection-start-line="130" selection-start-column="40" selection-end-line="130" selection-end-column="40" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
@@ -123,10 +123,10 @@
       <find>AllTripActivity</find>
       <find>CaculationDirationIon</find>
       <find>Toast</find>
-      <find>PickupFixRateCall</find>
       <find>CaculationDirationIon()</find>
       <find>layout_now</find>
       <find>layout_reservation</find>
+      <find>PickupFixRateCall</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -5375,6 +5375,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java" />
       </list>
     </option>
@@ -5548,7 +5549,7 @@
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50075644" side_tool="true" weight="0.70458406" />
-      <window_info active="true" anchor="right" id="Preview" order="4" visible="true" weight="0.32980332" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.32980332" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49924356" weight="0.3293718" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3293718" />
@@ -5719,7 +5720,7 @@
           <folding>
             <element signature="e#75968#79508#0" expanded="true" />
             <element signature="e#79507#79508#0" expanded="true" />
-            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
+            <marker date="1548220728584" expanded="true" signature="76519:77163" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -5783,7 +5784,7 @@
           <folding>
             <element signature="e#75968#79508#0" expanded="true" />
             <element signature="e#79507#79508#0" expanded="true" />
-            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
+            <marker date="1548220728584" expanded="true" signature="76519:77163" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -5847,7 +5848,7 @@
           <folding>
             <element signature="e#75968#79508#0" expanded="true" />
             <element signature="e#79507#79508#0" expanded="true" />
-            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
+            <marker date="1548220728584" expanded="true" signature="76519:77163" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -5866,7 +5867,7 @@
           <folding>
             <element signature="e#75968#79508#0" expanded="true" />
             <element signature="e#79507#79508#0" expanded="true" />
-            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
+            <marker date="1548220728584" expanded="true" signature="76519:77163" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -5941,26 +5942,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="263" column="82" selection-start-line="263" selection-start-column="64" selection-end-line="263" selection-end-column="82" />
-          <folding>
-            <element signature="e#75968#79508#0" expanded="true" />
-            <element signature="e#79507#79508#0" expanded="true" />
-            <marker date="1548188064743" expanded="true" signature="76534:77178" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="236" column="47" selection-start-line="236" selection-start-column="29" selection-end-line="236" selection-end-column="47" />
+        <state relative-caret-position="1481">
+          <caret line="130" column="40" selection-start-line="130" selection-start-column="40" selection-end-line="130" selection-end-column="40" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/taxi/driver/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="1599" column="83" selection-start-line="1599" selection-start-column="83" selection-end-line="1599" selection-end-column="83" />
+          <folding>
+            <element signature="e#75968#79508#0" expanded="true" />
+            <element signature="e#79507#79508#0" expanded="true" />
+            <marker date="1548220728584" expanded="true" signature="76519:77163" ph="{...}" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
