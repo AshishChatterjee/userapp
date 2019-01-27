@@ -61,6 +61,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.JsonObject;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.koushikdutta.async.future.FutureCallback;
@@ -1164,13 +1166,11 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void CaculationDirationIon() {
         String CaculationLocUrl = "";
-//        try {
-//            DrowLocUrl = "http://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin="+URLEncoder.encode(edt_pickup_location.getText().toString(), "UTF-8")+"&destination="+URLEncoder.encode(edt_drop_location.getText().toString(), "UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-
-        CaculationLocUrl = "http://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin=" + PickupLatitude + "," + PickupLongtude + "&destination=" + DropLatitude + "," + DropLongtude;
+        List<LatLng> list = new ArrayList<>();
+        list.add(new LatLng(PickupLatitude,PickupLatitude));
+        list.add(new LatLng(DropLatitude,DropLongtude));
+        drawPolyLineOnMap(list);
+        CaculationLocUrl = "https://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin=" + PickupLatitude + "," + PickupLongtude + "&destination=" + DropLatitude + "," + DropLongtude+"&key=AIzaSyAOMoXEjvhoTXlaqIKCGvu5yIjCHuePLek";
         Log.d("CaculationLocUrl", "CaculationLocUrl = " + CaculationLocUrl);
         Ion.with(HomeActivity.this)
                 .load(CaculationLocUrl)
@@ -1509,7 +1509,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 layout_far_breakup.setVisibility(View.VISIBLE);
                 Log.d("fromintailrate", "fromintailrate = " + car_rate + "==" + fromintailrate + "==" + ride_time_rate);
                 if (car_rate != null && fromintailrate != null && ride_time_rate != null)
-                    totlePrice = Common.getTotalPrice("5", 5, distance, fromintailrate, ride_time_rate, totalTime);
+                    totlePrice = Common.getTotalPrice("5.0", 5, distance, fromintailrate, ride_time_rate, totalTime);
                 Log.d("totlePrice", "totlePrice = " + totlePrice);
                 txt_total_price.setText(Math.round(totlePrice) + "");
             }
@@ -1607,23 +1607,29 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception error, JsonObject result) {
+                        ProgressDialog.cancel();
                         // do stuff with the result or error
                         Log.d("load_trips result", "load_trips result = " + result + "==" + error);
                         if (error == null) {
 
                             try {
-                                JSONArray fixAreaArray = new JSONArray(result.toString());
+                                JSONObject Obj = new JSONObject(result.toString());
+                                Toast.makeText(HomeActivity.this,Obj.getString("message"),Toast.LENGTH_SHORT).show();
+                                if(Obj.get("status").equals("True")) {
+                                    JSONArray fixAreaArray = Obj.getJSONArray("ratelist");
                                     for (int fi = 0; fi < fixAreaArray.length(); fi++) {
                                         JSONObject fixAreaObj = fixAreaArray.getJSONObject(fi);
                                         HashMap<String, String> FixHasMap = new HashMap<String, String>();
                                         FixHasMap.put("cab_id", fixAreaObj.getString("cab_id").toString());
                                         FixHasMap.put("cartype", fixAreaObj.getString("cartype").toString());
                                         FixHasMap.put("car_rate", fixAreaObj.getString("car_rate").toString());
-                                       // Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + fixAreaObj);
+                                        FixHasMap.put("car_type", fixAreaObj.getString("car_type").toString());
+                                        // Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + fixAreaObj);
 
 
-                                    Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + FixRateArray.size());
-                                 //   CaculationDirationIon();
+                                        Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + FixRateArray.size());
+                                        CaculationDirationIon();
+                                    }
                                 }
 
                             } catch (JSONException e) {
@@ -2279,7 +2285,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public int getDistance() {
-        /*String CaculationLocUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + edt_pickup_location.getText().toString() + "&destinations=" + edt_drop_location.getText().toString() + "&key=AIzaSyAOMoXEjvhoTXlaqIKCGvu5yIjCHuePLek";
+        String CaculationLocUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + edt_pickup_location.getText().toString() + "&destinations=" + edt_drop_location.getText().toString() + "&key=AIzaSyAOMoXEjvhoTXlaqIKCGvu5yIjCHuePLek";
         Log.d("CaculationLocUrl", "CaculationLocUrl = " + CaculationLocUrl);
         Ion.with(HomeActivity.this)
                 .load(CaculationLocUrl)
@@ -2307,6 +2313,11 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                                     JSONObject distance = ob.getJSONObject("distance");
                                     dis = distance.getInt("value") / 1000;
                                     LocationDistanse = true;
+
+                                   /* List<LatLng> list = new ArrayList<>();
+                                    list.add(new LatLng(PickupLatitude,PickupLatitude));
+                                    list.add(new LatLng(DropLatitude,DropLongtude));
+                                    drawPolyLineOnMap(list);*/
                                 }
                             } catch (Exception e) {
 
@@ -2315,9 +2326,37 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                 });
-*/
+
         LocationDistanse = true;
-        return 100;
+        return 50;
+    }
+
+    public void drawPolyLineOnMap(List<LatLng> list) {
+        /*PolylineOptions polyOptions = new PolylineOptions();
+        polyOptions.color(Color.RED).geodesic(true);
+        polyOptions.width(5);
+        polyOptions.addAll(list);
+
+        googleMap.clear();
+        Polyline polyline = googleMap.addPolyline(polyOptions);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (LatLng latLng : list) {
+            builder.include(latLng);
+        }
+
+        final LatLngBounds bounds = builder.build();
+
+        //BOUND_PADDING is an int to specify padding of bound.. try 100.
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+        googleMap.animateCamera(cu);*/
+
+        PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
+        for (int z = 0; z < list.size(); z++) {
+            LatLng point = list.get(z);
+            options.add(point);
+        }
+         googleMap.addPolyline(options);
     }
 
 }
