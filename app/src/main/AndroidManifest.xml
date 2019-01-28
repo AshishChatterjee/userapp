@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name="com.taxi.driver.utils.TwitterApplication"
+        android:name=".utils.TwitterApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -31,7 +31,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.taxi.driver.SplashActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,23 +40,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.taxi.driver.LoginActivity"
+            android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.LoginOptionActivity"
+            android:name=".LoginOptionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.SignUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.taxi.driver.HomeActivity"
+            android:name=".SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.ForgotActivity"
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgotActivity"
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name="com.taxi.driver.utils.MyTwitterResultReceiver"
+            android:name=".utils.MyTwitterResultReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS" />
@@ -78,29 +78,29 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.taxi.driver.TripDetailActivity"
+            android:name=".TripDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.AllTripActivity"
+            android:name=".AllTripActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.BookingDetailActivity"
+            android:name=".BookingDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.UserProfileActivity"
+            android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.taxi.driver.TrackTruckActivity"
+            android:name=".TrackTruckActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.TestMapActivity"
+            android:name=".TestMapActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.taxi.driver.ChangePasswordActivity"
+            android:name=".ChangePasswordActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan"/>
+            android:windowSoftInputMode="stateVisible|adjustPan" />
 
         <service
             android:name="com.paypal.android.sdk.payments.PayPalService"
@@ -114,7 +114,7 @@
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity android:name="io.card.payment.DataEntryActivity" />
-        <activity android:name="com.taxi.driver.StripeFormActivity" />
+        <activity android:name=".StripeFormActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -128,27 +128,26 @@
         </receiver>
 
         <service
-            android:name="com.taxi.driver.utils.MyGcmListenerService"
+            android:name=".utils.MyGcmListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
-            android:name="com.taxi.driver.utils.MyInstanceIDListenerService"
+            android:name=".utils.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
         <service
-            android:name="com.taxi.driver.utils.RegistrationIntentService"
+            android:name=".utils.RegistrationIntentService"
             android:exported="false" />
 
-        <activity android:name="com.taxi.driver.RateCardActivity" />
-        <activity android:name="com.taxi.driver.AutocompleteFrgActivity">
-
-        </activity>
+        <activity android:name=".RateCardActivity" />
+        <activity android:name=".AutocompleteFrgActivity"></activity>
+        <activity android:name=".wheel.ThemeActivity"></activity>
     </application>
 
 </manifest>

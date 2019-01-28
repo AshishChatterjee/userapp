@@ -8,6 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeOrange" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange</item>
+        <item name="colorAccent">@color/orange</item>
+    </style>
+
+    <style name="AppThemeNaviBlue" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/navi_blue</item>
+        <item name="colorPrimaryDark">@color/navi_blue</item>
+        <item name="colorAccent">@color/navi_blue</item>
+    </style>
+    <style name="AppThemeWhiteRed" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white_red</item>
+        <item name="colorPrimaryDark">@color/white_red</item>
+        <item name="colorAccent">@color/white_red</item>
+    </style>
+    <style name="AppThemeWhiteBlue" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white_blue</item>
+        <item name="colorPrimaryDark">@color/white_blue</item>
+        <item name="colorAccent">@color/white_blue</item>
+    </style>
+
     <style name="DialogAnimation" >
         <item name="android:windowEnterAnimation">@anim/slide_up_dialog</item>
         <item name="android:windowExitAnimation">@anim/slide_out_down</item>

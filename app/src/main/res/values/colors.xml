@@ -34,4 +34,8 @@
     <color name="rate_car_des">#808080</color>
     <color name="reservation_color">#bbbbbb</color>
     <color name="detail_color">#149a40</color>
+    <color name="orange">#FF4500</color>
+    <color name="white_red">#DC143C</color>
+    <color name="navi_blue">#000080</color>
+    <color name="white_blue">#B0D4CE</color>
 </resources>

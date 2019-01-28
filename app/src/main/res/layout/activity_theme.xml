@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:background="@color/yellow_texi">
+
+        <RelativeLayout
+            android:id="@+id/layout_slidemenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/margin_15">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/menu_icon"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_15"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_all_trip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change theme"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/font_18"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10"
+        android:layout_below="@+id/layout_header"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/height_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/orange"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:text="Orange"
+                />
+            <Button
+                android:id="@+id/navi_blue"
+                android:layout_marginLeft="@dimen/margin_50"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/navi_blue"
+                android:textColor="@color/white"
+                android:text="Navi blue"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/white_red"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/white_red"
+                android:textColor="@color/white"
+                android:text="White red"
+                />
+            <Button
+                android:id="@+id/white_blue"
+                android:layout_marginLeft="@dimen/margin_50"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/white_blue"
+                android:textColor="@color/white"
+                android:text="White blue"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_no_recourd_found"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/layout_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No Record Found"
+            android:textSize="@dimen/font_16"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#90000000"
+        android:visibility="gone">
+
+    </RelativeLayout>
+
+</RelativeLayout>

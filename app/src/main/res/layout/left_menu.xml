@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_bg">
+    android:background="@drawable/menu_bg"
+    android:theme="@style/AppTheme">
 
     <RelativeLayout
         android:id="@+id/layout_setting"
@@ -237,6 +239,41 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/layout_cahnge_theme"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/img_cahnge_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_brush_black_24dp"
+                android:layout_marginLeft="@dimen/margin_30"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/txt_cahnge_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change theme"
+                android:layout_toRightOf="@+id/img_cahnge_theme"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:textSize="@dimen/font_15"
+                android:textColor="@color/slide_option_menu"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/nevigation_arrow"
+                android:layout_marginRight="@dimen/margin_15"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 
@@ -276,11 +313,5 @@
                 android:textColor="@color/slide_option_menu"/>
 
         </RelativeLayout>
-
-
-
     </RelativeLayout>
-
-
-
 </RelativeLayout>

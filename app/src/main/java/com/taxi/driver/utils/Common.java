@@ -38,6 +38,7 @@ import com.taxi.driver.LoginActivity;
 import com.taxi.driver.LoginOptionActivity;
 import com.taxi.driver.RateCardActivity;
 import com.taxi.driver.gpsLocation.GPSTracker;
+import com.taxi.driver.wheel.ThemeActivity;
 import com.victor.loading.rotate.RotateLoading;
 
 import org.json.JSONArray;
@@ -90,6 +91,7 @@ public class Common {
     RelativeLayout layout_my_trip;
     RelativeLayout layout_rate_card;
     RelativeLayout layout_cahnge_password;
+    RelativeLayout layout_cahnge_theme;
     RelativeLayout layout_footer_logout;
 
     double PickupLongtude;
@@ -758,6 +760,8 @@ public class Common {
         txt_rate_card.setTypeface(Roboto_Bold);
         TextView txt_cahnge_password = (TextView)slidingMenu.findViewById(R.id.txt_cahnge_password);
         txt_cahnge_password.setTypeface(Roboto_Bold);
+        TextView txt_cahnge_theme = (TextView)slidingMenu.findViewById(R.id.txt_cahnge_theme);
+        txt_cahnge_theme.setTypeface(Roboto_Bold);
         TextView txt_sign_out = (TextView)slidingMenu.findViewById(R.id.txt_sign_out);
         txt_sign_out.setTypeface(Roboto_Bold);
 
@@ -766,6 +770,7 @@ public class Common {
          layout_my_trip = (RelativeLayout)slidingMenu.findViewById(R.id.layout_my_trip);
          layout_rate_card = (RelativeLayout)slidingMenu.findViewById(R.id.layout_rate_card);
          layout_cahnge_password = (RelativeLayout)slidingMenu.findViewById(R.id.layout_cahnge_password);
+         layout_cahnge_theme = (RelativeLayout)slidingMenu.findViewById(R.id.layout_cahnge_theme);
          layout_footer_logout = (RelativeLayout)slidingMenu.findViewById(R.id.layout_footer_logout);
 
         RelativeLayout layout_user = (RelativeLayout)slidingMenu.findViewById(R.id.layout_user);
@@ -779,6 +784,7 @@ public class Common {
 
                 layout_my_trip.setBackgroundResource(0);
                 layout_my_trip.setBackgroundResource(0);
+                layout_cahnge_theme.setBackgroundResource(0);
                 layout_cahnge_password.setBackgroundResource(0);
                 Common.ActiveActivity = "book my trips";
                 if(!clickMenu.equals("home")) {
@@ -797,9 +803,10 @@ public class Common {
             @Override
             public void onClick(View v) {
                 slidingMenu.toggle();
-                layout_book_my_trip.setBackgroundResource(0);
                 layout_rate_card.setBackgroundResource(0);
+                layout_cahnge_theme.setBackgroundResource(0);
                 layout_cahnge_password.setBackgroundResource(0);
+                layout_my_trip.setBackgroundResource(0);
                 Common.ActiveActivity = "my trips";
                 if(!clickMenu.equals("all trip")) {
                     Intent mi = new Intent(activity, AllTripActivity.class);
@@ -821,6 +828,7 @@ public class Common {
                 layout_my_trip.setBackgroundResource(0);
                 layout_book_my_trip.setBackgroundResource(0);
                 layout_cahnge_password.setBackgroundResource(0);
+                layout_cahnge_theme.setBackgroundResource(0);
 
                 if(!clickMenu.equals("rate card")) {
                     Intent ri = new Intent(activity, RateCardActivity.class);
@@ -839,11 +847,32 @@ public class Common {
                 slidingMenu.toggle();
                 Common.ActiveActivity = "change password";
                 layout_rate_card.setBackgroundResource(0);
+                layout_cahnge_theme.setBackgroundResource(0);
                 layout_my_trip.setBackgroundResource(0);
                 layout_book_my_trip.setBackgroundResource(0);
 
                 if(!clickMenu.equals("change password")) {
                     Intent mi = new Intent(activity, ChangePasswordActivity.class);
+                    activity.startActivity(mi);
+                    activity.finish();
+                }
+            }
+        });
+        if(Common.ActiveActivity.equals("change password")){
+            layout_cahnge_theme.setBackgroundResource(R.drawable.active_opt_bg);
+        }
+layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slidingMenu.toggle();
+                Common.ActiveActivity = "change theme";
+                layout_rate_card.setBackgroundResource(0);
+                layout_cahnge_password.setBackgroundResource(0);
+                layout_my_trip.setBackgroundResource(0);
+                layout_book_my_trip.setBackgroundResource(0);
+
+                if(!clickMenu.equals("change theme")) {
+                    Intent mi = new Intent(activity, ThemeActivity.class);
                     activity.startActivity(mi);
                     activity.finish();
                 }
@@ -918,7 +947,10 @@ public class Common {
 
     public static Float getTotalPrice(String intailrate,float FirstKm,Float distance,String fromintailrate,String ride_time_rate,int totalTime){
         Float totlePrice;
-        Float firstPrice = Float.parseFloat(intailrate);
+        String temp = "50";
+        if(intailrate!=null || !intailrate.isEmpty())
+            temp = intailrate;
+        Float firstPrice = Float.parseFloat(temp);
         Float secoundPrice = null;
         Log.d("fromintailrate","fromintailrate FirstKm= "+FirstKm+"=="+distance);
         if(FirstKm < distance) {
