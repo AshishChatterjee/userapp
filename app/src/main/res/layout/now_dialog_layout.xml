@@ -45,9 +45,9 @@
                 android:layout_centerVertical="true"/>
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/title_bg"
+                android:layout_width="150dp"
+                android:layout_height="25sp"
+                android:background="@drawable/round_back"
                 android:layout_centerInParent="true"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp">
@@ -284,7 +284,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_40"
-            android:background="@drawable/cell_header_background">
+            android:background="@drawable/round_back">
 
             <TextView
                 android:id="@+id/txt_specailChr_note"
@@ -488,8 +488,8 @@
         <RelativeLayout
             android:id="@+id/layout_book"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/book_now_btn"
+            android:layout_height="55dp"
+            android:background="@drawable/round_back"
             android:layout_alignParentLeft="true"
             >
             <TextView

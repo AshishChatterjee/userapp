@@ -52,10 +52,20 @@ public class ChangePasswordActivity extends AppCompatActivity {
     //Error Alert
     RelativeLayout rlMainView;
     TextView tvTitle;
+    Common common = new Common();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (common.getTheme(this).equals("orange")) {
+            setTheme(R.style.AppThemeOrange);
+        } else if (common.getTheme(this).equals("navi_blue")) {
+            setTheme(R.style.AppThemeNaviBlue);
+        } else if (common.getTheme(this).equals("white_red")) {
+            setTheme(R.style.AppThemeWhiteRed);
+        } else if (common.getTheme(this).equals("white_blue")) {
+            setTheme(R.style.AppThemeWhiteBlue);
+        }
         setContentView(R.layout.activity_change_password);
 
         //Error Alert

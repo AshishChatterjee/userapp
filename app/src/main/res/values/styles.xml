@@ -11,33 +11,61 @@
     <style name="AppThemeOrange" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/orange</item>
-        <item name="colorPrimaryDark">@color/orange</item>
-        <item name="colorAccent">@color/orange</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/orange</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:buttonStyle">@style/ButtonColor</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
     </style>
 
     <style name="AppThemeNaviBlue" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/navi_blue</item>
-        <item name="colorPrimaryDark">@color/navi_blue</item>
-        <item name="colorAccent">@color/navi_blue</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/navi_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:buttonStyle">@style/ButtonColor</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
     </style>
+
     <style name="AppThemeWhiteRed" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white_red</item>
-        <item name="colorPrimaryDark">@color/white_red</item>
-        <item name="colorAccent">@color/white_red</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/white_red</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:buttonStyle">@style/ButtonColor</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
     </style>
+
     <style name="AppThemeWhiteBlue" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white_blue</item>
-        <item name="colorPrimaryDark">@color/white_blue</item>
-        <item name="colorAccent">@color/white_blue</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/white_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:buttonStyle">@style/ButtonColor</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
     </style>
 
-    <style name="DialogAnimation" >
+    <style name="ButtonColor" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up_dialog</item>
         <item name="android:windowExitAnimation">@anim/slide_out_down</item>
     </style>
+
     <style name="DialogUpDownAnim" parent="@android:style/Theme.Translucent.NoTitleBar">
 
         <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
@@ -47,11 +75,13 @@
         <item name="android:windowAnimationStyle">@style/DialogSlideAnimation</item>
     </style>
 
-    <style name="DialogSlideAnimation" >
+    <style name="DialogSlideAnimation">
         <item name="android:windowEnterAnimation">@anim/anim_slide_in_right</item>
         <item name="android:windowExitAnimation">@anim/anim_slide_in_left</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="FormTextInputLayou" parent="TextAppearance.AppCompat">

@@ -9,7 +9,7 @@
         android:id="@+id/layout_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_50"
-        android:background="@color/yellow_texi">
+        android:background="?colorPrimary">
 
         <RelativeLayout
             android:id="@+id/layout_slidemenu"

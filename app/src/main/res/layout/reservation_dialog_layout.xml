@@ -95,7 +95,7 @@
             android:id="@+id/layout_done"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_50"
-            android:background="@drawable/title_bg"
+            android:background="@drawable/round_back"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/margin_20">

@@ -109,9 +109,9 @@
                         <!--android:layout_centerInParent="true"/>-->
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/to_background_with_text"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/round_back"
                         android:layout_centerInParent="true">
 
                         <TextView

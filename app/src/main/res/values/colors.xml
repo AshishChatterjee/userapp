@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimary">#ffd700</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FFFFFF</color>
 
     <color name="white">#ffffff</color>
 
@@ -22,7 +22,7 @@
     <color name="gray_light">#f1f1f1</color>
     <color name="label_gray_light">#5b5f66</color>
     <color name="pass_gray_light">#585858</color>
-    <color name="yellow">#ffffff</color>
+    <color name="yellow">#ffff00</color>
     <color name="yellow_texi">#ffffff</color>
     <color name="footer_color">#dcdcdc</color>
     <color name="footer_track_color">#575757</color>

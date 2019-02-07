@@ -97,13 +97,12 @@ public class Common {
     double PickupLongtude;
     double PickupLatitude;
 
-    public static void showLoginRegisterMkError(final Activity act,String message)
-    {
-        if(!act.isFinishing()){
+    public static void showLoginRegisterMkError(final Activity act, String message) {
+        if (!act.isFinishing()) {
 
             Animation slideUpAnimation;
 
-            final Dialog MKInfoPanelDialog = new Dialog(act,android.R.style.Theme_Translucent_NoTitleBar);
+            final Dialog MKInfoPanelDialog = new Dialog(act, android.R.style.Theme_Translucent_NoTitleBar);
 
             MKInfoPanelDialog.setContentView(R.layout.mkinfopanel);
             MKInfoPanelDialog.show();
@@ -113,14 +112,14 @@ public class Common {
             RelativeLayout layout_info_panel = (RelativeLayout) MKInfoPanelDialog.findViewById(R.id.layout_info_panel);
             layout_info_panel.startAnimation(slideUpAnimation);
 
-            TextView subtitle = (TextView)MKInfoPanelDialog.findViewById(R.id.subtitle);
+            TextView subtitle = (TextView) MKInfoPanelDialog.findViewById(R.id.subtitle);
             subtitle.setText(message);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        if(MKInfoPanelDialog.isShowing() && !act.isFinishing())
+                        if (MKInfoPanelDialog.isShowing() && !act.isFinishing())
                             MKInfoPanelDialog.cancel();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -131,27 +130,27 @@ public class Common {
         }
     }
 
-    public static void LoginMkError(final Activity act,String message,String code){
+    public static void LoginMkError(final Activity act, String message, String code) {
 
         Typeface OpenSans_Bold = Typeface.createFromAsset(act.getAssets(), "fonts/OpenSans-Bold_0.ttf");
         Typeface OpenSans_Regular = Typeface.createFromAsset(act.getAssets(), "fonts/OpenSans-Regular_0.ttf");
 
-        final Dialog LoginErrorDialog = new Dialog(act,android.R.style.Theme_Translucent_NoTitleBar);
+        final Dialog LoginErrorDialog = new Dialog(act, android.R.style.Theme_Translucent_NoTitleBar);
         LoginErrorDialog.setContentView(R.layout.login_error_dialog);
-        TextView txt_invalid_login = (TextView)LoginErrorDialog.findViewById(R.id.txt_invalid_login);
-        TextView txt_error_msg = (TextView)LoginErrorDialog.findViewById(R.id.txt_error_msg);
-        Log.d("code","code = "+code);
-        if(code.toString().toLowerCase().equals("invalid login")){
+        TextView txt_invalid_login = (TextView) LoginErrorDialog.findViewById(R.id.txt_invalid_login);
+        TextView txt_error_msg = (TextView) LoginErrorDialog.findViewById(R.id.txt_error_msg);
+        Log.d("code", "code = " + code);
+        if (code.toString().toLowerCase().equals("invalid login")) {
             txt_invalid_login.setText(act.getResources().getString(R.string.invalid_login));
             txt_error_msg.setText(act.getResources().getString(R.string.correct_login_detail));
-        }else{
+        } else {
             txt_invalid_login.setText(act.getResources().getString(R.string.recheck_your_login_detail_title));
             txt_error_msg.setText(act.getResources().getString(R.string.recheck_your_login_detail));
         }
         txt_invalid_login.setTypeface(OpenSans_Bold);
         txt_error_msg.setTypeface(OpenSans_Regular);
 
-        RelativeLayout layout_ok = (RelativeLayout)LoginErrorDialog.findViewById(R.id.layout_ok);
+        RelativeLayout layout_ok = (RelativeLayout) LoginErrorDialog.findViewById(R.id.layout_ok);
         layout_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,38 +161,37 @@ public class Common {
         LoginErrorDialog.show();
     }
 
-    public static void showMkError(final Activity act, final String error_code)
-    {
+    public static void showMkError(final Activity act, final String error_code) {
         String message = "";
-        if(!act.isFinishing()){
-            Log.d("error_code","error_code = "+error_code);
-            if(error_code.equals("2")){
+        if (!act.isFinishing()) {
+            Log.d("error_code", "error_code = " + error_code);
+            if (error_code.equals("2")) {
                 message = act.getResources().getString(R.string.enter_correct_login_detail);
-            }else if(error_code.equals("7")){
+            } else if (error_code.equals("7")) {
                 message = act.getResources().getString(R.string.email_username_mobile_exit);
-            }else if(error_code.equals("8")){
+            } else if (error_code.equals("8")) {
                 message = act.getResources().getString(R.string.email_username_exit);
-            }else if(error_code.equals("9")){
+            } else if (error_code.equals("9")) {
                 message = act.getResources().getString(R.string.email_mobile_exit);
-            }else if(error_code.equals("10")){
+            } else if (error_code.equals("10")) {
                 message = act.getResources().getString(R.string.mobile_username_exit);
-            }else if(error_code.equals("11")){
+            } else if (error_code.equals("11")) {
                 message = act.getResources().getString(R.string.email_exit);
-            }else if(error_code.equals("12")){
+            } else if (error_code.equals("12")) {
                 message = act.getResources().getString(R.string.user_exit);
-            }else if(error_code.equals("13")){
+            } else if (error_code.equals("13")) {
                 message = act.getResources().getString(R.string.mobile_exit);
-            }else if(error_code.equals("14")){
+            } else if (error_code.equals("14")) {
                 message = act.getResources().getString(R.string.somthing_worng);
-            }else if(error_code.equals("15") || error_code.equals("16")){
+            } else if (error_code.equals("15") || error_code.equals("16")) {
                 message = act.getResources().getString(R.string.data_not_found);
-            }else if(error_code.equals("19")){
+            } else if (error_code.equals("19")) {
                 message = act.getResources().getString(R.string.vehicle_numbet_exits);
-            }else if(error_code.equals("20")){
+            } else if (error_code.equals("20")) {
                 message = act.getResources().getString(R.string.license_numbet_exits);
-            }else if(error_code.equals("22")){
+            } else if (error_code.equals("22")) {
                 message = act.getResources().getString(R.string.dublicate_booking);
-            }else{
+            } else {
                 message = error_code;
             }
 
@@ -201,7 +199,7 @@ public class Common {
 
             Animation slideUpAnimation;
 
-           final Dialog MKInfoPanelDialog = new Dialog(act,android.R.style.Theme_Translucent_NoTitleBar);
+            final Dialog MKInfoPanelDialog = new Dialog(act, android.R.style.Theme_Translucent_NoTitleBar);
 
             MKInfoPanelDialog.setContentView(R.layout.mkinfopanel);
             MKInfoPanelDialog.show();
@@ -215,17 +213,17 @@ public class Common {
             buttonLayoutParams.setMargins(0, (int) act.getResources().getDimension(R.dimen.height_50), 0, 0);
             layout_info_panel.setLayoutParams(buttonLayoutParams);
 
-            TextView subtitle = (TextView)MKInfoPanelDialog.findViewById(R.id.subtitle);
+            TextView subtitle = (TextView) MKInfoPanelDialog.findViewById(R.id.subtitle);
             subtitle.setText(message);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        if(MKInfoPanelDialog.isShowing() && !act.isFinishing())
+                        if (MKInfoPanelDialog.isShowing() && !act.isFinishing())
                             MKInfoPanelDialog.cancel();
 
-                        if(error_code.equals("1") || error_code.equals("5") ){
+                        if (error_code.equals("1") || error_code.equals("5")) {
                             SharedPreferences.Editor editor = userPref.edit();
                             editor.clear();
                             editor.commit();
@@ -245,13 +243,12 @@ public class Common {
         }
     }
 
-    public static void showMkSucess(final Activity act,String message,String isHeader)
-    {
-        if(!act.isFinishing()){
+    public static void showMkSucess(final Activity act, String message, String isHeader) {
+        if (!act.isFinishing()) {
 
             Animation slideUpAnimation;
 
-            final Dialog MKInfoPanelDialog = new Dialog(act,android.R.style.Theme_Translucent_NoTitleBar);
+            final Dialog MKInfoPanelDialog = new Dialog(act, android.R.style.Theme_Translucent_NoTitleBar);
 
             MKInfoPanelDialog.setContentView(R.layout.mkinfopanel);
             MKInfoPanelDialog.show();
@@ -264,13 +261,13 @@ public class Common {
             layout_info_panel.setBackgroundResource(R.color.sucess_color);
             layout_info_panel.startAnimation(slideUpAnimation);
 
-            if(isHeader.equals("yes")) {
+            if (isHeader.equals("yes")) {
                 RelativeLayout.LayoutParams buttonLayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) act.getResources().getDimension(R.dimen.height_50));
                 buttonLayoutParams.setMargins(0, (int) act.getResources().getDimension(R.dimen.height_50), 0, 0);
                 layout_info_panel.setLayoutParams(buttonLayoutParams);
             }
 
-            TextView subtitle = (TextView)MKInfoPanelDialog.findViewById(R.id.subtitle);
+            TextView subtitle = (TextView) MKInfoPanelDialog.findViewById(R.id.subtitle);
             subtitle.setText(message);
 
             new Handler().postDelayed(new Runnable() {
@@ -288,9 +285,9 @@ public class Common {
         }
     }
 
-    public static boolean isNetworkAvailable(Activity act){
+    public static boolean isNetworkAvailable(Activity act) {
 
-        ConnectivityManager connMgr = (ConnectivityManager)act.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) act.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             // fetch data
@@ -302,17 +299,16 @@ public class Common {
 
     }
 
-    public static void showInternetInfo(final Activity act,String message)
-    {
-        if(!act.isFinishing()){
-            final InternetInfoPanel mk = new InternetInfoPanel(act, InternetInfoPanel.InternetInfoPanelType.MKInfoPanelTypeInfo, "SUCCESS!",message, 2000);
+    public static void showInternetInfo(final Activity act, String message) {
+        if (!act.isFinishing()) {
+            final InternetInfoPanel mk = new InternetInfoPanel(act, InternetInfoPanel.InternetInfoPanelType.MKInfoPanelTypeInfo, "SUCCESS!", message, 2000);
             mk.show();
             mk.getIv_ok().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     try {
-                        if(mk.isShowing() && !act.isFinishing())
+                        if (mk.isShowing() && !act.isFinishing())
                             mk.cancel();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -322,7 +318,7 @@ public class Common {
         }
     }
 
-    public static boolean ShowHttpErrorMessage(Activity activity,String ErrorMessage){
+    public static boolean ShowHttpErrorMessage(Activity activity, String ErrorMessage) {
 
         Log.d("ErrorMessage", "ErrorMessage = " + ErrorMessage);
         boolean Status = true;
@@ -330,36 +326,36 @@ public class Common {
             if (ErrorMessage.contains("Connect to")) {
                 Common.showInternetInfo(activity, "");
                 Status = false;
-            }else if(ErrorMessage.contains("failed to connect to")){
+            } else if (ErrorMessage.contains("failed to connect to")) {
                 Common.showInternetInfo(activity, "network not available");
                 Status = false;
-            }else if(ErrorMessage.contains("Internal Server Error")){
+            } else if (ErrorMessage.contains("Internal Server Error")) {
                 Common.showMkError(activity, "Internal Server Error");
                 Status = false;
-            }else if(ErrorMessage.contains("Request Timeout")){
+            } else if (ErrorMessage.contains("Request Timeout")) {
                 Common.showMkError(activity, "Request Timeout");
                 Status = false;
             }
-        }else{
+        } else {
             Toast.makeText(activity, "Server Time Out", Toast.LENGTH_LONG).show();
             Status = false;
         }
         return Status;
     }
 
-    public static class LoginSocialUserHttp extends AsyncTask<String, Integer, String>{
+    public static class LoginSocialUserHttp extends AsyncTask<String, Integer, String> {
 
         HttpEntity entity;
         String SocialUrl;
         String facebook_id;
         String twitter_id;
-        private String content =  null;
+        private String content = null;
         Activity activity;
         SharedPreferences userPref;
         double PickupLongtude;
         double PickupLatitude;
 
-        public LoginSocialUserHttp(String SUrl,String f_id, String t_id,Activity act){
+        public LoginSocialUserHttp(String SUrl, String f_id, String t_id, Activity act) {
 
             SocialUrl = SUrl;
             facebook_id = f_id;
@@ -369,9 +365,9 @@ public class Common {
             MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
             entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-            if(!facebook_id.equals(""))
+            if (!facebook_id.equals(""))
                 entityBuilder.addTextBody("facebook_id", facebook_id);
-            else if(!twitter_id.equals(""))
+            else if (!twitter_id.equals(""))
                 entityBuilder.addTextBody("twitter_id", twitter_id);
             entity = entityBuilder.build();
 
@@ -388,13 +384,12 @@ public class Common {
 
         @Override
         protected String doInBackground(String... params) {
-            try
-            {
+            try {
                 HttpClient client = new DefaultHttpClient();
                 HttpParams HttpParams = client.getParams();
                 HttpConnectionParams.setConnectionTimeout(HttpParams, 60 * 60 * 1000);
                 HttpConnectionParams.setSoTimeout(HttpParams, 60 * 60 * 1000);
-                Log.d("SocialUrl","SocialUrl = "+SocialUrl+"=="+facebook_id+"=="+twitter_id);
+                Log.d("SocialUrl", "SocialUrl = " + SocialUrl + "==" + facebook_id + "==" + twitter_id);
                 HttpPost post = new HttpPost(SocialUrl);
                 post.setEntity(entity);
                 client.execute(post, new ResponseHandler<String>() {
@@ -403,14 +398,13 @@ public class Common {
 
                         HttpEntity httpEntity = httpResponse.getEntity();
                         content = EntityUtils.toString(httpEntity);
-                        Log.d("Result >>>","Result One"+ content);
+                        Log.d("Result >>>", "Result One" + content);
 
                         return null;
                     }
                 });
 
-            } catch(Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
                 Log.d("Indiaries", "Result error" + e);
                 return e.getMessage();
@@ -421,8 +415,8 @@ public class Common {
         @Override
         protected void onPostExecute(String result) {
 
-            boolean isStatus = Common.ShowHttpErrorMessage(activity,result);
-            if(isStatus) {
+            boolean isStatus = Common.ShowHttpErrorMessage(activity, result);
+            if (isStatus) {
                 try {
                     JSONObject resObj = new JSONObject(result);
                     Log.d("Social Register resObj", "Social Register resObj = " + resObj);
@@ -440,7 +434,7 @@ public class Common {
                             Common.Country = startEndTimeObj.getString("country");
                         }
 
-                /*set Start And End Time*/
+                        /*set Start And End Time*/
                         JSONArray startEndTimeArray = new JSONArray(resObj.getString("time_detail"));
                         for (int si = 0; si < startEndTimeArray.length(); si++) {
                             JSONObject startEndTimeObj = startEndTimeArray.getJSONObject(si);
@@ -448,7 +442,7 @@ public class Common {
                             Common.EndDayTime = startEndTimeObj.getString("day_end_time");
                         }
 
-                /*User Detail*/
+                        /*User Detail*/
                         JSONObject userDetilObj = new JSONObject(resObj.getString("userdetail"));
 
                         SharedPreferences.Editor id = userPref.edit();
@@ -522,20 +516,20 @@ public class Common {
         }
     }
 
-    public static class LoginCallHttp extends AsyncTask<String, Integer, String>{
+    public static class LoginCallHttp extends AsyncTask<String, Integer, String> {
 
         Activity activity;
         Dialog ProgressDialog;
         RotateLoading cusRotateLoading;
         String activityName;
-        private String content =  null;
+        private String content = null;
         SharedPreferences userPref;
         String password;
         double PickupLongtude;
         double PickupLatitude;
         String LoginUrl;
 
-        public LoginCallHttp(Activity act,Dialog ProgressDialog, RotateLoading cusRotateLoading, String password, String activityName,String LoginUrl){
+        public LoginCallHttp(Activity act, Dialog ProgressDialog, RotateLoading cusRotateLoading, String password, String activityName, String LoginUrl) {
             activity = act;
 
             this.ProgressDialog = ProgressDialog;
@@ -551,10 +545,11 @@ public class Common {
             PickupLongtude = gpsTracker.getLongitude();
 
         }
+
         @Override
         protected void onPreExecute() {
             Log.d("Start", "start");
-            if(ProgressDialog != null) {
+            if (ProgressDialog != null) {
                 ProgressDialog.show();
                 cusRotateLoading.start();
             }
@@ -564,8 +559,7 @@ public class Common {
         @Override
         protected String doInBackground(String... params) {
 
-            try
-            {
+            try {
                 HttpClient client = new DefaultHttpClient();
                 HttpParams HttpParams = client.getParams();
                 HttpConnectionParams.setConnectionTimeout(HttpParams, 60 * 60 * 1000);
@@ -579,14 +573,13 @@ public class Common {
 
                         HttpEntity httpEntity = httpResponse.getEntity();
                         content = EntityUtils.toString(httpEntity);
-                        Log.d("Result >>>","Result One"+ content);
+                        Log.d("Result >>>", "Result One" + content);
 
                         return null;
                     }
                 });
 
-            } catch(Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
                 Log.d("CarGo", "Result error" + e);
                 return e.getMessage();
@@ -596,14 +589,14 @@ public class Common {
 
         @Override
         protected void onPostExecute(String result) {
-            if(ProgressDialog != null) {
+            if (ProgressDialog != null) {
                 cusRotateLoading.stop();
                 ProgressDialog.cancel();
             }
 
-            boolean isStatus = Common.ShowHttpErrorMessage(activity,result);
-            Log.d("LoginUrl", "LoginUrl result= " + result+"=="+isStatus);
-            if(isStatus) {
+            boolean isStatus = Common.ShowHttpErrorMessage(activity, result);
+            Log.d("LoginUrl", "LoginUrl result= " + result + "==" + isStatus);
+            if (isStatus) {
                 try {
                     Log.d("loginUrl", "loginUrl two= " + result);
                     final JSONObject resObj = new JSONObject(result);
@@ -612,7 +605,7 @@ public class Common {
                         ProgressDialog.cancel();
                         cusRotateLoading.stop();
                     }
-                    Log.d("loginUrl Status","loginUrl Status"+resObj.getString("status"));
+                    Log.d("loginUrl Status", "loginUrl Status" + resObj.getString("status"));
 
                     if (resObj.getString("status").equals("success")) {
 
@@ -628,7 +621,7 @@ public class Common {
                             Common.Country = startEndTimeObj.getString("country");
                         }
 
-                /*set Start And End Time*/
+                        /*set Start And End Time*/
                         JSONArray startEndTimeArray = new JSONArray(resObj.getString("time_detail"));
                         for (int si = 0; si < startEndTimeArray.length(); si++) {
                             JSONObject startEndTimeObj = startEndTimeArray.getJSONObject(si);
@@ -636,7 +629,7 @@ public class Common {
                             Common.EndDayTime = startEndTimeObj.getString("day_end_time");
                         }
 
-                /*User Detail*/
+                        /*User Detail*/
                         JSONObject userDetilObj = new JSONObject(resObj.getString("userdetail"));
 
                         SharedPreferences.Editor id = userPref.edit();
@@ -693,7 +686,7 @@ public class Common {
                                 activity.finish();
                             }
                         }, 2000);
-                    }else if(resObj.getString("status").equals("failed")){
+                    } else if (resObj.getString("status").equals("failed")) {
                         Common.LoginMkError(activity, resObj.getString("error code"), resObj.getString("code"));
                         if (activityName.equals("SplashScreen")) {
                             new Handler().postDelayed(new Runnable() {
@@ -705,28 +698,28 @@ public class Common {
                                 }
                             }, 2000);
                         }
-                    }else if(resObj.getString("status").equals("false")){
-                        Log.d("Result","Result failed"+resObj.getString("status"));
-                        if(resObj.getString("Isactive").equals("Inactive")){
+                    } else if (resObj.getString("status").equals("false")) {
+                        Log.d("Result", "Result failed" + resObj.getString("status"));
+                        if (resObj.getString("Isactive").equals("Inactive")) {
 
                             //Common.showLoginRegisterMkError(activity, resObj.getString("message"));
                             Common.user_InActive = 1;
                             Common.InActive_msg = resObj.getString("message");
                             //if (activityName.equals("SplashScreen")) {
-                                SharedPreferences.Editor editor = userPref.edit();
-                                editor.clear();
-                                editor.commit();
+                            SharedPreferences.Editor editor = userPref.edit();
+                            editor.clear();
+                            editor.commit();
 
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent logInt = new Intent(activity, LoginOptionActivity.class);
-                                        logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        activity.startActivity(logInt);
-                                    }
-                                }, 500);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent logInt = new Intent(activity, LoginOptionActivity.class);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    activity.startActivity(logInt);
+                                }
+                            }, 500);
                             //}
                         }
                     }
@@ -742,39 +735,39 @@ public class Common {
 
         final SharedPreferences userPref = PreferenceManager.getDefaultSharedPreferences(activity);
 
-        Typeface Roboto_Regular =Typeface.createFromAsset(activity.getAssets(), "fonts/OpenSans-Regular_0.ttf");
-        Typeface Roboto_Bold =Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Bold.ttf");
+        Typeface Roboto_Regular = Typeface.createFromAsset(activity.getAssets(), "fonts/OpenSans-Regular_0.ttf");
+        Typeface Roboto_Bold = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Bold.ttf");
 
-        TextView txt_user_name = (TextView)slidingMenu.findViewById(R.id.txt_user_name);
+        TextView txt_user_name = (TextView) slidingMenu.findViewById(R.id.txt_user_name);
         txt_user_name.setTypeface(Roboto_Regular);
-        txt_user_name.setText(userPref.getString("username",""));
-        TextView txt_user_number = (TextView)slidingMenu.findViewById(R.id.txt_user_number);
+        txt_user_name.setText(userPref.getString("username", ""));
+        TextView txt_user_number = (TextView) slidingMenu.findViewById(R.id.txt_user_number);
         txt_user_number.setTypeface(Roboto_Regular);
         txt_user_number.setText(userPref.getString("mobile", ""));
 
-        TextView txt_book_my_trip = (TextView)slidingMenu.findViewById(R.id.txt_book_my_trip);
+        TextView txt_book_my_trip = (TextView) slidingMenu.findViewById(R.id.txt_book_my_trip);
         txt_book_my_trip.setTypeface(Roboto_Bold);
-        TextView txt_my_trip = (TextView)slidingMenu.findViewById(R.id.txt_my_trip);
+        TextView txt_my_trip = (TextView) slidingMenu.findViewById(R.id.txt_my_trip);
         txt_my_trip.setTypeface(Roboto_Bold);
-        TextView txt_rate_card = (TextView)slidingMenu.findViewById(R.id.txt_rate_card);
+        TextView txt_rate_card = (TextView) slidingMenu.findViewById(R.id.txt_rate_card);
         txt_rate_card.setTypeface(Roboto_Bold);
-        TextView txt_cahnge_password = (TextView)slidingMenu.findViewById(R.id.txt_cahnge_password);
+        TextView txt_cahnge_password = (TextView) slidingMenu.findViewById(R.id.txt_cahnge_password);
         txt_cahnge_password.setTypeface(Roboto_Bold);
-        TextView txt_cahnge_theme = (TextView)slidingMenu.findViewById(R.id.txt_cahnge_theme);
+        TextView txt_cahnge_theme = (TextView) slidingMenu.findViewById(R.id.txt_cahnge_theme);
         txt_cahnge_theme.setTypeface(Roboto_Bold);
-        TextView txt_sign_out = (TextView)slidingMenu.findViewById(R.id.txt_sign_out);
+        TextView txt_sign_out = (TextView) slidingMenu.findViewById(R.id.txt_sign_out);
         txt_sign_out.setTypeface(Roboto_Bold);
 
 
-         layout_book_my_trip = (RelativeLayout)slidingMenu.findViewById(R.id.layout_book_my_trip);
-         layout_my_trip = (RelativeLayout)slidingMenu.findViewById(R.id.layout_my_trip);
-         layout_rate_card = (RelativeLayout)slidingMenu.findViewById(R.id.layout_rate_card);
-         layout_cahnge_password = (RelativeLayout)slidingMenu.findViewById(R.id.layout_cahnge_password);
-         layout_cahnge_theme = (RelativeLayout)slidingMenu.findViewById(R.id.layout_cahnge_theme);
-         layout_footer_logout = (RelativeLayout)slidingMenu.findViewById(R.id.layout_footer_logout);
+        layout_book_my_trip = (RelativeLayout) slidingMenu.findViewById(R.id.layout_book_my_trip);
+        layout_my_trip = (RelativeLayout) slidingMenu.findViewById(R.id.layout_my_trip);
+        layout_rate_card = (RelativeLayout) slidingMenu.findViewById(R.id.layout_rate_card);
+        layout_cahnge_password = (RelativeLayout) slidingMenu.findViewById(R.id.layout_cahnge_password);
+        layout_cahnge_theme = (RelativeLayout) slidingMenu.findViewById(R.id.layout_cahnge_theme);
+        layout_footer_logout = (RelativeLayout) slidingMenu.findViewById(R.id.layout_footer_logout);
 
-        RelativeLayout layout_user = (RelativeLayout)slidingMenu.findViewById(R.id.layout_user);
-        if(Common.ActiveActivity.equals("book my trips")){
+        RelativeLayout layout_user = (RelativeLayout) slidingMenu.findViewById(R.id.layout_user);
+        if (Common.ActiveActivity.equals("book my trips")) {
             layout_book_my_trip.setBackgroundResource(R.drawable.active_opt_bg);
         }
         layout_book_my_trip.setOnClickListener(new View.OnClickListener() {
@@ -787,7 +780,7 @@ public class Common {
                 layout_cahnge_theme.setBackgroundResource(0);
                 layout_cahnge_password.setBackgroundResource(0);
                 Common.ActiveActivity = "book my trips";
-                if(!clickMenu.equals("home")) {
+                if (!clickMenu.equals("home")) {
                     Intent mi = new Intent(activity, HomeActivity.class);
                     activity.startActivity(mi);
                     activity.finish();
@@ -796,7 +789,7 @@ public class Common {
             }
         });
 
-        if(Common.ActiveActivity.equals("my trips")){
+        if (Common.ActiveActivity.equals("my trips")) {
             layout_my_trip.setBackgroundResource(R.drawable.active_opt_bg);
         }
         layout_my_trip.setOnClickListener(new View.OnClickListener() {
@@ -808,7 +801,7 @@ public class Common {
                 layout_cahnge_password.setBackgroundResource(0);
                 layout_my_trip.setBackgroundResource(0);
                 Common.ActiveActivity = "my trips";
-                if(!clickMenu.equals("all trip")) {
+                if (!clickMenu.equals("all trip")) {
                     Intent mi = new Intent(activity, AllTripActivity.class);
                     activity.startActivity(mi);
                     activity.finish();
@@ -816,7 +809,7 @@ public class Common {
             }
         });
 
-        if(Common.ActiveActivity.equals("rate card")){
+        if (Common.ActiveActivity.equals("rate card")) {
             layout_rate_card.setBackgroundResource(R.drawable.active_opt_bg);
         }
         layout_rate_card.setOnClickListener(new View.OnClickListener() {
@@ -830,7 +823,7 @@ public class Common {
                 layout_cahnge_password.setBackgroundResource(0);
                 layout_cahnge_theme.setBackgroundResource(0);
 
-                if(!clickMenu.equals("rate card")) {
+                if (!clickMenu.equals("rate card")) {
                     Intent ri = new Intent(activity, RateCardActivity.class);
                     activity.startActivity(ri);
                     activity.finish();
@@ -838,7 +831,7 @@ public class Common {
             }
         });
 
-        if(Common.ActiveActivity.equals("change password")){
+        if (Common.ActiveActivity.equals("change password")) {
             layout_cahnge_password.setBackgroundResource(R.drawable.active_opt_bg);
         }
         layout_cahnge_password.setOnClickListener(new View.OnClickListener() {
@@ -851,17 +844,17 @@ public class Common {
                 layout_my_trip.setBackgroundResource(0);
                 layout_book_my_trip.setBackgroundResource(0);
 
-                if(!clickMenu.equals("change password")) {
+                if (!clickMenu.equals("change password")) {
                     Intent mi = new Intent(activity, ChangePasswordActivity.class);
                     activity.startActivity(mi);
                     activity.finish();
                 }
             }
         });
-        if(Common.ActiveActivity.equals("change password")){
+        if (Common.ActiveActivity.equals("change password")) {
             layout_cahnge_theme.setBackgroundResource(R.drawable.active_opt_bg);
         }
-layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
+        layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 slidingMenu.toggle();
@@ -871,7 +864,7 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
                 layout_my_trip.setBackgroundResource(0);
                 layout_book_my_trip.setBackgroundResource(0);
 
-                if(!clickMenu.equals("change theme")) {
+                if (!clickMenu.equals("change theme")) {
                     Intent mi = new Intent(activity, ThemeActivity.class);
                     activity.startActivity(mi);
                     activity.finish();
@@ -886,28 +879,28 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
                 slidingMenu.toggle();
 
                 new AlertDialog.Builder(activity)
-                    .setMessage("Are you sure you want to logout?")
-                    .setPositiveButton(activity.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences.Editor editor = userPref.edit();
-                            editor.clear();
-                            editor.commit();
+                        .setMessage("Are you sure you want to logout?")
+                        .setPositiveButton(activity.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences.Editor editor = userPref.edit();
+                                editor.clear();
+                                editor.commit();
 
-                            Intent logInt = new Intent(activity, LoginOptionActivity.class);
-                            logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(logInt);
+                                Intent logInt = new Intent(activity, LoginOptionActivity.class);
+                                logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(logInt);
 
-                        }
-                    })
-                    .setNegativeButton(activity.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+                            }
+                        })
+                        .setNegativeButton(activity.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
 
@@ -920,20 +913,20 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-        ImageView img_user = (ImageView)slidingMenu.findViewById(R.id.img_user);
-        String facebook_id = userPref.getString("facebook_id","");
-        Log.d("facebook_id","facebook_id = "+facebook_id);
-        if(facebook_id != null && !facebook_id.equals("") && userPref.getString("userImage", "").equals("")) {
+        ImageView img_user = (ImageView) slidingMenu.findViewById(R.id.img_user);
+        String facebook_id = userPref.getString("facebook_id", "");
+        Log.d("facebook_id", "facebook_id = " + facebook_id);
+        if (facebook_id != null && !facebook_id.equals("") && userPref.getString("userImage", "").equals("")) {
             String facebookImage = Url.FacebookImgUrl + facebook_id + "/picture?type=large";
-            Log.d("facebookImage","facebookImage = "+facebookImage);
+            Log.d("facebookImage", "facebookImage = " + facebookImage);
             Picasso.with(activity)
                     .load(facebookImage)
                     .placeholder(R.drawable.avatar_placeholder)
                     .resize(200, 200)
-                    .transform(new  CircleTransform())
+                    .transform(new CircleTransform())
                     .into(img_user);
-        }else {
-            Log.d("userImage","user Image = "+Url.userImageUrl+userPref.getString("userImage",""));
+        } else {
+            Log.d("userImage", "user Image = " + Url.userImageUrl + userPref.getString("userImage", ""));
             Picasso.with(activity)
                     .load(Uri.parse(Url.userImageUrl + userPref.getString("userImage", "")))
                     .transform(new CircleTransform())
@@ -945,30 +938,30 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
     }
 
 
-    public static Float getTotalPrice(String intailrate,float FirstKm,Float distance,String fromintailrate,String ride_time_rate,int totalTime){
+    public static Float getTotalPrice(String intailrate, float FirstKm, Float distance, String fromintailrate, String ride_time_rate, int totalTime) {
         Float totlePrice;
         String temp = "50";
-        if(intailrate!=null || !intailrate.isEmpty())
+        if (intailrate != null || !intailrate.isEmpty())
             temp = intailrate;
         Float firstPrice = Float.parseFloat(temp);
         Float secoundPrice = null;
-        Log.d("fromintailrate","fromintailrate FirstKm= "+FirstKm+"=="+distance);
-        if(FirstKm < distance) {
+        Log.d("fromintailrate", "fromintailrate FirstKm= " + FirstKm + "==" + distance);
+        if (FirstKm < distance) {
             Float afterkm = distance - FirstKm;
-            Log.d("fromintailrate","fromintailrate distance= "+fromintailrate+"=="+afterkm);
-            if(fromintailrate.equals(""))
+            Log.d("fromintailrate", "fromintailrate distance= " + fromintailrate + "==" + afterkm);
+            if (fromintailrate.equals(""))
                 fromintailrate = "0";
             secoundPrice = Float.parseFloat(fromintailrate) * afterkm;
-            Log.d("total price","total price = "+distance+"=="+FirstKm+"=="+afterkm);
+            Log.d("total price", "total price = " + distance + "==" + FirstKm + "==" + afterkm);
         }
 
-        Log.d("totalTime","totalTime = "+totalTime+"=="+ride_time_rate);
+        Log.d("totalTime", "totalTime = " + totalTime + "==" + ride_time_rate);
         float driverprice = Float.parseFloat(ride_time_rate) * totalTime;
 
-        if(secoundPrice != null)
-            totlePrice = firstPrice+secoundPrice+driverprice;
+        if (secoundPrice != null)
+            totlePrice = firstPrice + secoundPrice + driverprice;
         else
-            totlePrice = firstPrice+driverprice;
+            totlePrice = firstPrice + driverprice;
 
         return totlePrice;
     }
@@ -992,13 +985,12 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
 //        });
 //    }
 
-    public static void showMkHitMessage(final Activity act,String message)
-    {
-        if(!act.isFinishing()){
+    public static void showMkHitMessage(final Activity act, String message) {
+        if (!act.isFinishing()) {
 
             Animation slideUpAnimation;
 
-            final Dialog MKInfoPanelDialog = new Dialog(act,android.R.style.Theme_Translucent_NoTitleBar);
+            final Dialog MKInfoPanelDialog = new Dialog(act, android.R.style.Theme_Translucent_NoTitleBar);
 
             MKInfoPanelDialog.setContentView(R.layout.mkinfopanel);
             MKInfoPanelDialog.show();
@@ -1010,14 +1002,14 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
 
             layout_info_panel.setBackgroundResource(R.color.yellow);
 
-            TextView subtitle = (TextView)MKInfoPanelDialog.findViewById(R.id.subtitle);
+            TextView subtitle = (TextView) MKInfoPanelDialog.findViewById(R.id.subtitle);
             subtitle.setText(message);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        if(MKInfoPanelDialog.isShowing() && !act.isFinishing())
+                        if (MKInfoPanelDialog.isShowing() && !act.isFinishing())
                             MKInfoPanelDialog.cancel();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1028,13 +1020,14 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
         }
     }
 
-    public static class CallUnSubscribeTaken extends AsyncTask<String, Void, String > {
+    public static class CallUnSubscribeTaken extends AsyncTask<String, Void, String> {
 
 
         private SharedPreferences userPref;
         String DeviceToken;
         Activity activity;
-        public CallUnSubscribeTaken(Activity activity,String dt){
+
+        public CallUnSubscribeTaken(Activity activity, String dt) {
             DeviceToken = dt;
             userPref = PreferenceManager.getDefaultSharedPreferences(activity);
             this.activity = activity;
@@ -1055,11 +1048,11 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
             try {
 
                 JSONObject passObj = new JSONObject();
-                passObj.put("user","u_"+userPref.getString("id",""));
-                passObj.put("type","android");
-                passObj.put("token",DeviceToken);
+                passObj.put("user", "u_" + userPref.getString("id", ""));
+                passObj.put("type", "android");
+                passObj.put("token", DeviceToken);
 
-                Log.d("passObj","response passObj = "+passObj);
+                Log.d("passObj", "response passObj = " + passObj);
 
                 HttpPost httppost = new HttpPost(Url.unsubscribeUrl);
                 httppost.setHeader("Content-Type", "application/json");
@@ -1070,7 +1063,7 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
 //                httppost.setEntity(se);
                 httppost.setEntity(new StringEntity(passObj.toString(), HTTP.UTF_8));
 
-                for (int i=0;i<httppost.getAllHeaders().length;i++) {
+                for (int i = 0; i < httppost.getAllHeaders().length; i++) {
                     Log.v("set header", httppost.getAllHeaders()[i].getValue());
                 }
 
@@ -1081,11 +1074,11 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
                 HttpEntity entity = response.getEntity();
                 contentStream = entity.getContent();
 
-                Log.d("response","response = "+response.toString()+"=="+entity+"=="+contentStream);
+                Log.d("response", "response = " + response.toString() + "==" + entity + "==" + contentStream);
                 resultString = response.toString();
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
-                Log.d("Error","response Error one = "+e.getMessage());
+                Log.d("Error", "response Error one = " + e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d("Error", "response Error two = " + e.getMessage());
@@ -1102,20 +1095,21 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
         protected void onPostExecute(String result) {
             //Toast.makeText(activity,"sucess = "+result,Toast.LENGTH_LONG).show();
 
-            if(result.contains("HTTP/1.1 200 OK")){
-                new Common.CallDeviceTaken(activity,Common.device_token).execute();
+            if (result.contains("HTTP/1.1 200 OK")) {
+                new Common.CallDeviceTaken(activity, Common.device_token).execute();
 
             }
         }
 
     }
 
-    public static class CallDeviceTaken extends AsyncTask<String, Void, String > {
+    public static class CallDeviceTaken extends AsyncTask<String, Void, String> {
 
 
         private SharedPreferences userPref;
         String DeviceToken;
-        public CallDeviceTaken(Activity activity,String dt){
+
+        public CallDeviceTaken(Activity activity, String dt) {
             DeviceToken = dt;
             userPref = PreferenceManager.getDefaultSharedPreferences(activity);
         }
@@ -1135,11 +1129,11 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
             try {
 
                 JSONObject passObj = new JSONObject();
-                passObj.put("user","u_"+userPref.getString("id",""));
-                passObj.put("type","android");
-                passObj.put("token",DeviceToken);
+                passObj.put("user", "u_" + userPref.getString("id", ""));
+                passObj.put("type", "android");
+                passObj.put("token", DeviceToken);
 
-                Log.d("passObj","response passObj = "+passObj);
+                Log.d("passObj", "response passObj = " + passObj);
 
                 HttpPost httppost = new HttpPost(Url.subscribeUrl);
                 httppost.setHeader("Content-Type", "application/json");
@@ -1150,7 +1144,7 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
 //                httppost.setEntity(se);
                 httppost.setEntity(new StringEntity(passObj.toString(), HTTP.UTF_8));
 
-                for (int i=0;i<httppost.getAllHeaders().length;i++) {
+                for (int i = 0; i < httppost.getAllHeaders().length; i++) {
                     Log.v("set header", httppost.getAllHeaders()[i].getValue());
                 }
 
@@ -1161,11 +1155,11 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
                 HttpEntity entity = response.getEntity();
                 contentStream = entity.getContent();
 
-                Log.d("response","response = "+response.toString()+"=="+entity+"=="+contentStream);
+                Log.d("response", "response = " + response.toString() + "==" + entity + "==" + contentStream);
                 resultString = response.toString();
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
-                Log.d("Error","response Error one = "+e.getMessage());
+                Log.d("Error", "response Error one = " + e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d("Error", "response Error two = " + e.getMessage());
@@ -1181,7 +1175,7 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
         @Override
         protected void onPostExecute(String result) {
 
-            if(result.contains("HTTP/1.1 200 OK")){
+            if (result.contains("HTTP/1.1 200 OK")) {
                 SharedPreferences.Editor isDeviceToken = userPref.edit();
                 isDeviceToken.putString("id_device_token", "1");
                 isDeviceToken.commit();
@@ -1207,7 +1201,7 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
         }
     }
 
-    public static void ValidationGone(final Activity activity, final RelativeLayout rlMainView, EditText edt_reg_username){
+    public static void ValidationGone(final Activity activity, final RelativeLayout rlMainView, EditText edt_reg_username) {
         edt_reg_username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -1216,9 +1210,9 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.d("charSequence","charSequence = "+charSequence.length()+"=="+rlMainView.getVisibility()+"=="+View.VISIBLE);
-                if(charSequence.length() > 0 && rlMainView.getVisibility() == View.VISIBLE){
-                    if(!activity.isFinishing()){
+                Log.d("charSequence", "charSequence = " + charSequence.length() + "==" + rlMainView.getVisibility() + "==" + View.VISIBLE);
+                if (charSequence.length() > 0 && rlMainView.getVisibility() == View.VISIBLE) {
+                    if (!activity.isFinishing()) {
                         TranslateAnimation slideUp = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, -100);
                         slideUp.setDuration(10);
                         slideUp.setFillAfter(true);
@@ -1248,6 +1242,14 @@ layout_cahnge_theme.setOnClickListener(new View.OnClickListener() {
 
             }
         });
+    }
+
+    public void saveTheme(Context context, String str) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("MYLABEL", str).apply();
+    }
+
+    public String getTheme(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString("MYLABEL", "defaultStringIfNothingFound");
     }
 
 }
