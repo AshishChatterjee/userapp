@@ -250,7 +250,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     RecyclerView recycle_cab_detail;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @Override
+    @Overridelayout_now
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (common.getTheme(this).equals("orange")) {
@@ -531,7 +531,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         txt_thd_currency.setText(Common.Currency);
         txt_thd_currency.setTypeface(Roboto_Bold);
 
-        recycle_cab_detail = (RecyclerView) NowDialog.findViewById(R.id.recycle_cab_detail);
+        recycle_cab_detail = findViewById(R.id.flayout);
+     //   recycle_cab_detail = (RecyclerView) NowDialog.findViewById(R.id.recycle_cab_detail);
         RecyclerView.LayoutManager categoryLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recycle_cab_detail.setLayoutManager(categoryLayoutManager);
 
@@ -744,8 +745,9 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         BookingDateTime = bookingFormate.format(Calendar.getInstance().getTime());
 
                         BookingType = "Now";
-                        layout_reservation.setVisibility(View.GONE);
-                        NowDialog.show();
+                       // layout_reservation.setVisibility(View.GONE);
+                        recycle_cab_detail.setVisibility(View.GONE);
+                       // NowDialog.show();
                     }
                 }
 

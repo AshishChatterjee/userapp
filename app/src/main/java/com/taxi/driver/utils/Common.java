@@ -882,9 +882,12 @@ public class Common {
                         .setMessage("Are you sure you want to logout?")
                         .setPositiveButton(activity.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                String str = getTheme(activity);
                                 SharedPreferences.Editor editor = userPref.edit();
                                 editor.clear();
                                 editor.commit();
+
+                                saveTheme(activity, str);
 
                                 Intent logInt = new Intent(activity, LoginOptionActivity.class);
                                 logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
