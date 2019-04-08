@@ -5,43 +5,63 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <RelativeLayout
+        android:id="@+id/topheade"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentTop="true"
+        android:background="?colorPrimary">
+
+        <RelativeLayout
+            android:id="@+id/layout_slidemenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/margin_15">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:src="@drawable/menu_icon" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/home_string"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_footer"
+        android:layout_below="@+id/topheade">
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/layout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_50"
-            android:background="?colorPrimary">
-
-            <RelativeLayout
-                android:id="@+id/layout_slidemenu"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingRight="@dimen/margin_15">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_15"
-                    android:src="@drawable/menu_icon" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/txt_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/home_string"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_18" />
-
-
-        </RelativeLayout>
+        android:layout_below="@+id/topheade"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,12 +75,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/location_logo"
                 android:textColor="@color/black"
-                android:textSize="@dimen/font_18" />
+                android:textSize="@dimen/font_15" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15">
+                android:layout_marginTop="@dimen/margin_10">
 
                 <ImageView
                     android:id="@+id/img_pickup_location"
@@ -74,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginLeft="@dimen/margin_10"
                     android:layout_marginRight="@dimen/margin_5"
                     android:layout_toLeftOf="@+id/img_pickup_close"
                     android:layout_toRightOf="@+id/img_pickup_location"
@@ -84,7 +104,7 @@
                     android:singleLine="true"
                     android:textColor="@color/grey_drk"
                     android:textColorHint="@color/grey_drk"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/font_14" />
 
                 <ImageView
                     android:id="@+id/img_pickup_close"
@@ -100,14 +120,14 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_5"
                 android:scaleType="fitXY"
                 android:src="@drawable/textbox_bottom_line" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15">
+                android:layout_marginTop="@dimen/margin_10">
 
                 <ImageView
                     android:id="@+id/img_drop_location"
@@ -121,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginLeft="@dimen/margin_10"
                     android:layout_marginRight="@dimen/margin_5"
                     android:layout_toLeftOf="@+id/img_drop_close"
                     android:layout_toRightOf="@+id/img_drop_location"
@@ -131,7 +151,7 @@
                     android:singleLine="true"
                     android:textColor="@color/grey_drk"
                     android:textColorHint="@color/grey_drk"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/font_14" />
 
                 <ImageView
                     android:id="@+id/img_drop_close"
@@ -191,28 +211,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/layout_footer"
-        android:layout_below="@+id/layout_header">
-
-        <fragment
-            android:id="@+id/map"
-            class="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/flayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_40"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/layout_footer"
+        android:background="@color/white"
         android:visibility="gone"></android.support.v7.widget.RecyclerView>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -220,10 +228,11 @@
 
         <RelativeLayout
             android:id="@+id/layout_now"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/round_back">
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:background="@drawable/round_back"
+            android:layout_marginRight="@dimen/margin_5">
 
             <TextView
                 android:id="@+id/txt_now"
@@ -242,26 +251,28 @@
         <!--android:src="@drawable/book_now_btn"-->
         <!--android:scaleType="fitXY"/>-->
 
-        <!--<RelativeLayout
+        <RelativeLayout
             android:id="@+id/layout_reservation"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/reservation_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:visibility="gone">
+            android:background="@drawable/round_back"
+            android:visibility="visible"
+            android:layout_marginLeft="@dimen/margin_5"
+
+          >
 
             <TextView
                 android:id="@+id/txt_reservation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_14"
-                android:text="@string/reservation"
                 android:layout_centerInParent="true"
-                android:textColor="@color/reservation_color"/>
+                android:text="Later"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_14" />
 
         </RelativeLayout>
--->
         <!--<ImageView-->
         <!--android:id="@+id/img_reservation"-->
         <!--android:layout_width="200dp"-->
@@ -272,7 +283,7 @@
         <!--android:layout_alignParentEnd="true"-->
         <!--/>-->
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/layout_pickup_drag_location"

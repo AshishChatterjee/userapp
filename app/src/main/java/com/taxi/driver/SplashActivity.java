@@ -46,6 +46,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+       if(common.getTheme(this).equals("defaultStringIfNothingFound")) {common.saveTheme(this, "navi_blue");}
+
         img_splash_screen = (ImageView)findViewById(R.id.img_splash_screen);
         img_location = (ImageView)findViewById(R.id.img_location);
 

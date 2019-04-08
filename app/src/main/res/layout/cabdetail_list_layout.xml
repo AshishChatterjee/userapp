@@ -19,7 +19,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_120"
+            android:layout_height="@dimen/height_60"
             android:minHeight="@dimen/height_100"
             android:layout_below="@+id/img_selected_indicator">
 
@@ -41,7 +41,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/fixed_rate"
-                    android:layout_below="@+id/img_car_icon"/>
+                    android:layout_below="@+id/img_car_icon"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/txt_car_type"

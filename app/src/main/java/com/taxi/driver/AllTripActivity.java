@@ -72,7 +72,7 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
     ArrayList<AllTripFeed> allTripArray;
     private RecyclerView.LayoutManager AllTripLayoutManager;
 
-    Typeface OpenSans_Bold,OpenSans_Regular,Roboto_Bold;
+    Typeface OpenSans_Bold, OpenSans_Regular, Roboto_Bold;
 
     Dialog filterDialog;
     String FilterString = "";
@@ -105,14 +105,14 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
         }
         setContentView(R.layout.activity_all_trip);
 
-        layout_slidemenu = (RelativeLayout)findViewById(R.id.layout_slidemenu);
-        txt_all_trip = (TextView)findViewById(R.id.txt_all_trip);
-        layout_filter = (RelativeLayout)findViewById(R.id.layout_filter);
-        recycle_all_trip = (RecyclerView)findViewById(R.id.recycle_all_trip);
-        swipe_refresh_layout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
-        layout_background = (RelativeLayout)findViewById(R.id.layout_background);
-        layout_no_recourd_found = (RelativeLayout)findViewById(R.id.layout_no_recourd_found);
-        layout_recycleview = (LinearLayout)findViewById(R.id.layout_recycleview);
+        layout_slidemenu = (RelativeLayout) findViewById(R.id.layout_slidemenu);
+        txt_all_trip = (TextView) findViewById(R.id.txt_all_trip);
+        layout_filter = (RelativeLayout) findViewById(R.id.layout_filter);
+        recycle_all_trip = (RecyclerView) findViewById(R.id.recycle_all_trip);
+        swipe_refresh_layout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        layout_background = (RelativeLayout) findViewById(R.id.layout_background);
+        layout_no_recourd_found = (RelativeLayout) findViewById(R.id.layout_no_recourd_found);
+        layout_recycleview = (LinearLayout) findViewById(R.id.layout_recycleview);
 
 
         OpenSans_Bold = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Bold_0.ttf");
@@ -129,7 +129,7 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
         ProgressDialog = new Dialog(AllTripActivity.this, android.R.style.Theme_Translucent_NoTitleBar);
         ProgressDialog.setContentView(R.layout.custom_progress_dialog);
         ProgressDialog.setCancelable(false);
-        cusRotateLoading = (RotateLoading)ProgressDialog.findViewById(R.id.rotateloading_register);
+        cusRotateLoading = (RotateLoading) ProgressDialog.findViewById(R.id.rotateloading_register);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -161,12 +161,12 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
 
                         if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3) {
                             SharedPreferences.Editor checkAll = userPref.edit();
-                            checkAll.putString("check all","check all");
+                            checkAll.putString("check all", "check all");
                             checkAll.commit();
                             FilterString = "";
-                        }else{
+                        } else {
                             SharedPreferences.Editor checkAll = userPref.edit();
-                            checkAll.putString("check all","");
+                            checkAll.putString("check all", "");
                             checkAll.commit();
                         }
                         FilterAllTrips(0, "filter");
@@ -210,11 +210,11 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
                         FilterString = FilterString.substring(0, (FilterString.length() - 1));
                         Log.d("FilterString", "FilterString = " + FilterString);
 
-                        if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3){
+                        if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3) {
                             FilterString = "";
                         }
 
-                        FilterAllTrips(0,"");
+                        FilterAllTrips(0, "");
                         FilterString = "";
                     } else {
                         getAllTrip(0);
@@ -229,7 +229,7 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
 
         /*Filter Dialog Start*/
 
-        filterDialog = new Dialog(AllTripActivity.this,R.style.DialogSlideAnim);
+        filterDialog = new Dialog(AllTripActivity.this, R.style.DialogSlideAnim);
         filterDialog.setContentView(R.layout.all_trip_filter_dialog);
 
         layout_filter.setOnClickListener(new View.OnClickListener() {
@@ -253,68 +253,68 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
             }
         });
 
-        TextView txt_all = (TextView)filterDialog.findViewById(R.id.txt_all);
+        TextView txt_all = (TextView) filterDialog.findViewById(R.id.txt_all);
         txt_all.setTypeface(OpenSans_Regular);
-        TextView txt_pending_booking = (TextView)filterDialog.findViewById(R.id.txt_pending_booking);
+        TextView txt_pending_booking = (TextView) filterDialog.findViewById(R.id.txt_pending_booking);
         txt_pending_booking.setTypeface(OpenSans_Regular);
-        TextView txt_com_booking = (TextView)filterDialog.findViewById(R.id.txt_com_booking);
+        TextView txt_com_booking = (TextView) filterDialog.findViewById(R.id.txt_com_booking);
         txt_com_booking.setTypeface(OpenSans_Regular);
-        TextView txt_drv_una = (TextView)filterDialog.findViewById(R.id.txt_drv_una);
+        TextView txt_drv_una = (TextView) filterDialog.findViewById(R.id.txt_drv_una);
         txt_drv_una.setTypeface(OpenSans_Regular);
-        TextView txt_usr_rej = (TextView)filterDialog.findViewById(R.id.txt_usr_rej);
+        TextView txt_usr_rej = (TextView) filterDialog.findViewById(R.id.txt_usr_rej);
         txt_usr_rej.setTypeface(OpenSans_Regular);
-        TextView txt_drv_accept = (TextView)filterDialog.findViewById(R.id.txt_drv_accept);
+        TextView txt_drv_accept = (TextView) filterDialog.findViewById(R.id.txt_drv_accept);
         txt_drv_accept.setTypeface(OpenSans_Regular);
 
-        chk_all = (CheckBox)filterDialog.findViewById(R.id.chk_all);
+        chk_all = (CheckBox) filterDialog.findViewById(R.id.chk_all);
 
-        RelativeLayout layout_all_check = (RelativeLayout)filterDialog.findViewById(R.id.layout_all_check);
+        RelativeLayout layout_all_check = (RelativeLayout) filterDialog.findViewById(R.id.layout_all_check);
         CheckBoxChecked(layout_all_check, chk_all, "all");
 
-        chk_pen_book = (CheckBox)filterDialog.findViewById(R.id.chk_pen_book);
-        RelativeLayout layour_pen_book_check = (RelativeLayout)filterDialog.findViewById(R.id.layour_pen_book_check);
+        chk_pen_book = (CheckBox) filterDialog.findViewById(R.id.chk_pen_book);
+        RelativeLayout layour_pen_book_check = (RelativeLayout) filterDialog.findViewById(R.id.layour_pen_book_check);
         CheckBoxChecked(layour_pen_book_check, chk_pen_book, "pending book");
 
-        chk_com_book = (CheckBox)filterDialog.findViewById(R.id.chk_com_book);
-        RelativeLayout layout_com_book_check = (RelativeLayout)filterDialog.findViewById(R.id.layout_com_book_check);
+        chk_com_book = (CheckBox) filterDialog.findViewById(R.id.chk_com_book);
+        RelativeLayout layout_com_book_check = (RelativeLayout) filterDialog.findViewById(R.id.layout_com_book_check);
         CheckBoxChecked(layout_com_book_check, chk_com_book, "completed book");
 
-        chk_drv_reject = (CheckBox)filterDialog.findViewById(R.id.chk_drv_reject);
-        RelativeLayout layout_drv_reject_check = (RelativeLayout)filterDialog.findViewById(R.id.layout_drv_reject_check);
+        chk_drv_reject = (CheckBox) filterDialog.findViewById(R.id.chk_drv_reject);
+        RelativeLayout layout_drv_reject_check = (RelativeLayout) filterDialog.findViewById(R.id.layout_drv_reject_check);
         CheckBoxChecked(layout_drv_reject_check, chk_drv_reject, "driver reject");
 
-        chk_user_reject = (CheckBox)filterDialog.findViewById(R.id.chk_user_reject);
-        RelativeLayout layout_user_reject_check = (RelativeLayout)filterDialog.findViewById(R.id.layout_user_reject_check);
+        chk_user_reject = (CheckBox) filterDialog.findViewById(R.id.chk_user_reject);
+        RelativeLayout layout_user_reject_check = (RelativeLayout) filterDialog.findViewById(R.id.layout_user_reject_check);
         CheckBoxChecked(layout_user_reject_check, chk_user_reject, "user reject");
 
-        chk_drv_accept = (CheckBox)filterDialog.findViewById(R.id.chk_drv_accept);
-        RelativeLayout layout_drv_accept_check = (RelativeLayout)filterDialog.findViewById(R.id.layout_drv_accept_check);
+        chk_drv_accept = (CheckBox) filterDialog.findViewById(R.id.chk_drv_accept);
+        RelativeLayout layout_drv_accept_check = (RelativeLayout) filterDialog.findViewById(R.id.layout_drv_accept_check);
         CheckBoxChecked(layout_drv_accept_check, chk_drv_accept, "drive accept");
 
-        Log.d("check Value","check value = "+userPref.getInt("pending booking",5)+"=="+userPref.getInt("user reject",5)+"=="+userPref.getInt("driver unavailable",5)+"=="+userPref.getInt("complete booking",5));
-        if(userPref.getInt("user reject",0) == 4)
+        Log.d("check Value", "check value = " + userPref.getInt("pending booking", 5) + "==" + userPref.getInt("user reject", 5) + "==" + userPref.getInt("driver unavailable", 5) + "==" + userPref.getInt("complete booking", 5));
+        if (userPref.getInt("user reject", 0) == 4)
             chk_user_reject.setChecked(true);
-        if(userPref.getInt("driver unavailable",0) == 6)
+        if (userPref.getInt("driver unavailable", 0) == 6)
             chk_drv_reject.setChecked(true);
-        if(userPref.getInt("complete booking",0) == 9)
+        if (userPref.getInt("complete booking", 0) == 9)
             chk_com_book.setChecked(true);
-        if(userPref.getInt("pending booking",0) == 1)
+        if (userPref.getInt("pending booking", 0) == 1)
             chk_pen_book.setChecked(true);
         if (userPref.getInt("driver accept", 0) == 3) {
             chk_drv_accept.setChecked(true);
         }
 
-        if(userPref.getInt("user reject",0) == 4 && userPref.getInt("driver unavailable",0) == 6 && userPref.getInt("complete booking",0) == 9 && userPref.getInt("pending booking",0) == 1 && userPref.getInt("driver accept",0) == 3){
+        if (userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("pending booking", 0) == 1 && userPref.getInt("driver accept", 0) == 3) {
             chk_all.setChecked(true);
         }
 
-        ImageView img_close_icon = (ImageView)filterDialog.findViewById(R.id.img_close_icon);
+        ImageView img_close_icon = (ImageView) filterDialog.findViewById(R.id.img_close_icon);
         img_close_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            layout_background.setVisibility(View.GONE);
-            filterDialog.cancel();
+                layout_background.setVisibility(View.GONE);
+                filterDialog.cancel();
             }
         });
 
@@ -325,8 +325,8 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
         layout_calcel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            layout_background.setVisibility(View.GONE);
-            filterDialog.cancel();
+                layout_background.setVisibility(View.GONE);
+                filterDialog.cancel();
             }
         });
 
@@ -342,61 +342,61 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
                 filterDialog.cancel();
                 boolean setFilter = false;
                 SharedPreferences.Editor pending_booking = userPref.edit();
-                if(chk_pen_book.isChecked()) {
+                if (chk_pen_book.isChecked()) {
                     FilterString = 1 + ",";
                     pending_booking.putInt("pending booking", 1);
                     setFilter = true;
-                }else
+                } else
                     pending_booking.putInt("pending booking", 0);
                 pending_booking.commit();
                 SharedPreferences.Editor complete_booking = userPref.edit();
-                if(chk_com_book.isChecked()) {
+                if (chk_com_book.isChecked()) {
                     FilterString += 9 + ",";
                     complete_booking.putInt("complete booking", 9);
                     setFilter = true;
-                }else
+                } else
                     complete_booking.putInt("complete booking", 0);
                 complete_booking.commit();
 
                 SharedPreferences.Editor user_reject = userPref.edit();
-                if(chk_user_reject.isChecked()) {
+                if (chk_user_reject.isChecked()) {
                     FilterString += 4 + ",";
                     user_reject.putInt("user reject", 4);
                     setFilter = true;
-                }else
+                } else
                     user_reject.putInt("user reject", 0);
                 user_reject.commit();
 
                 SharedPreferences.Editor driver_accept = userPref.edit();
-                if(chk_drv_accept.isChecked()) {
+                if (chk_drv_accept.isChecked()) {
                     FilterString += 3 + ",";
                     driver_accept.putInt("driver accept", 3);
                     setFilter = true;
-                }else
+                } else
                     driver_accept.putInt("driver accept", 0);
                 driver_accept.commit();
 
                 SharedPreferences.Editor driver_unavailable = userPref.edit();
-                if(chk_drv_reject.isChecked()) {
+                if (chk_drv_reject.isChecked()) {
                     FilterString += 6 + ",";
                     driver_unavailable.putInt("driver unavailable", 6);
                     setFilter = true;
-                }else
+                } else
                     driver_unavailable.putInt("driver unavailable", 0);
                 driver_unavailable.commit();
 
-                if(FilterString.length() > 0)
+                if (FilterString.length() > 0)
                     FilterString = FilterString.substring(0, (FilterString.length() - 1));
 
                 SharedPreferences.Editor clickfilter = userPref.edit();
                 clickfilter.putBoolean("setFilter", setFilter);
                 clickfilter.commit();
 
-                if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3){
+                if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3) {
                     FilterString = "";
                 }
 
-                FilterAllTrips(0,"filter");
+                FilterAllTrips(0, "filter");
                 FilterString = "";
 
             }
@@ -405,7 +405,7 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
         /*Filter Dialog End*/
 
 
-         /*Slide Menu Start*/
+        /*Slide Menu Start*/
 
         slidingMenu = new SlidingMenu(this);
         slidingMenu.setMode(SlidingMenu.LEFT);
@@ -415,7 +415,7 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
         slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         slidingMenu.setMenu(R.layout.left_menu);
 
-        common.SlideMenuDesign(slidingMenu, AllTripActivity.this,"all trip");
+        common.SlideMenuDesign(slidingMenu, AllTripActivity.this, "all trip");
 
         layout_slidemenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -425,7 +425,7 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
         });
     }
 
-    public void CheckBoxChecked(RelativeLayout relativeLayout, final CheckBox checkBox, final String checkBoxValue){
+    public void CheckBoxChecked(RelativeLayout relativeLayout, final CheckBox checkBox, final String checkBoxValue) {
 
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -506,258 +506,258 @@ public class AllTripActivity extends AppCompatActivity implements AllTripAdapter
 
     public void getAllTrip(final int offset) {
 
-        if(offset == 0) {
+        if (offset == 0) {
             allTripArray = new ArrayList<>();
         }
-
-        Log.d("loadTripsUrl","loadTripsUrl ="+Url.loadTripsUrl+"=="+userPref.getString("id", "")+"=="+String.valueOf(offset));
+        String url = "http://mediaorange.co/olauber/new_api/load_trips?user_id=" +userPref.getString("id", "");
+                Log.d("loadTripsUrl", "loadTripsUrl =" + Url.loadTripsUrl + "==" + userPref.getString("id", "") + "==" + String.valueOf(offset));
         Ion.with(AllTripActivity.this)
-            .load(Url.loadTripsUrl)
-            .setTimeout(6000)
-            //.setJsonObjectBody(json)
-            .setMultipartParameter("user_id", userPref.getString("id", ""))
-            .setMultipartParameter("off", String.valueOf(offset))
-            .asJsonObject()
-            .setCallback(new FutureCallback<JsonObject>() {
-                @Override
-                public void onCompleted(Exception error, JsonObject result) {
-                    // do stuff with the result or error
-                    Log.d("load_trips result", "load_trips result = " + result + "==" + error);
-                    if (error == null) {
+                .load(url)
+                .setTimeout(6000)
+                //.setJsonObjectBody(json)
+                .setMultipartParameter("user_id", userPref.getString("id", ""))
+                .setMultipartParameter("off", String.valueOf(offset))
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception error, JsonObject result) {
+                        // do stuff with the result or error
+                        Log.d("load_trips result", "load_trips result = " + result + "==" + error);
+                        if (error == null) {
 
-                        ProgressDialog.cancel();
-                        cusRotateLoading.stop();
-                        try {
-                            JSONObject resObj = new JSONObject(result.toString());
-                            Log.d("loadTripsUrl", "loadTripsUrl two= " + resObj);
-                            swipe_refresh_layout.setRefreshing(false);
-                            if (resObj.getString("status").equals("success")) {
-                                recycle_all_trip.setEnabled(true);
-                                JSONArray tripArray = new JSONArray(resObj.getString("all_trip"));
-                                for (int t = 0; t < tripArray.length(); t++) {
-                                    JSONObject trpObj = tripArray.getJSONObject(t);
-                                    AllTripFeed allTripFeed = new AllTripFeed();
-                                    allTripFeed.setBookingId(trpObj.getString("id"));
-                                    allTripFeed.setDropArea(trpObj.getString("drop_area"));
-                                    allTripFeed.setPickupArea(trpObj.getString("pickup_area"));
-                                    allTripFeed.setTaxiType(trpObj.getString("car_type"));
-                                    allTripFeed.setPickupDateTime(trpObj.getString("pickup_date_time"));
-                                    allTripFeed.setAmount(trpObj.getString("amount"));
-                                    allTripFeed.setCarIcon(trpObj.getString("icon"));
-                                    allTripFeed.setKm(trpObj.getString("km"));
-                                    allTripFeed.setDriverDetail(trpObj.getString("driver_detail"));
-                                    allTripFeed.setStatus(trpObj.getString("status"));
-                                    allTripFeed.setApproxTime(trpObj.getString("approx_time"));
-                                    allTripFeed.setOldLocationList(null);
-                                    allTripFeed.setStartPickLatLng(trpObj.getString("pickup_lat"));
-                                    allTripFeed.setEndPickLatLng(trpObj.getString("pickup_longs"));
-                                    allTripFeed.setStartDropLatLng(trpObj.getString("drop_lat"));
-                                    allTripFeed.setEndDropLatLng(trpObj.getString("drop_longs"));
+                            ProgressDialog.cancel();
+                            cusRotateLoading.stop();
+                            try {
+                                JSONObject resObj = new JSONObject(result.toString());
+                                Log.d("loadTripsUrl", "loadTripsUrl two= " + resObj);
+                                swipe_refresh_layout.setRefreshing(false);
+                                if (resObj.getString("status").equals("success")) {
+                                    recycle_all_trip.setEnabled(true);
+                                    JSONArray tripArray = new JSONArray(resObj.getString("all_trip"));
+                                    for (int t = 0; t < tripArray.length(); t++) {
+                                        JSONObject trpObj = tripArray.getJSONObject(t);
+                                        AllTripFeed allTripFeed = new AllTripFeed();
+                                        allTripFeed.setBookingId(trpObj.getString("id"));
+                                        allTripFeed.setDropArea(trpObj.getString("drop_area"));
+                                        allTripFeed.setPickupArea(trpObj.getString("pickup_area"));
+                                        allTripFeed.setTaxiType(trpObj.getString("car_type"));
+                                        allTripFeed.setPickupDateTime(trpObj.getString("pickup_date_time"));
+                                        allTripFeed.setAmount(trpObj.getString("amount"));
+                                        allTripFeed.setCarIcon(trpObj.getString("icon"));
+                                        allTripFeed.setKm(trpObj.getString("km"));
+                                        allTripFeed.setDriverDetail(trpObj.getString("driver_detail"));
+                                        allTripFeed.setStatus(trpObj.getString("status"));
+                                        allTripFeed.setApproxTime(trpObj.getString("approx_time"));
+                                        allTripFeed.setOldLocationList(null);
+                                        allTripFeed.setStartPickLatLng(trpObj.getString("pickup_lat"));
+                                        allTripFeed.setEndPickLatLng(trpObj.getString("pickup_longs"));
+                                        allTripFeed.setStartDropLatLng(trpObj.getString("drop_lat"));
+                                        allTripFeed.setEndDropLatLng(trpObj.getString("drop_longs"));
 
-                                    allTripArray.add(allTripFeed);
-                                }
-                                Log.d("loadTripsUrl", "loadTripsUrl three= " + allTripArray.size());
-                                if (allTripArray != null && allTripArray.size() > 0) {
+                                        allTripArray.add(allTripFeed);
+                                    }
+                                    Log.d("loadTripsUrl", "loadTripsUrl three= " + allTripArray.size());
+                                    if (allTripArray != null && allTripArray.size() > 0) {
+                                        if (offset == 0) {
+                                            layout_recycleview.setVisibility(View.VISIBLE);
+                                            layout_no_recourd_found.setVisibility(View.GONE);
+                                            allTripAdapter = new AllTripAdapter(AllTripActivity.this, allTripArray);
+                                            recycle_all_trip.setAdapter(allTripAdapter);
+                                            allTripAdapter.setOnAllTripItemClickListener(AllTripActivity.this);
+
+
+                                            ProgressDialog.cancel();
+                                            cusRotateLoading.stop();
+                                        }
+                                        allTripAdapter.updateItems();
+                                        swipe_refresh_layout.setEnabled(true);
+                                    }
+                                } else if (resObj.getString("status").equals("false")) {
+                                    Common.user_InActive = 1;
+                                    Common.InActive_msg = resObj.getString("message");
+
+                                    SharedPreferences.Editor editor = userPref.edit();
+                                    editor.clear();
+                                    editor.commit();
+
+                                    Intent logInt = new Intent(AllTripActivity.this, LoginOptionActivity.class);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(logInt);
+
+                                } else {
                                     if (offset == 0) {
-                                        layout_recycleview.setVisibility(View.VISIBLE);
-                                        layout_no_recourd_found.setVisibility(View.GONE);
-                                        allTripAdapter = new AllTripAdapter(AllTripActivity.this, allTripArray);
-                                        recycle_all_trip.setAdapter(allTripAdapter);
-                                        allTripAdapter.setOnAllTripItemClickListener(AllTripActivity.this);
-
-
                                         ProgressDialog.cancel();
                                         cusRotateLoading.stop();
+                                        layout_recycleview.setVisibility(View.GONE);
+                                        layout_no_recourd_found.setVisibility(View.VISIBLE);
+                                    } else {
+                                        Toast.makeText(AllTripActivity.this, resObj.getString("message").toString(), Toast.LENGTH_LONG).show();
                                     }
-                                    allTripAdapter.updateItems();
-                                    swipe_refresh_layout.setEnabled(true);
                                 }
-                            }else if(resObj.getString("status").equals("false")){
-                                Common.user_InActive = 1;
-                                Common.InActive_msg = resObj.getString("message");
-
-                                SharedPreferences.Editor editor = userPref.edit();
-                                editor.clear();
-                                editor.commit();
-
-                                Intent logInt = new Intent(AllTripActivity.this, LoginOptionActivity.class);
-                                logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(logInt);
-
-                            } else {
-                                if (offset == 0) {
-                                    ProgressDialog.cancel();
-                                    cusRotateLoading.stop();
-                                    layout_recycleview.setVisibility(View.GONE);
-                                    layout_no_recourd_found.setVisibility(View.VISIBLE);
-                                } else {
-                                    Toast.makeText(AllTripActivity.this, resObj.getString("message").toString(), Toast.LENGTH_LONG).show();
-                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
 
-                    } else {
+                        } else {
+                            ProgressDialog.cancel();
+                            cusRotateLoading.stop();
+
+                            Common.ShowHttpErrorMessage(AllTripActivity.this, error.getMessage());
+                        }
+                    }
+                });
+
+    }
+
+    public void FilterAllTrips(final int offset, final String filter) {
+
+        if (offset == 0)
+            allTripArray = new ArrayList<>();
+
+        Log.d("loadTripsUrl", "loadTripsUrl FilterString= " + Url.loadTripsFiltersUrl + "==" + FilterString + "==" + userPref.getString("id", "") + "==" + String.valueOf(offset));
+
+        Ion.with(AllTripActivity.this)
+                .load(Url.loadTripsFiltersUrl)
+                .setTimeout(6000)
+                //.setJsonObjectBody(json)
+                .setMultipartParameter("user_id", userPref.getString("id", ""))
+                .setMultipartParameter("off", String.valueOf(offset))
+                .setMultipartParameter("filter", FilterString)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception error, JsonObject result) {
                         ProgressDialog.cancel();
                         cusRotateLoading.stop();
+                        if (error == null) {
+                            try {
+                                JSONObject resObj = new JSONObject(result.toString());
+                                Log.d("loadTripsUrl", "loadTripsUrl filter two= " + resObj.getString("status") + "==" + resObj);
+                                if (resObj.getString("status").equals("success")) {
 
-                       Common.ShowHttpErrorMessage(AllTripActivity.this, error.getMessage());
-                    }
-                }
-            });
+                                    recycle_all_trip.setEnabled(true);
 
-    }
-
-public void FilterAllTrips(final int offset, final String filter){
-
-    if(offset == 0)
-        allTripArray = new ArrayList<>();
-
-    Log.d("loadTripsUrl", "loadTripsUrl FilterString= " +Url.loadTripsFiltersUrl+"=="+FilterString+"=="+userPref.getString("id", "")+"=="+String.valueOf(offset));
-
-    Ion.with(AllTripActivity.this)
-    .load(Url.loadTripsFiltersUrl)
-    .setTimeout(6000)
-    //.setJsonObjectBody(json)
-    .setMultipartParameter("user_id", userPref.getString("id", ""))
-    .setMultipartParameter("off", String.valueOf(offset))
-    .setMultipartParameter("filter", FilterString)
-    .asJsonObject()
-            .setCallback(new FutureCallback<JsonObject>() {
-                @Override
-                public void onCompleted(Exception error, JsonObject result) {
-                    ProgressDialog.cancel();
-                    cusRotateLoading.stop();
-                    if (error == null) {
-                        try {
-                            JSONObject resObj = new JSONObject(result.toString());
-                            Log.d("loadTripsUrl", "loadTripsUrl filter two= "+resObj.getString("status")+"=="+ resObj);
-                            if (resObj.getString("status").equals("success")) {
-
-                                recycle_all_trip.setEnabled(true);
-
-                                JSONArray tripArray = new JSONArray(resObj.getString("all_trip"));
-                                for (int t = 0; t < tripArray.length(); t++) {
-                                    JSONObject trpObj = tripArray.getJSONObject(t);
-                                    AllTripFeed allTripFeed = new AllTripFeed();
-                                    allTripFeed.setBookingId(trpObj.getString("id"));
-                                    allTripFeed.setDropArea(trpObj.getString("drop_area"));
-                                    allTripFeed.setPickupArea(trpObj.getString("pickup_area"));
-                                    allTripFeed.setTaxiType(trpObj.getString("car_type"));
-                                    allTripFeed.setPickupDateTime(trpObj.getString("book_create_date_time"));
-                                    allTripFeed.setAmount(trpObj.getString("amount"));
-                                    allTripFeed.setCarIcon(trpObj.getString("icon"));
-                                    allTripFeed.setKm(trpObj.getString("km"));
-                                    allTripFeed.setDriverDetail(trpObj.getString("driver_detail"));
-                                    allTripFeed.setStatus(trpObj.getString("status"));
-                                    allTripFeed.setApproxTime(trpObj.getString("approx_time"));
-                                    allTripFeed.setOldLocationList(null);
-                                    allTripFeed.setStartPickLatLng(trpObj.getString("pickup_lat"));
-                                    allTripFeed.setEndPickLatLng(trpObj.getString("pickup_longs"));
-                                    allTripFeed.setStartDropLatLng(trpObj.getString("drop_lat"));
-                                    allTripFeed.setEndDropLatLng(trpObj.getString("drop_longs"));
-                                    allTripArray.add(allTripFeed);
-                                }
-                                Log.d("loadTripsUrl", "loadTripsUrl three= " + allTripArray.size());
-                                if (allTripArray != null && allTripArray.size() > 0) {
-                                    layout_recycleview.setVisibility(View.VISIBLE);
-                                    layout_no_recourd_found.setVisibility(View.GONE);
-                                    if (offset == 0) {
-                                        allTripAdapter = new AllTripAdapter(AllTripActivity.this, allTripArray);
-                                        recycle_all_trip.setAdapter(allTripAdapter);
-                                        allTripAdapter.setOnAllTripItemClickListener(AllTripActivity.this);
-                                        swipe_refresh_layout.setRefreshing(false);
-
+                                    JSONArray tripArray = new JSONArray(resObj.getString("all_trip"));
+                                    for (int t = 0; t < tripArray.length(); t++) {
+                                        JSONObject trpObj = tripArray.getJSONObject(t);
+                                        AllTripFeed allTripFeed = new AllTripFeed();
+                                        allTripFeed.setBookingId(trpObj.getString("id"));
+                                        allTripFeed.setDropArea(trpObj.getString("drop_area"));
+                                        allTripFeed.setPickupArea(trpObj.getString("pickup_area"));
+                                        allTripFeed.setTaxiType(trpObj.getString("car_type"));
+                                        allTripFeed.setPickupDateTime(trpObj.getString("book_create_date_time"));
+                                        allTripFeed.setAmount(trpObj.getString("amount"));
+                                        allTripFeed.setCarIcon(trpObj.getString("icon"));
+                                        allTripFeed.setKm(trpObj.getString("km"));
+                                        allTripFeed.setDriverDetail(trpObj.getString("driver_detail"));
+                                        allTripFeed.setStatus(trpObj.getString("status"));
+                                        allTripFeed.setApproxTime(trpObj.getString("approx_time"));
+                                        allTripFeed.setOldLocationList(null);
+                                        allTripFeed.setStartPickLatLng(trpObj.getString("pickup_lat"));
+                                        allTripFeed.setEndPickLatLng(trpObj.getString("pickup_longs"));
+                                        allTripFeed.setStartDropLatLng(trpObj.getString("drop_lat"));
+                                        allTripFeed.setEndDropLatLng(trpObj.getString("drop_longs"));
+                                        allTripArray.add(allTripFeed);
                                     }
-                                    allTripAdapter.updateItemsFilter(allTripArray);
+                                    Log.d("loadTripsUrl", "loadTripsUrl three= " + allTripArray.size());
+                                    if (allTripArray != null && allTripArray.size() > 0) {
+                                        layout_recycleview.setVisibility(View.VISIBLE);
+                                        layout_no_recourd_found.setVisibility(View.GONE);
+                                        if (offset == 0) {
+                                            allTripAdapter = new AllTripAdapter(AllTripActivity.this, allTripArray);
+                                            recycle_all_trip.setAdapter(allTripAdapter);
+                                            allTripAdapter.setOnAllTripItemClickListener(AllTripActivity.this);
+                                            swipe_refresh_layout.setRefreshing(false);
+
+                                        }
+                                        allTripAdapter.updateItemsFilter(allTripArray);
+                                        if (swipe_refresh_layout != null)
+                                            swipe_refresh_layout.setEnabled(true);
+                                    }
+                                } else if (resObj.getString("status").equals("false")) {
+                                    Common.user_InActive = 1;
+                                    Common.InActive_msg = resObj.getString("message");
+
+                                    SharedPreferences.Editor editor = userPref.edit();
+                                    editor.clear();
+                                    editor.commit();
+
+                                    Intent logInt = new Intent(AllTripActivity.this, LoginOptionActivity.class);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(logInt);
+                                } else if (resObj.getString("status").equals("failed")) {
+                                    Log.d("allTripArray", "allTripArray = " + allTripArray.size());
                                     if (swipe_refresh_layout != null)
-                                        swipe_refresh_layout.setEnabled(true);
+                                        swipe_refresh_layout.setEnabled(false);
+                                    if (allTripAdapter != null)
+                                        allTripAdapter.updateItemsFilter(allTripArray);
+
+                                    if (offset == 0) {
+                                        ProgressDialog.cancel();
+                                        cusRotateLoading.stop();
+                                        layout_recycleview.setVisibility(View.GONE);
+                                        layout_no_recourd_found.setVisibility(View.VISIBLE);
+                                    } else {
+                                        Toast.makeText(AllTripActivity.this, resObj.getString("message").toString(), Toast.LENGTH_LONG).show();
+                                    }
+
                                 }
-                            }else if(resObj.getString("status").equals("false")){
-                                Common.user_InActive = 1;
-                                Common.InActive_msg = resObj.getString("message");
-
-                                SharedPreferences.Editor editor = userPref.edit();
-                                editor.clear();
-                                editor.commit();
-
-                                Intent logInt = new Intent(AllTripActivity.this, LoginOptionActivity.class);
-                                logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(logInt);
-                            } else if (resObj.getString("status").equals("failed")) {
-                                Log.d("allTripArray", "allTripArray = " + allTripArray.size());
-                                if (swipe_refresh_layout != null)
-                                    swipe_refresh_layout.setEnabled(false);
-                                if (allTripAdapter != null)
-                                    allTripAdapter.updateItemsFilter(allTripArray);
-
-                                if (offset == 0) {
-                                    ProgressDialog.cancel();
-                                    cusRotateLoading.stop();
-                                    layout_recycleview.setVisibility(View.GONE);
-                                    layout_no_recourd_found.setVisibility(View.VISIBLE);
-                                } else {
-                                    Toast.makeText(AllTripActivity.this, resObj.getString("message").toString(), Toast.LENGTH_LONG).show();
-                                }
-
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        } else {
+                            Common.ShowHttpErrorMessage(AllTripActivity.this, error.getMessage());
                         }
-                    } else {
-                        Common.ShowHttpErrorMessage(AllTripActivity.this, error.getMessage());
                     }
-        }
 
-    });
+                });
 
-}
-
-@Override
-public void scrollToLoad(int position) {
-
-    if (userPref.getBoolean("setFilter", true) == true && !userPref.getString("check all", "").equals("check all")) {
-        if (userPref.getInt("pending booking", 0) == 1) {
-            FilterString += 1 + ",";
-        }
-        if (userPref.getInt("complete booking", 0) == 9) {
-            FilterString += 9 + ",";
-        }
-        if (userPref.getInt("driver unavailable", 0) == 6) {
-            FilterString += 6 + ",";
-        }
-        if (userPref.getInt("user reject", 0) == 4) {
-            FilterString += 4 + ",";
-        }
-        if (userPref.getInt("driver accept", 0) == 3) {
-            FilterString += 3 + ",";
-        }
-
-        if(FilterString.length() > 0)
-            FilterString = FilterString.substring(0, (FilterString.length() - 1));
-
-        FilterAllTrips(position + 1, "");
-        FilterString = "";
-    } else {
-        getAllTrip(position + 1);
     }
 
-}
+    @Override
+    public void scrollToLoad(int position) {
 
-@Override
-public void clickDetailTrip(int position) {
+        if (userPref.getBoolean("setFilter", true) == true && !userPref.getString("check all", "").equals("check all")) {
+            if (userPref.getInt("pending booking", 0) == 1) {
+                FilterString += 1 + ",";
+            }
+            if (userPref.getInt("complete booking", 0) == 9) {
+                FilterString += 9 + ",";
+            }
+            if (userPref.getInt("driver unavailable", 0) == 6) {
+                FilterString += 6 + ",";
+            }
+            if (userPref.getInt("user reject", 0) == 4) {
+                FilterString += 4 + ",";
+            }
+            if (userPref.getInt("driver accept", 0) == 3) {
+                FilterString += 3 + ",";
+            }
 
-    if(allTripArray.size() > 0) {
-        Common.allTripFeeds = allTripArray.get(position);
-        Intent di = new Intent(AllTripActivity.this, BookingDetailActivity.class);
-        startActivity(di);
+            if (FilterString.length() > 0)
+                FilterString = FilterString.substring(0, (FilterString.length() - 1));
+
+            FilterAllTrips(position + 1, "");
+            FilterString = "";
+        } else {
+            getAllTrip(position + 1);
+        }
+
     }
-}
+
+    @Override
+    public void clickDetailTrip(int position) {
+
+        if (allTripArray.size() > 0) {
+            Common.allTripFeeds = allTripArray.get(position);
+            Intent di = new Intent(AllTripActivity.this, BookingDetailActivity.class);
+            startActivity(di);
+        }
+    }
 
     @Override
     public void tripCancel(final int position) {
@@ -848,11 +848,11 @@ public void clickDetailTrip(int position) {
 
                 SelTripFeeds = allTripArray.get(position);
 
-                Log.d("deleteCabUrl","deleteCabUrl = "+Url.deleteCabUrl+"?"+SelTripFeeds.getBookingId()+"=="+userPref.getString("id", ""));
+                Log.d("deleteCabUrl", "deleteCabUrl = " + Url.deleteCabUrl + "?" + SelTripFeeds.getBookingId() + "==" + userPref.getString("id", ""));
                 Ion.with(AllTripActivity.this)
-                    .load(Url.deleteCabUrl + "?booking_id=" + SelTripFeeds.getBookingId() + "&uid=" + userPref.getString("id", ""))
-                    .setTimeout(6000)
-                            //.setJsonObjectBody(json)
+                        .load(Url.deleteCabUrl + "?booking_id=" + SelTripFeeds.getBookingId() + "&uid=" + userPref.getString("id", ""))
+                        .setTimeout(6000)
+                        //.setJsonObjectBody(json)
 //                        .setMultipartParameter("booking_id", SelTripFeeds.getBookingId())
 //                        .setMultipartParameter("uid", userPref.getString("id", ""))
                         .asJsonObject()
@@ -978,11 +978,11 @@ public void clickDetailTrip(int position) {
                         FilterString = FilterString.substring(0, (FilterString.length() - 1));
                         Log.d("FilterString", "FilterString = " + FilterString);
 
-                        if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3){
+                        if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3) {
                             FilterString = "";
                         }
 
-                        FilterAllTrips(0,"");
+                        FilterAllTrips(0, "");
                         FilterString = "";
                     } else {
                         getAllTrip(0);
@@ -997,7 +997,7 @@ public void clickDetailTrip(int position) {
         registerReceiver(receiver, filter);
 
 
-        if(Common.is_pusnotification == 1){
+        if (Common.is_pusnotification == 1) {
             Common.is_pusnotification = 0;
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -1029,12 +1029,12 @@ public void clickDetailTrip(int position) {
 
                             if (userPref.getInt("pending booking", 0) == 1 && userPref.getInt("complete booking", 0) == 9 && userPref.getInt("driver unavailable", 0) == 6 && userPref.getInt("user reject", 0) == 4 && userPref.getInt("driver accept", 0) == 3) {
                                 SharedPreferences.Editor checkAll = userPref.edit();
-                                checkAll.putString("check all","check all");
+                                checkAll.putString("check all", "check all");
                                 checkAll.commit();
                                 FilterString = "";
-                            }else{
+                            } else {
                                 SharedPreferences.Editor checkAll = userPref.edit();
-                                checkAll.putString("check all","");
+                                checkAll.putString("check all", "");
                                 checkAll.commit();
                             }
                             FilterAllTrips(0, "filter");
@@ -1057,9 +1057,9 @@ public void clickDetailTrip(int position) {
     @Override
     public void onBackPressed() {
 
-        if(slidingMenu.isMenuShowing()){
+        if (slidingMenu.isMenuShowing()) {
             slidingMenu.toggle();
-        }else{
+        } else {
             new AlertDialog.Builder(this)
                     .setTitle("Really Exit?")
                     .setMessage("Are you sure you want to exit?")

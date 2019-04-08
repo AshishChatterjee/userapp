@@ -87,6 +87,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -130,6 +131,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     TextView txt_not_found;
     TextView no_location;
     TextView please_check;
+    boolean isBookNow = false;
+    Date time = new Date();
 
     SharedPreferences userPref;
     Typeface OpenSans_Regular, OpenSans_Bold, Roboto_Regular, Roboto_Medium, Roboto_Bold;
@@ -197,13 +200,14 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     String truckType;
     String CabId;
     String AreaId;
-    Float totlePrice=100.0f;
+    Float totlePrice = 100.0f;
     float FirstKm;
     int totalTime;
     String CarName = "";
     String AstTime = "";
 
     String bothLocationString = "";
+    Dialog dialogView;
 
 
     PickupDropLocationAdapter pickupDropLocationAdapter;
@@ -250,7 +254,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     RecyclerView recycle_cab_detail;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @Overridelayout_now
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (common.getTheme(this).equals("orange")) {
@@ -282,7 +286,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         no_location = (TextView) findViewById(R.id.no_location);
         please_check = (TextView) findViewById(R.id.please_check);
         txt_locatons = (TextView) findViewById(R.id.txt_locatons);
-        txt_reservation = (TextView) findViewById(R.id.txt_reservation);
+        //   txt_reservation = (TextView) findViewById(R.id.txt_reservation);
         txt_now = (TextView) findViewById(R.id.txt_now);
 
         String bookinCancel = getIntent().getStringExtra("cancel_booking");
@@ -306,13 +310,13 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         devise_width = displaymetrics.widthPixels;
 
-        layout_now.getLayoutParams().width = (int) (devise_width * 0.50);
+      //  layout_now.getLayoutParams().width = (int) (devise_width * 0.50);
 
         RelativeLayout.LayoutParams resParam = new RelativeLayout.LayoutParams((int) (devise_width * 0.51), ViewGroup.LayoutParams.WRAP_CONTENT);
         resParam.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         resParam.addRule(RelativeLayout.ALIGN_PARENT_END);
 
-        layout_reservation.setLayoutParams(resParam);
+       // layout_reservation.setLayoutParams(resParam);
 
         bookingFormate = new SimpleDateFormat("h:mm a, d, MMM yyyy,EEE");
 
@@ -324,7 +328,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         txt_home.setTypeface(OpenSans_Bold);
         txt_not_found.setTypeface(OpenSans_Bold);
         txt_locatons.setTypeface(Roboto_Bold);
-        txt_reservation.setTypeface(Roboto_Bold);
+        //  txt_reservation.setTypeface(Roboto_Bold);
         txt_now.setTypeface(Roboto_Bold);
 
         edt_pickup_location.setTypeface(OpenSans_Regular);
@@ -506,6 +510,28 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         layout_timming = (LinearLayout) NowDialog.findViewById(R.id.layout_timming);
         layout_far_breakup = (RelativeLayout) NowDialog.findViewById(R.id.layout_far_breakup);
 
+
+        dialogView = new Dialog(this);
+        dialogView.setContentView(R.layout.date_time_picker);
+        dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
+                TimePicker timePicker = (TimePicker) dialogView.findViewById(R.id.time_picker);
+
+                Calendar calendar = new GregorianCalendar(datePicker.getYear(),
+                        datePicker.getMonth(),
+                        datePicker.getDayOfMonth(),
+                        timePicker.getCurrentHour(),
+                        timePicker.getCurrentMinute());
+
+                time = calendar.getTime();
+                dialogView.dismiss();
+                openAllTrip();
+            }
+        });
+
         spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -532,7 +558,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         txt_thd_currency.setTypeface(Roboto_Bold);
 
         recycle_cab_detail = findViewById(R.id.flayout);
-     //   recycle_cab_detail = (RecyclerView) NowDialog.findViewById(R.id.recycle_cab_detail);
+        //   recycle_cab_detail = (RecyclerView) NowDialog.findViewById(R.id.recycle_cab_detail);
         RecyclerView.LayoutManager categoryLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recycle_cab_detail.setLayoutManager(categoryLayoutManager);
 
@@ -554,7 +580,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
                 NowDialog.cancel();
 
-                layout_reservation.setVisibility(View.VISIBLE);
+                //  layout_reservation.setVisibility(View.VISIBLE);
 //                if(car_rate != null && fromintailrate != null && ride_time_rate != null)
 //                    totlePrice = Common.getTotalPrice(car_rate, FirstKm, distance, fromintailrate, ride_time_rate, totalTime);
 //                else
@@ -602,7 +628,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 NowDialog.cancel();
-                layout_reservation.setVisibility(View.VISIBLE);
+                // layout_reservation.setVisibility(View.VISIBLE);
             }
         });
 
@@ -725,40 +751,44 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         layout_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int d = 0;
-                Log.d("length ", "length = " + edt_pickup_location.getText().toString().length());
-                if (edt_pickup_location.getText().toString().length() == 0) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
-                    return;
-                } else if (edt_drop_location.getText().toString().length() == 0) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
-                    return;
-                } else {
-                    d = getDistance();
-                    if (!LocationDistanse) {
-                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
+                if (!isBookNow) {
+                    int d = 0;
+                    Log.d("length ", "length = " + edt_pickup_location.getText().toString().length());
+                    if (edt_pickup_location.getText().toString().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
                         return;
-                    } else if (d == 0) {
-                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
+                    } else if (edt_drop_location.getText().toString().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
                         return;
                     } else {
-                        BookingDateTime = bookingFormate.format(Calendar.getInstance().getTime());
+                        d = getDistance();
+                        if (!LocationDistanse) {
+                            Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
+                            return;
+                        } else if (d == 0) {
+                            Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
+                            return;
+                        } else {
+                            BookingDateTime = bookingFormate.format(Calendar.getInstance().getTime());
 
-                        BookingType = "Now";
-                       // layout_reservation.setVisibility(View.GONE);
-                        recycle_cab_detail.setVisibility(View.GONE);
-                       // NowDialog.show();
+                            BookingType = "Now";
+                            layout_reservation.setVisibility(View.VISIBLE);
+                            recycle_cab_detail.setVisibility(View.VISIBLE);
+                            isBookNow = true;
+                            txt_now.setText("Book");
+                            // NowDialog.show();
+                        }
                     }
+                } else {
+                    if (edt_pickup_location.getText().toString().trim().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
+                        return;
+                    } else if (edt_drop_location.getText().toString().trim().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_drop));
+                        return;
+                    }
+                    openAllTrip();
                 }
-
-
-//                if(intailrate != null && fromintailrate != null && ride_time_rate != null)
-//                    totlePrice = Common.getTotalPrice(intailrate, FirstKm, distance, fromintailrate, ride_time_rate, totalTime);
-//                else
-//                    totlePrice = 0f;
-//                Log.d("totlePrice","totlePrice = "+totlePrice);
-//
-//                txt_total_price.setText(String.valueOf(totlePrice));
             }
         });
 
@@ -1007,7 +1037,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 txt_first_price.setText(car_rate);
                 txt_sec_pric.setText(fromintailrate + "/" + getResources().getString(R.string.km));
 
-                layout_reservation.setVisibility(View.GONE);
+                //  layout_reservation.setVisibility(View.GONE);
                 NowDialog.show();
                 ReservationDialog.cancel();
 
@@ -1017,24 +1047,48 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         layout_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*edt_pickup_location.setText("");
+                edt_drop_location.setText("");
+                layout_reservation.setVisibility(View.GONE);*/
 
-                Log.d("length ", "length = " + edt_pickup_location.getText().toString().length());
-                if (edt_pickup_location.getText().toString().length() == 0) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
-                    return;
-                } else if (edt_drop_location.getText().toString().length() == 0) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_drop));
-                    return;
-                } else if (!LocationDistanse) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
-                    return;
-                } else if (distance == 0.0) {
-                    Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
-                    return;
+                if (!isBookNow) {
+                    int d = 0;
+                    Log.d("length ", "length = " + edt_pickup_location.getText().toString().length());
+                    if (edt_pickup_location.getText().toString().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
+                        return;
+                    } else if (edt_drop_location.getText().toString().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
+                        return;
+                    } else {
+                        d = getDistance();
+                        if (!LocationDistanse) {
+                            Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
+                            return;
+                        } else if (d == 0) {
+                            Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
+                            return;
+                        } else {
+                            BookingDateTime = bookingFormate.format(Calendar.getInstance().getTime());
+                            isBookNow = true;
+                            BookingType = "later";
+                            layout_reservation.setVisibility(View.VISIBLE);
+                            recycle_cab_detail.setVisibility(View.VISIBLE);
+                            txt_now.setText("Book");
+                            // NowDialog.show();
+                        }
+                    }
+                } else {
+                    if (edt_pickup_location.getText().toString().trim().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
+                        return;
+                    } else if (edt_drop_location.getText().toString().trim().length() == 0) {
+                        Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_drop));
+                        return;
+                    }
+                    dialogView.show();
                 }
 
-                BookingType = "Reservation";
-                ReservationDialog.show();
             }
         });
 
@@ -1141,7 +1195,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         bothLocationString = "drop";
                         LocationAddress.getAddressFromLocation(edt_drop_location.getText().toString(), getApplicationContext(), new GeocoderHandlerLatitude());
                     } else {
-                       // Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
+                        // Toast.makeText(HomeActivity.this, "No Network", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -1178,10 +1232,10 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     public void CaculationDirationIon() {
         String CaculationLocUrl = "";
         List<LatLng> list = new ArrayList<>();
-        list.add(new LatLng(PickupLatitude,PickupLatitude));
-        list.add(new LatLng(DropLatitude,DropLongtude));
+        list.add(new LatLng(PickupLatitude, PickupLatitude));
+        list.add(new LatLng(DropLatitude, DropLongtude));
         drawPolyLineOnMap(list);
-        CaculationLocUrl = "https://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin=" + PickupLatitude + "," + PickupLongtude + "&destination=" + DropLatitude + "," + DropLongtude+"&key=AIzaSyAOMoXEjvhoTXlaqIKCGvu5yIjCHuePLek";
+        CaculationLocUrl = "https://maps.googleapis.com/maps/api/directions/json?sensor=true&mode=driving&origin=" + PickupLatitude + "," + PickupLongtude + "&destination=" + DropLatitude + "," + DropLongtude + "&key=AIzaSyAOMoXEjvhoTXlaqIKCGvu5yIjCHuePLek";
         Log.d("CaculationLocUrl", "CaculationLocUrl = " + CaculationLocUrl);
         Ion.with(HomeActivity.this)
                 .load(CaculationLocUrl)
@@ -1520,7 +1574,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 layout_far_breakup.setVisibility(View.VISIBLE);
                 Log.d("fromintailrate", "fromintailrate = " + car_rate + "==" + fromintailrate + "==" + ride_time_rate);
                 if (car_rate != null && fromintailrate != null && ride_time_rate != null)
-                    totlePrice = Common.getTotalPrice("5.0", 5, distance, fromintailrate, ride_time_rate, totalTime);
+                    totlePrice = Common.getTotalPrice("5.0", 5.0f, 50f, fromintailrate, ride_time_rate, totalTime);
                 Log.d("totlePrice", "totlePrice = " + totlePrice);
                 txt_total_price.setText(Math.round(totlePrice) + "");
             }
@@ -1608,8 +1662,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         FixRateArray = new ArrayList<>();
 
-          String FixAreaUrl = "http://mediaorange.co/olauber/new_api/fix_rate_list?lat="+ PickupLongtude+"&long=" + DropLatitude;
-      //  String FixAreaUrl = Url.FixAreaUrl + "?pick_lat=" + PickupLatitude + "&pick_long=" + PickupLongtude + "&drop_lat=" + DropLatitude + "&drop_long=" + DropLongtude;
+        String FixAreaUrl = "http://mediaorange.co/olauber/new_api/fix_rate_list?lat=" + PickupLongtude + "&long=" + DropLatitude;
+        //  String FixAreaUrl = Url.FixAreaUrl + "?pick_lat=" + PickupLatitude + "&pick_long=" + PickupLongtude + "&drop_lat=" + DropLatitude + "&drop_long=" + DropLongtude;
         Log.d("FixAreaUrl", "FixAreaUrl =" + FixAreaUrl);
         Ion.with(HomeActivity.this)
                 .load(FixAreaUrl)
@@ -1625,8 +1679,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
                             try {
                                 JSONObject Obj = new JSONObject(result.toString());
-                                Toast.makeText(HomeActivity.this,Obj.getString("message"),Toast.LENGTH_SHORT).show();
-                                if(Obj.get("status").equals("True")) {
+                                Toast.makeText(HomeActivity.this, Obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                if (Obj.get("status").equals("True")) {
                                     JSONArray fixAreaArray = Obj.getJSONArray("ratelist");
                                     for (int fi = 0; fi < fixAreaArray.length(); fi++) {
                                         JSONObject fixAreaObj = fixAreaArray.getJSONObject(fi);
@@ -1673,7 +1727,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             }
             if (locationAddress != null) {
                 if (locationAddress.equals("Unable connect to Geocoder")) {
-                   // Toast.makeText(HomeActivity.this, "No Network conection", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(HomeActivity.this, "No Network conection", Toast.LENGTH_LONG).show();
                 } else {
                     Log.d("locationAddress", "locationAddress = " + locationAddress + "==" + bothLocationString);
                     if (bothLocationString.equals("pickeup") && edt_pickup_location != null)
@@ -1683,7 +1737,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             } else {
                 NowDialog.cancel();
-                layout_reservation.setVisibility(View.VISIBLE);
+                //  layout_reservation.setVisibility(View.VISIBLE);
                 Toast.makeText(HomeActivity.this, getResources().getString(R.string.location_long), Toast.LENGTH_LONG).show();
 
             }
@@ -2200,7 +2254,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         edt_drop_location = null;
         edt_write_comment = null;
         layout_now = null;
-        layout_reservation = null;
+        // layout_reservation = null;
         gpsTracker = null;
         googleMap = null;
         cabDetailArray = null;
@@ -2278,20 +2332,28 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onBackPressed() {
-
-        if (slidingMenu.isMenuShowing()) {
-            slidingMenu.toggle();
+        if (recycle_cab_detail.isShown()) {
+            layout_reservation.setVisibility(View.VISIBLE);
+            recycle_cab_detail.setVisibility(View.GONE);
+            edt_pickup_location.setText("");
+            edt_drop_location.setText("");
+            isBookNow = false;
         } else {
-            new AlertDialog.Builder(this)
-                    .setTitle("Really Exit?")
-                    .setMessage("Are you sure you want to exit?")
-                    .setNegativeButton(android.R.string.no, null)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            HomeActivity.super.onBackPressed();
-                        }
-                    }).create().show();
+            if (slidingMenu.isMenuShowing()) {
+                slidingMenu.toggle();
+            } else {
+                new AlertDialog.Builder(this)
+                        .setTitle("Really Exit?")
+                        .setMessage("Are you sure you want to exit?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                HomeActivity.super.onBackPressed();
+                            }
+                        }).create().show();
+            }
         }
     }
 
@@ -2367,7 +2429,117 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng point = list.get(z);
             options.add(point);
         }
-         googleMap.addPolyline(options);
+        googleMap.addPolyline(options);
     }
 
+    public void openAllTrip() {
+        ProgressDialog.show();
+        cusRotateLoading.start();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm a, d, MMM yyyy,EEE");
+        String pickup_date_time = "";
+        try {
+            Date parceDate = simpleDateFormat.parse(BookingDateTime);
+            SimpleDateFormat parceDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            pickup_date_time = parceDateFormat.format(parceDate.getTime());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String code = null;
+        if (!BookingType.equals("Now")) {
+            try {
+                Date parceDate = simpleDateFormat.parse(time.toString());
+                SimpleDateFormat parceDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                pickup_date_time = parceDateFormat.format(parceDate.getTime());
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            code = "ride-later";
+        }
+
+        Ion.with(HomeActivity.this)
+                .load(Url.bookCabUrl)
+                .setTimeout(10000)
+                //.setJsonObjectBody(json)
+
+                .setMultipartParameter("user_id", userPref.getString("id", ""))
+                .setMultipartParameter("username", userPref.getString("username", ""))
+                .setMultipartParameter("pickup_date_time", pickup_date_time)
+                .setMultipartParameter("drop_area", edt_drop_location.getText().toString().trim())
+                .setMultipartParameter("pickup_area", edt_pickup_location.getText().toString().trim())
+                .setMultipartParameter("time_type", DayNight)
+                .setMultipartParameter("amount", String.valueOf(totlePrice))
+                .setMultipartParameter("km", String.valueOf(distance))
+                .setMultipartParameter("pickup_lat", String.valueOf(PickupLatitude))
+                .setMultipartParameter("pickup_longs", String.valueOf(PickupLongtude))
+                .setMultipartParameter("drop_lat", String.valueOf(DropLatitude))
+                .setMultipartParameter("drop_longs", String.valueOf(DropLongtude))
+                .setMultipartParameter("isdevice", "1")
+                .setMultipartParameter("flag", "0")
+                .setMultipartParameter("taxi_type", truckType)
+                .setMultipartParameter("taxi_id", CabId)
+                .setMultipartParameter("area_id", AreaId)
+                .setMultipartParameter("purpose", transfertype)
+                .setMultipartParameter("comment", "")
+                .setMultipartParameter("person", person)
+                .setMultipartParameter("payment_type", PaymentType)
+                .setMultipartParameter("book_create_date_time", BookingType)
+                .setMultipartParameter("transaction_id", transaction_id)
+                .setMultipartParameter("approx_time", AstTime)
+                .setMultipartParameter("status_code", code)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception error, JsonObject result) {
+                        // do stuff with the result or error
+                        Log.d("Booking result", "Booking result = " + result + "==" + error);
+                        ProgressDialog.cancel();
+                        cusRotateLoading.stop();
+                        if (error == null) {
+
+
+                            try {
+                                JSONObject resObj = new JSONObject(result.toString());
+                                Log.d("Booking result", "Booking result = " + resObj);
+                                if (resObj.getString("status").equals("success")) {
+                                    //Common.showMkSucess(TripDetailActivity.this, resObj.getString("message").toString(), "yes");
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent ai = new Intent(HomeActivity.this, AllTripActivity.class);
+                                            startActivity(ai);
+                                            finish();
+                                        }
+                                    }, 500);
+                                } else if (resObj.getString("status").equals("false")) {
+
+                                    Common.user_InActive = 1;
+                                    Common.InActive_msg = resObj.getString("message");
+
+                                    SharedPreferences.Editor editor = userPref.edit();
+                                    editor.clear();
+                                    editor.commit();
+
+                                    Intent logInt = new Intent(HomeActivity.this, LoginOptionActivity.class);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    logInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(logInt);
+                                } else {
+                                    Common.showMkError(HomeActivity.this, resObj.getString("error code").toString());
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Common.ShowHttpErrorMessage(HomeActivity.this, error.getMessage());
+                        }
+                    }
+                });
+
+
+    }
 }

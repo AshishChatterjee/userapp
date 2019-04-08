@@ -1,12 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.victor:lib:1.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/lib-1.0.1.aar/23773888b11dc06bca149a95f60920de/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/lib-1.0.1.aar/23773888b11dc06bca149a95f60920de/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/lib-1.0.1.aar/4437de34435bb3bc238f41e9df794a67/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/lib-1.0.1.aar/4437de34435bb3bc238f41e9df794a67/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.victor/lib/1.0.1/8d0bd62f6b15ae5edf3f2abb6567e6400e2fec39/lib-1.0.1-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
