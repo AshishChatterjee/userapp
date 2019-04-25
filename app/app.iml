@@ -175,11 +175,9 @@
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-maps:16.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:multidex:1.0.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: io.fabric.sdk.android:fabric:1.3.10@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.stripe:stripe-android:6.1.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: io.card:android-sdk:5.4.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks:16.0.1@aar" level="project" />
-    <orderEntry type="module" module-name="stripe" />
-    <orderEntry type="module" module-name="slideMenuLibrary" />
-    <orderEntry type="module" module-name="facebooklibrary" />
     <orderEntry type="module" module-name="stripe" />
     <orderEntry type="module" module-name="slideMenuLibrary" />
     <orderEntry type="module" module-name="facebooklibrary" />

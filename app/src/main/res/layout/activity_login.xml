@@ -154,7 +154,7 @@
                         <RelativeLayout
                             android:id="@+id/layout_signin"
                             android:layout_width="150dp"
-                            android:layout_height="25sp"
+                            android:layout_height="35sp"
                             android:background="@drawable/round_back"
                             android:layout_marginTop="@dimen/margin_30"
                             android:layout_gravity="center">

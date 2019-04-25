@@ -229,7 +229,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     Common common = new Common();
 
     boolean LocationDistanse = false;
-    int dis = 0;
+    float dis = 0;
     Marker PickupMarker;
     Marker DropMarker;
     int CabPositon = 0;
@@ -752,7 +752,6 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 if (!isBookNow) {
-                    int d = 0;
                     Log.d("length ", "length = " + edt_pickup_location.getText().toString().length());
                     if (edt_pickup_location.getText().toString().length() == 0) {
                         Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
@@ -761,11 +760,10 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
                         return;
                     } else {
-                        d = getDistance();
                         if (!LocationDistanse) {
                             Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
                             return;
-                        } else if (d == 0) {
+                        } else if (dis == 0) {
                             Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_short));
                             return;
                         } else {
@@ -1052,7 +1050,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 layout_reservation.setVisibility(View.GONE);*/
 
                 if (!isBookNow) {
-                    int d = 0;
+                    float d = 0;
+                    d = dis;
                     Log.d("length ", "length = " + edt_pickup_location.getText().toString().length());
                     if (edt_pickup_location.getText().toString().length() == 0) {
                         Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
@@ -1061,7 +1060,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         Common.showMkError(HomeActivity.this, getResources().getString(R.string.enter_pickup));
                         return;
                     } else {
-                        d = getDistance();
+                       // d = getDistance();
                         if (!LocationDistanse) {
                             Common.showMkError(HomeActivity.this, getResources().getString(R.string.location_long));
                             return;
@@ -1265,6 +1264,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                                     JSONObject disObj = new JSONObject(legsObj.getString("distance"));
                                     //if (disObj.getInt("value") > 1000)
                                     distance = (float) disObj.getInt("value") / 1000;
+                                    dis = distance;
+                                    LocationDistanse = true;
 //                                    else if (disObj.getInt("value") > 100)
 //                                        distance = (float) disObj.getInt("value") / 100;
 //                                    else if (disObj.getInt("value") > 10)
@@ -1694,6 +1695,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
                                         Log.d("FixRateArray", "FixAreaUrl FixRateArray = " + FixRateArray.size());
                                         CaculationDirationIon();
+                                       // getDistance();
                                     }
                                 }
 
@@ -2357,7 +2359,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public int getDistance() {
+    public float getDistance() {
         String CaculationLocUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + edt_pickup_location.getText().toString() + "&destinations=" + edt_drop_location.getText().toString() + "&key=AIzaSyAOMoXEjvhoTXlaqIKCGvu5yIjCHuePLek";
         Log.d("CaculationLocUrl", "CaculationLocUrl = " + CaculationLocUrl);
         Ion.with(HomeActivity.this)
@@ -2400,8 +2402,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
 
-        LocationDistanse = true;
-        return 50;
+       LocationDistanse = true;
+        return dis;
     }
 
     public void drawPolyLineOnMap(List<LatLng> list) {

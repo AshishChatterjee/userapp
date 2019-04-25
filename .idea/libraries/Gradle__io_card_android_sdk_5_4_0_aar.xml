@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: io.card:android-sdk:5.4.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/android-sdk-5.4.0.aar/f67150fe8d242c1a298a99c2f9eb43f6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/android-sdk-5.4.0.aar/f67150fe8d242c1a298a99c2f9eb43f6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/android-sdk-5.4.0.aar/fb06039826c4b668e9f4bdd58c6440db/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/android-sdk-5.4.0.aar/fb06039826c4b668e9f4bdd58c6440db/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.card/android-sdk/5.4.0/ac050c53e097f759d74c854675f6b88f148c7719/android-sdk-5.4.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
