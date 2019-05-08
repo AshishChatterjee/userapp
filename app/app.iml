@@ -196,5 +196,8 @@
     <orderEntry type="module" module-name="stripe" />
     <orderEntry type="module" module-name="slideMenuLibrary" />
     <orderEntry type="module" module-name="facebooklibrary" />
+    <orderEntry type="module" module-name="stripe" />
+    <orderEntry type="module" module-name="slideMenuLibrary" />
+    <orderEntry type="module" module-name="facebooklibrary" />
   </component>
 </module>

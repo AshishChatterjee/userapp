@@ -148,7 +148,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/forgot_password_screen"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_18" />
 
 

@@ -21,6 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/menu_icon"
+                android:tint="@color/white"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_15"/>
         </RelativeLayout>
@@ -33,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/font_18"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
 
         <RelativeLayout
             android:id="@+id/layout_filter"
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/filter_icon"
                 android:layout_centerVertical="true"
+                android:tint="@color/white"
                 android:layout_marginLeft="@dimen/margin_15"/>
         </RelativeLayout>
     </RelativeLayout>
